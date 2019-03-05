@@ -1,52 +1,50 @@
 <template>
-  <section
-    class="card"
-    @click="viewTask(task.id)">
-    
+  <section class="card" @click="viewTask(task.id)">
     <header>
-      {{ task.name }}
+      Name: {{ task.name }}
       <span>{{ task.category }}</span>
     </header>
 
-    <div class="description">{{ task.description }}</div>
+    <div class="description"> Description: {{ task.description }}</div>
 
+    <div class="tag">Tag: {{ task.tag }}</div>
+
+    <div class="datetimeDeadline">Deadline Date: {{ task.dateOfTask }}</div>
   </section>
 </template>
 
 <script>
-
 export default {
-  name: 'TaskCard',
+  name: "TaskCard",
 
   props: {
     task: {
       type: Object,
       default: () => {
         return {
-          name: '',
-          category: '',
-          description: ''
-        }
+          name: "",
+          category: "",
+          description: ""
+        };
       }
     }
   },
 
   methods: {
-    viewTask (id) {
-      this.$router.push({ name: 'view-task', params: { id } })
+    viewTask(id) {
+      this.$router.push({ name: "view-task", params: { id } });
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
 .card {
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-              0 1px 5px 0 rgba(0, 0, 0, 0.12),
-              0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   display: flex;
-  flex: 0 0 calc(33.3333% - calc(1rem * .6666));
+  flex: 0 0 calc(33.3333% - calc(1rem * 0.6666));
   flex-direction: column;
   margin-bottom: 1rem;
   margin-right: 1rem;
@@ -63,7 +61,7 @@ export default {
     span {
       color: lighten(#333, 25%);
       float: right;
-      font-size: .9rem;
+      font-size: 0.9rem;
       font-weight: normal;
     }
   }
@@ -87,10 +85,20 @@ export default {
     flex-grow: 1;
   }
 
-  .times {
-    font-size: .8rem;
+  .tag {
+    border: #eee 2px;
+    border-radius: 25px;
+    background: #73ad21;
+    padding: 20px;
+    width: 200px;
+    height: 70px;
+  }
+
+  .datetimeDeadline {
+    font-size: 1rem;
     font-weight: bold;
-    width: 100%;
+    flex-grow: 1;
+    text-align: center;
 
     .center {
       text-align: center;
@@ -104,7 +112,7 @@ export default {
 
 @media screen and (max-width: 800px) {
   .card {
-    flex: 0 0 calc(50% - calc(1rem * .55));
+    flex: 0 0 calc(50% - calc(1rem * 0.55));
   }
 }
 

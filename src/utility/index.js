@@ -15,9 +15,13 @@ export const TASK_TYPES = [
   'Сделать'
 ];
 
-
-
 //Для тестирования в случае если нету никаких заданий
 export const defaultTasks = [];
 
 export const tags = [];
+
+export const DEADLINE_TYPES = [
+  'Просроченные Задачи',
+  'Непросроченные Задачи'
+];
+

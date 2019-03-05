@@ -2,18 +2,15 @@
   <div>
     <div class="task">
       <h3>
-        {{ task.name }}
+        Name: {{ task.name }}
         <span>{{ task.category }}</span>
       </h3>
 
-      <div class="description">{{ task.description }}</div>
+      <div class="description">Description: {{ task.description }}</div>
 
-      <div class="tags">
-       Заглушка tags
-      
+      <div class="tag">Tags: {{ task.tag }}</div>
 
-      
-      </div>
+    <div class="datetimeDeadline">Date Deadline: {{ task.dateOfTask }}</div>
 
      
     </div>
@@ -65,7 +62,7 @@ export default {
         if (response.data === null) {
           //Перенаправление на страницу
           this.$router.push({ name: 'task-list' })
-          showNoty('Requested recipe not found.')
+          showNoty('Requested task not found.')
           return
         }
 
@@ -82,7 +79,7 @@ export default {
 
     deleteTask () {
       this.check = new Noty({
-        text: 'Deleting a recipe cannot be undone.<br>Are you sure?',
+        text: 'Deleting a task cannot be undone.<br>Are you sure?',
         type: 'alert',
         layout: 'topCenter',
         buttons: [

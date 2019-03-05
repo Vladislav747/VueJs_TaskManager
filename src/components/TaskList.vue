@@ -1,49 +1,43 @@
 <template>
   <div>
-    <div
-      v-if="!isLoading && !noTasks"
-      id="filter">
-      Show:
+    <!-- Фильтр по категориям  -->
+    <div v-if="!isLoading && !noTasks" id="filter">
+      Фильтр по категориям:
       <select v-model="filterCategory">
-        <option
-          v-for="type in taskTypes"
-          :key="type">{{ type }}</option>
+        <option v-for="type in taskTypes" :key="type">{{ type }}</option>
       </select>
     </div>
-    <!-- Если есть isLoading то ставим Loader -->
-    <div
-      v-if="isLoading"
-      class="loading">
-      Loading Tasks...
-    </div>
-    <!-- Если есть noTasks то задач нет -->
-    <div
-      v-if="noTasks"
-      class="no-tasks"
-      @click="addTask()">
-      <h3>No tasks found.</h3>
-      Click this card to add one.
+
+    <!-- Фильтр по Дедлайну  -->
+    <div v-if="!isLoading && !noTasks" id="filter">
+      Фильтр по срочности:
+      <select v-model="filterDateDeadline" @change="filterDateDeadline1" >
+        <option v-for="type in deadlineTypes" :key="type">{{ type }}</option>
+      </select>
     </div>
 
+    <!-- Если есть isLoading то ставим Loader -->
+    <div v-if="isLoading" class="loading">Loading Tasks...</div>
+    <!-- Если есть noTasks то задач нет -->
+    <div v-if="noTasks" class="no-tasks" @click="addTask()">
+      <h3>No tasks found.</h3>Click this card to add one.
+    </div>
 
     <div id="tasks">
       <!-- Тут выводим компонент TaskCard -->
-       <!-- Тут выводятся только данные из отфильтрованных по умолчанию 
-       в filteredTasks пусто поэтому  -->
-      <task-card
-        v-for="task in filteredTasks"
-        :key="task.id"
-        :task="task"/>
+      <!-- Тут выводятся только данные из отфильтрованных по умолчанию 
+      в filteredTasks пусто поэтому-->
+      <task-card v-for="task in filteredTasks" :key="task.id" :task="task"/>
     </div>
   </div>
 </template>
 
 <script>
-import {showNoty, TASK_TYPES } from '../utility'
-import TaskCard from './TaskCard.vue'
+import { showNoty, TASK_TYPES, DEADLINE_TYPES } from "../utility";
+import TaskCard from "./TaskCard.vue";
 
 export default {
-  name: 'TaskList',
+  name: "TaskList",
 
   components: {
     TaskCard
@@ -52,69 +46,93 @@ export default {
   props: {
     search: {
       type: String,
-      default: ''
+      default: ""
     }
   },
 
-  data () {
+  data() {
     return {
       isLoading: true,
       tasks: [],
       filteredTasks: [],
       //Значение по умолчанию в фильтре
-      filterCategory: 'В работе',
-      taskTypes: TASK_TYPES
-    }
+      filterCategory: "В работе",
+      filterDateDeadline: "",
+      taskTypes: TASK_TYPES,
+      deadlineTypes: DEADLINE_TYPES
+    };
   },
 
   computed: {
-    noTasks () {
-      return this.isLoading === false &&
-        (this.tasks && this.tasks.length === 0)
+    noTasks() {
+      return (
+        this.isLoading === false && (this.tasks && this.tasks.length === 0)
+      );
     }
   },
 
   watch: {
-    'filterCategory': function () {
-      this.filteredTasks = this.tasks.filter(this.filterTask)
+    filterCategory: function() {
+      this.filteredTasks = this.tasks.filter(this.filterTask);
     },
 
-    'search': function () {
-      this.filteredTasks = this.tasks.filter(this.filterSearch)
+    filterDateDeadline: function () {
+      if (this.filteredTasks.length === 0) {
+        this.filteredTasks = this.tasks.filter(this.filterTaskDeadline);
+      } else {
+        this.filteredTasks = this.filteredTasks.filter(this.filterTaskDeadline);
+      }
+
+    },
+
+    search: function() {
+      this.filteredTasks = this.tasks.filter(this.filterSearch);
     }
   },
 
   mounted() {
-    this.getTasks()
+    this.getTasks();
   },
 
   methods: {
     async getTasks() {
       try {
-        const response = await this.$http.get('tasks')
-        this.tasks = response.data
+        const response = await this.$http.get("tasks");
+        this.tasks = response.data;
         //Создается копия массива
-        this.filteredTasks = this.tasks.slice()
+        this.filteredTasks = this.tasks.slice();
       } catch (error) {
-        showNoty("TaskList  " + error)
+        showNoty("TaskList  " + error);
       }
 
-      this.isLoading = false
+      this.isLoading = false;
     },
 
-    filterTask (task) {
-      return task.category.toString() === this.filterCategory.toString()
+    filterTask(task) {
+      return task.category.toString() === this.filterCategory.toString();
     },
 
-    filterSearch (task) {
-      return task.name.toLowerCase().includes(this.search)
-    },
-
-    addTask () {
-      this.$router.push('task-add')
+    filterTaskDeadline(task) {
+      if (this.filterDateDeadline === 'Непросроченные Задачи') {
+         var nowDate = new Date().getTime();
+        var dateDeadline = new Date(task.dateOfTask).getTime();
+        return task.dateOfTask <= nowDate;
+      } else {
+         var nowDate = new Date().getTime();
+        var dateDeadline = new Date(task.dateOfTask).getTime();
+        return dateDeadline >= nowDate;
+      }
     }
+  },
+
+  filterSearch(task) {
+    return task.name.toLowerCase().includes(this.search);
+  },
+
+  addTask() {
+    this.$router.push("task-add");
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -147,9 +165,8 @@ export default {
 }
 
 .no-tasks {
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-              0 1px 5px 0 rgba(0, 0, 0, 0.12),
-              0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   text-align: center;
 }

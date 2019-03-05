@@ -41,6 +41,24 @@
       </label>
     </div>
 
+    <div class="row">
+      <label>
+        Tags:
+        <input
+          id="task-tag"
+          v-model="task.tag"
+          type="text"
+          required>
+      </label>
+    </div>
+
+<div class="row">
+      <label>
+        Task Deadline Date:
+         <date-picker v-model="task.dateOfTask" type="datetime" lang="en" format="YYYY-MM-DD hh:mm:ss"></date-picker>
+      </label>
+    </div>
+
     <div>
       <button
         id="save"
@@ -64,9 +82,14 @@
 
 <script>
 import {showNoty, TASK_TYPES} from '../utility'
+import DatePicker from 'vue2-datepicker';
 
 export default {
   name: 'TaskAddEdit',
+
+  components: {
+    DatePicker
+  },
 
   data () {
     return {
@@ -74,6 +97,7 @@ export default {
         category: 'В работе'
       },
       taskTypes: TASK_TYPES
+      
     }
   },
 
@@ -100,7 +124,6 @@ export default {
 
         this.task = response.data
       } catch (error) {
-        /* istanbul ignore next */
         showNoty(error)
       }
     },
@@ -134,13 +157,16 @@ export default {
     },
 
     resetForm () {
-      this.recipe = {
-        category: 'В работе',
-        ingredients: [{}]
+      this.task = {
+        name: '',
+        category: 'В работе', 
+        description: '',
+        tag:''
       }
     },
 
     cancel () {
+      //Вернуться назад
       this.$router.go(-1)
     },
 
@@ -165,6 +191,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <style lang="scss" scoped>
@@ -184,11 +211,19 @@ form {
       font-weight: normal;
       margin-left: 2rem;
       padding-left: .4rem;
+ 
+    }
+
+    span.required{
+      
+        font-size: 1rem;
+      
     }
   }
 
   [required] {
     border-left: 3px solid #841c26 !important;
+
   }
 
   .row {
@@ -196,11 +231,6 @@ form {
     line-height: 3rem;
     padding-bottom: 3px;
 
-    .ingredient:first-of-type {
-      a {
-        display: none;
-      }
-    }
   }
 
   .short-label {
@@ -208,58 +238,7 @@ form {
     width: 49%;
   }
 
-  .ingredients {
-    overflow: hidden;
-    padding-bottom: 1rem;
-
-    button {
-      float: right;
-    }
-  }
-
-  .ingredient {
-    label {
-      display: inline-block;
-      width: 32%;
-    }
-
-    input[type="text"] {
-      float: none;
-      margin-left: 1rem;
-      width: 60%;
-    }
-
-    a {
-      background-color:#2b87d8;
-      border: 1px solid #1c5f9a;
-      border-radius: 3px;
-      color: #fff;
-      cursor: pointer;
-      padding: 0 5px;
-      text-decoration: none;
-    }
-
-    @media screen and (max-width: 800px) {
-      label {
-        width: 31.5%;
-      }
-
-      input[type="text"] {
-        margin-right: 0;
-        width: 55%;
-      }
-    }
-
-    @media screen and (max-width: 500px) {
-      label {
-        width: 100%;
-      }
-
-      input[type="text"] {
-        float: right;
-      }
-    }
-  }
+     
 
   input,
   select,
@@ -304,7 +283,12 @@ form {
     margin-right: 1rem;
     margin-top: 9px;
     width: 45%;
+  
   }
+
+  input[type="text"]#task-tag{
+     padding-right: 100px;
+    }
 
   .preview {
     display: block;

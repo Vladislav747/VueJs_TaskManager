@@ -6,7 +6,7 @@ let router = express.Router();
 router.get('/', (req, res) => {
   task.findAll({
     attributes: [
-      'id', 'category', 'name', 'description'
+      'id', 'category', 'name', 'description', 'tag', 'dateOfTask'
     ]
   })
   .then(tasks => {
