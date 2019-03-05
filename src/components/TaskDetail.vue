@@ -40,7 +40,7 @@ export default {
 
   data () {
     return {
-      tasks: {
+      task: {
         name: 'Invalid Task',
         category: '',
         description: 'Try the Task List instead.',

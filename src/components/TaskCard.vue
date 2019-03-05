@@ -31,13 +31,7 @@ export default {
       }
     }
   },
-
-  computed: {
-    // imageStyle () {
-    //   return `background-image: url(${this.recipe.image});`
-    // }
-  },
-
+  
   methods: {
     viewTask (id) {
       this.$router.push({ name: 'view-task', params: { id } })

@@ -13,8 +13,8 @@
       <label class="short-label">
         Name:
         <input
-          id="recipe-name"
-          v-model="recipe.name"
+          id="task-name"
+          v-model="task.name"
           type="text"
           required>
       </label>
@@ -22,8 +22,8 @@
       <label class="short-label">
         Category:
         <select
-          id="recipe-category"
-          v-model="recipe.category"
+          id="task-category"
+          v-model="task.category"
           required>
           <option
             v-for="type in taskTypes"
@@ -33,119 +33,24 @@
     </div>
 
     <div class="row">
-      <label class="short-label">
-        Prep Time (minutes):
-        <input
-          id="recipe-prep"
-          v-model="recipe.prepTime"
-          type="number"
-          step="any"
-          min="1"
-          required>
-      </label>
-
-      <label class="short-label">
-        Cook Time (minutes):
-        <input
-          id="recipe-cook"
-          v-model="recipe.cookTime"
-          type="text"
-          step="any"
-          min="1"
-          required>
-      </label>
-    </div>
-
-    <div class="row">
       <label>
         Description:
         <textarea
-          id="recipe-description"
-          v-model="recipe.description"/>
+          id="task-description"
+          v-model="task.description"/>
       </label>
-    </div>
-
-    <div class="row ingredients">
-      <strong>Ingredients:</strong>
-      <div
-        v-for="(ingredient, index) in recipe.ingredients"
-        :key="ingredient.id"
-        class="ingredient">
-        <label>
-          Name:
-          <input
-            v-model="ingredient.name"
-            class="name"
-            type="text"
-            required>
-        </label>
-
-        <label>
-          Amount:
-          <input
-            v-model="ingredient.amount"
-            class="amount"
-            type="text"
-            required>
-        </label>
-
-        <label>
-          Measure:
-          <input
-            v-model="ingredient.measure"
-            class="measure"
-            type="text"
-            required>
-        </label>
-        <a @click.prevent="removeIngredient(index)">-</a>
-      </div>
-      <button @click.prevent="addIngredient">Add Ingredient</button>
-    </div>
-
-    <div class="row">
-      <label>
-        Instructions:
-        <textarea
-          id="recipe-instructions"
-          v-model="recipe.instructions"
-          required/>
-      </label>
-    </div>
-
-    <div class="row">
-      <label>
-        Image:
-        <input
-          ref="filer"
-          type="file"
-          accept="image/*"
-          @change="onFileChange">
-      </label>
-
-      <button
-        v-if="task.image"
-        @click.prevent="clearImage()">
-        Clear Image
-      </button>
-
-      <span
-        v-if="task.image"
-        class="preview">
-        Preview:
-        <img :src="recipe.image">
-      </span>
     </div>
 
     <div>
       <button
         id="save"
-        @click.prevent="saveRecipe(true)">
-        Save Recipe
+        @click.prevent="saveTask(true)">
+        Save Task
       </button>
       <button
         id="save-new"
-        @click.prevent="saveRecipe(false)">
-        Save and New Recipe
+        @click.prevent="saveTask(false)">
+        Save and New Task
       </button>
       <button
         id="cancel"
@@ -158,7 +63,7 @@
 </template>
 
 <script>
-import { TASK_TYPES} from '../utility'
+import {showNoty, TASK_TYPES} from '../utility'
 
 export default {
   name: 'TaskAddEdit',
@@ -166,7 +71,7 @@ export default {
   data () {
     return {
       task: {
-        category: 'Appetizer',
+        category: 'В работе',
         ingredients: [{}]
       },
       taskTypes: TASK_TYPES
@@ -201,7 +106,7 @@ export default {
       }
     },
 
-    async saveRecipe (isComplete) {
+    async saveTask (isComplete) {
       try {
         const response = this.isEdit
           ? await this.$http.put('tasks', this.task)
@@ -231,75 +136,13 @@ export default {
 
     resetForm () {
       this.recipe = {
-        category: 'Appetizer',
+        category: 'В работе',
         ingredients: [{}]
       }
     },
 
     cancel () {
       this.$router.go(-1)
-    },
-
-    addIngredient () {
-      this.recipe.ingredients.push({})
-
-      setTimeout(() => {
-        let names = document.getElementsByClassName('name')
-        //Сфокусироваться на элементе
-        names[names.length - 1].focus()
-      }, 10)
-    },
-
-    removeIngredient (index) {
-      this.recipe.ingredients.splice(index, 1)
-    },
-
-    clearImage () {
-      let fileInput = this.$refs.filer
-
-      fileInput.value = ''
-
-      this.recipe.image = ''
-      this.$forceUpdate()
-    },
-
-    onFileChange (e) {
-      const files = e.target.files || e.dataTransfer.files
-
-      if (!files.length) return
-
-      let reader = new FileReader()
-      let vm = this
-
-      vm.recipe.image = new Image()
-
-      reader.onload = e => {
-        let img = new Image()
-
-        img.onload = () => {
-          /* istanbul ignore next */
-          vm.recipe.image = vm.resizeImage(img)
-          /* istanbul ignore next */
-          vm.$forceUpdate()
-        }
-        img.src = e.target.result
-      }
-      reader.readAsDataURL(files[0])
-    },
-
-    resizeImage (img) {
-      const resizeHeight = 240
-
-      let canvas = document.createElement('canvas')
-      let ctx = canvas.getContext('2d')
-      let aspectRatio = img.width / img.height
-
-      canvas.height = resizeHeight
-      canvas.width = resizeHeight * aspectRatio
-
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
-
-      return canvas.toDataURL('image/jpeg', 0.7)
     },
 
     checkErrors (response) {
