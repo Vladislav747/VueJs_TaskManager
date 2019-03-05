@@ -1,8 +1,6 @@
-let task = require('../models/task');
+let task = require('../models/task.js');
 let express = require('express');
 let router = express.Router();
-
-
 
 
 router.get('/', (req, res) => {

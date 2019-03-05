@@ -3,10 +3,10 @@
     v-if="task"
     @submit.prevent="addTask">
     <h2 v-if="!isEdit">
-      Add Recipe <span class="required">= required field</span>
+      Add Task <span class="required">= required field</span>
     </h2>
     <h2 v-else>
-      Edit Recipe <span class="required">= required field</span>
+      Edit Task <span class="required">= required field</span>
     </h2>
 
     <div class="row">
@@ -71,8 +71,7 @@ export default {
   data () {
     return {
       task: {
-        category: 'В работе',
-        ingredients: [{}]
+        category: 'В работе'
       },
       taskTypes: TASK_TYPES
     }
@@ -127,7 +126,7 @@ export default {
           return
         }
       } catch(e) {
-        showNoty('There was an error saving the recipe. Please try again.')
+        showNoty('There was an error saving the task. Please try again.')
         return
       }
 

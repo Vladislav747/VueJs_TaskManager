@@ -5,7 +5,6 @@
       id="filter">
       Show:
       <select v-model="filterCategory">
-        <option>Все Задачи</option>
         <option
           v-for="type in taskTypes"
           :key="type">{{ type }}</option>
@@ -63,7 +62,7 @@ export default {
       tasks: [],
       filteredTasks: [],
       //Значение по умолчанию в фильтре
-      filterCategory: 'Все Задачи',
+      filterCategory: 'В работе',
       taskTypes: TASK_TYPES
     }
   },

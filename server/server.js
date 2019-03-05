@@ -3,6 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const Sequelize = require('sequelize');
 const epilogue = require('epilogue');
+const database = require('./database');
 
 let configs = require('./config/serverConfigs');
 
@@ -10,13 +11,6 @@ let routes = require('./routes/index');
 let tasks = require('./routes/tasks');
 
 let app = express();
-
- // Create Database in sql to store the data
- let database = new Sequelize({
-  dialect: 'sqlite',
-  storage: '../test.sqlite'
-});
-
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*")

@@ -8,15 +8,14 @@
 
       <div class="description">{{ task.description }}</div>
 
-      <div class="details">
-       Заглушка details
+      <div class="tags">
+       Заглушка tags
+      
 
       
       </div>
 
-      <h4>Instructions</h4>
-      <!-- Подставится как html код -->
-      <div v-html="instructions"/>
+     
     </div>
 
     <footer>
@@ -33,7 +32,7 @@
 <script>
 import Noty from 'noty'
 
-import {showNoty, convertTime} from '../utility'
+import {showNoty} from '../utility'
 
 export default {
   name: 'TaskDetail',
@@ -153,7 +152,7 @@ export default {
     margin-bottom: 1rem;
   }
 
-  .details {
+  .tags {
     display: flex;
 
     .times {

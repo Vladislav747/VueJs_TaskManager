@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import { convertTime } from '../utility'
 
 export default {
   name: 'TaskCard',
@@ -31,7 +30,7 @@ export default {
       }
     }
   },
-  
+
   methods: {
     viewTask (id) {
       this.$router.push({ name: 'view-task', params: { id } })

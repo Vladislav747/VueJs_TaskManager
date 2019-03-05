@@ -1,41 +1,38 @@
 'use strict'
 
 const Sequelize = require('sequelize');
+const database = require('../database');
 
 
- // Create Database in sql to store the data
-let database = new Sequelize({
-    dialect: 'sqlite',
-    storage: './test.sqlite'
-  });
-  
-  
-  const Task = database.define('task', {
+
+
+const Task = database.define('task', {
+    id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
     name: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      //Валидация средствами sequlize
-      validate: { notEmpty: true }
+        type: Sequelize.STRING,
+        allowNull: false,
+        //Валидация средствами sequlize
+        validate: { notEmpty: true }
     },
     category: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      //Валидация средствами sequlize
-      validate: { notEmpty: true }
+        type: Sequelize.STRING,
+        allowNull: false,
+        //Валидация средствами sequlize
+        validate: { notEmpty: true }
     },
     description: {
-      type: Sequelize.TEXT
-    }   
-  });
-//   Recipe.associate = (models) => {
-//     //Определение отношение полей??
-//     // Один ко многим????
-//     Recipe.Ingredients = Recipe.hasMany(models.ingredient)
-//   }
-
-//    return Recipe
-
-// }
-
+        type: Sequelize.TEXT
+    },
+    tag: {
+        type: Sequelize.TEXT
+    },
+    dateOfTask: {
+        type: Sequelize.DATE
+    }
+});
 
 module.exports = Task;
