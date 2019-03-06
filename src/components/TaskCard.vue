@@ -1,21 +1,27 @@
 <template>
   <section class="card" @click="viewTask(task.id)">
     <header>
-      Name: {{ task.name }}
+      Имя: {{ task.name }}
       <span>{{ task.category }}</span>
     </header>
 
-    <div class="description"> Description: {{ task.description }}</div>
+    <div class="description"> Описание: {{ task.description }}</div>
 
-    <div class="tag">Tag: {{ task.tag }}</div>
+   Тэги: <input-tag id="task-tag" v-model="task.tag" :read-only="true"></input-tag>
 
-    <div class="datetimeDeadline">Deadline Date: {{ task.dateOfTask }}</div>
+    <div class="datetimeDeadline">Дата Дедлайна: {{ task.dateOfTask }}</div>
   </section>
 </template>
 
 <script>
+import InputTag from 'vue-input-tag'; 
+
 export default {
   name: "TaskCard",
+
+  components: {
+    InputTag
+  },
 
   props: {
     task: {
@@ -26,7 +32,7 @@ export default {
           category: "",
           description: ""
         };
-      }
+      },
     }
   },
 
@@ -48,11 +54,13 @@ export default {
   flex-direction: column;
   margin-bottom: 1rem;
   margin-right: 1rem;
+  flex-wrap: wrap;
 
   header,
   .description,
   .times {
     padding: 1rem;
+    
   }
 
   header {
@@ -82,7 +90,8 @@ export default {
   }
 
   .description {
-    flex-grow: 1;
+  word-wrap: break-word;
+  width: 200px;
   }
 
   .tag {

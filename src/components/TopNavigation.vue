@@ -2,10 +2,10 @@
   <nav>
     <router-link
       id="task-list"
-      :to="{ name: 'task-list' }">Task List</router-link>
+      :to="{ name: 'task-list' }">Список Задач</router-link>
     <router-link
       id="task-add"
-      :to="{ name: 'task-add' }">Add New Task</router-link>
+      :to="{ name: 'task-add' }">Добавить Новую задачу</router-link>
 
     <div class="spacer"/>
 

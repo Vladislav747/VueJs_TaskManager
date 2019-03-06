@@ -2,15 +2,15 @@
   <div>
     <div class="task">
       <h3>
-        Name: {{ task.name }}
+        Имя: {{ task.name }}
         <span>{{ task.category }}</span>
       </h3>
 
-      <div class="description">Description: {{ task.description }}</div>
+      <div class="description">Описание: {{ task.description }}</div>
 
-      <div class="tag">Tags: {{ task.tag }}</div>
+      <div class="tag">Тэги: <input-tag id="task-tag" v-model="task.tag" :read-only="true"></input-tag></div>
 
-    <div class="datetimeDeadline">Date Deadline: {{ task.dateOfTask }}</div>
+    <div class="datetimeDeadline">Дата Дедлайна: {{ task.dateOfTask }}</div>
 
      
     </div>
@@ -18,10 +18,10 @@
     <footer>
       <a
         id="edit"
-        @click.prevent="editTask()">Edit</a>
+        @click.prevent="editTask()">Редактировать</a>
       <a
         id="delete"
-        @click.prevent="deleteTask()">Delete</a>
+        @click.prevent="deleteTask()">Удалить</a>
     </footer>
   </div>
 </template>
@@ -30,16 +30,21 @@
 import Noty from 'noty'
 
 import {showNoty} from '../utility'
+import InputTag from 'vue-input-tag'; 
 
 export default {
   name: 'TaskDetail',
 
+  components: {
+    InputTag
+  },
+
   data () {
     return {
       task: {
-        name: 'Invalid Task',
+        name: 'Ошибка',
         category: '',
-        description: 'Try the Task List instead.',
+        description: 'Неправильно задаете задание',
       },
       check: undefined
     }
@@ -79,15 +84,15 @@ export default {
 
     deleteTask () {
       this.check = new Noty({
-        text: 'Deleting a task cannot be undone.<br>Are you sure?',
+        text: 'Удаление задачи нельзя будет отменить.<br>Вы уверены?',
         type: 'alert',
         layout: 'topCenter',
         buttons: [
-          Noty.button('Yes',
+          Noty.button('Да',
                       'danger',
                       /* istanbul ignore next */ () => this.realDelete(),
                       { id: 'delete-yes' }),
-          Noty.button('No',
+          Noty.button('Нет',
                       '',
                       /* istanbul ignore next */ () => this.closeCheck(),
                       { id: 'delete-no' })
@@ -115,7 +120,7 @@ export default {
         this.check.close()
         this.$router.push({ name: 'task-list' })
 
-        showNoty('Recipe deleted.', 'success')
+        showNoty('Задача Удалена.', 'success')
       } catch (error) {
         this.check.close()
         showNoty(error)

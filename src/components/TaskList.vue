@@ -4,6 +4,7 @@
     <div v-if="!isLoading && !noTasks" id="filter">
       Фильтр по категориям:
       <select v-model="filterCategory">
+        <option></option>
         <option v-for="type in taskTypes" :key="type">{{ type }}</option>
       </select>
     </div>
@@ -11,16 +12,17 @@
     <!-- Фильтр по Дедлайну  -->
     <div v-if="!isLoading && !noTasks" id="filter">
       Фильтр по срочности:
-      <select v-model="filterDateDeadline" @change="filterDateDeadline1" >
+      <select v-model="filterDateDeadline">
+        <option></option>
         <option v-for="type in deadlineTypes" :key="type">{{ type }}</option>
       </select>
     </div>
 
     <!-- Если есть isLoading то ставим Loader -->
-    <div v-if="isLoading" class="loading">Loading Tasks...</div>
+    <div v-if="isLoading" class="loading">Загружаю задачи</div>
     <!-- Если есть noTasks то задач нет -->
     <div v-if="noTasks" class="no-tasks" @click="addTask()">
-      <h3>No tasks found.</h3>Click this card to add one.
+      <h3>Задачи не найдены</h3>Нажмите сюда чтобы добавить новую задачу
     </div>
 
     <div id="tasks">
@@ -56,10 +58,12 @@ export default {
       tasks: [],
       filteredTasks: [],
       //Значение по умолчанию в фильтре
-      filterCategory: "В работе",
+      filterCategory: "",
       filterDateDeadline: "",
       taskTypes: TASK_TYPES,
-      deadlineTypes: DEADLINE_TYPES
+      deadlineTypes: DEADLINE_TYPES,
+      filteredTasksTime: [],
+      filteredTasksDeadline: []
     };
   },
 
@@ -73,16 +77,23 @@ export default {
 
   watch: {
     filterCategory: function() {
-      this.filteredTasks = this.tasks.filter(this.filterTask);
+      if (this.filteredTasksDeadline.length === 0) {
+        this.filteredTasksTime = this.tasks.filter(this.filterTask);
+      } else {
+        this.filteredTasksTime = this.filteredTasksDeadline.filter(this.filterTask);
+      }
+      this.filteredTasks = this.filteredTasksTime;
     },
 
-    filterDateDeadline: function () {
-      if (this.filteredTasks.length === 0) {
-        this.filteredTasks = this.tasks.filter(this.filterTaskDeadline);
+    filterDateDeadline: function() {
+      if (this.filteredTasksTime.length === 0) {
+        this.filteredTasksDeadline = this.tasks.filter(this.filterTaskDeadline);
       } else {
-        this.filteredTasks = this.filteredTasks.filter(this.filterTaskDeadline);
+        this.filteredTasksDeadline = this.filteredTasksTime.filter(
+          this.filterTaskDeadline
+        );
       }
-
+      this.filteredTasks = this.filteredTasksDeadline;
     },
 
     search: function() {
@@ -102,26 +113,40 @@ export default {
         //Создается копия массива
         this.filteredTasks = this.tasks.slice();
       } catch (error) {
-        showNoty("TaskList  " + error);
+        showNoty("Ошибка вывода списка задач  " + error);
       }
 
       this.isLoading = false;
     },
 
     filterTask(task) {
+
+      if(this.filterCategory !== ''){
       return task.category.toString() === this.filterCategory.toString();
+      }
+      else{
+      return true;
+      }
+
     },
 
     filterTaskDeadline(task) {
-      if (this.filterDateDeadline === 'Непросроченные Задачи') {
-         var nowDate = new Date().getTime();
-        var dateDeadline = new Date(task.dateOfTask).getTime();
-        return task.dateOfTask <= nowDate;
-      } else {
-         var nowDate = new Date().getTime();
-        var dateDeadline = new Date(task.dateOfTask).getTime();
-        return dateDeadline >= nowDate;
+
+      var dateDeadline = new Date(task.dateOfTask).getTime();
+      var nowDate = new Date().getTime();
+
+      switch (this.filterDateDeadline) {
+
+        case "Непросроченные Задачи":
+          return task.dateOfTask <= nowDate;
+
+        case "Просроченные Задачи":
+          return dateDeadline > nowDate;
+
+        default:
+          return true;
       }
+     
     }
   },
 

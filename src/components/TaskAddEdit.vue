@@ -1,204 +1,226 @@
 <template>
-  <form
-    v-if="task"
-    @submit.prevent="addTask">
-    <h2 v-if="!isEdit">
-      Add Task <span class="required">= required field</span>
+
+  <form v-if="task" @submit.prevent="submit">
+    
+    <h2 v-if="!isEdit">Добавить задачу
+      <span class="required">= обязательное поле</span>
     </h2>
-    <h2 v-else>
-      Edit Task <span class="required">= required field</span>
+    <h2 v-else>Редактировать задачу
+      <span class="required">= обязательное поле</span>
     </h2>
 
     <div class="row">
       <label class="short-label">
-        Name:
-        <input
-          id="task-name"
-          v-model="task.name"
-          type="text"
-          required>
+        Имя:
+        <input id="task-name" v-model="task.name" type="text" required>
       </label>
+ 
 
       <label class="short-label">
-        Category:
-        <select
-          id="task-category"
-          v-model="task.category"
-          required>
-          <option
-            v-for="type in taskTypes"
-            :key="type">{{ type }}</option>
+        Категория:
+        <select id="task-category" v-model="task.category" required>
+          <option v-for="type in taskTypes" :key="type">{{ type }}</option>
         </select>
       </label>
     </div>
 
     <div class="row">
       <label>
-        Description:
-        <textarea
-          id="task-description"
-          v-model="task.description"/>
+        Описание:
+        <textarea id="task-description" v-model="task.description"/>
       </label>
     </div>
 
     <div class="row">
-      <label>
-        Tags:
-        <input
-          id="task-tag"
-          v-model="task.tag"
-          type="text"
-          required>
+      <label>Тэги:
+        <input-tag id="task-tag" v-model="task.tag"></input-tag>
       </label>
     </div>
 
-<div class="row">
-      <label>
-        Task Deadline Date:
-         <date-picker v-model="task.dateOfTask" type="datetime" lang="en" format="YYYY-MM-DD hh:mm:ss"></date-picker>
+    <div class="row">
+      <label>Дата Дедлайна:
+        <date-picker
+          v-model="task.dateOfTask"
+          type="datetime"
+          lang="en"
+          format="YYYY-MM-DD hh:mm:ss"
+        ></date-picker>
       </label>
     </div>
 
     <div>
-      <button
-        id="save"
-        @click.prevent="saveTask(true)">
-        Save Task
-      </button>
-      <button
-        id="save-new"
-        @click.prevent="saveTask(false)">
-        Save and New Task
-      </button>
-      <button
-        id="cancel"
-        @click.prevent="cancel()">
-        Cancel
-      </button>
+      <button id="save" type="submit" @click.prevent="validateForm(true)">Сохранить Задачу</button>
+      <button id="save-new" @click.prevent="validateForm(false)">Сохранить и Начать Новую Задачу</button>
+      <button id="cancel" @click.prevent="cancel()">Отмена</button>
     </div>
-
   </form>
 </template>
 
 <script>
-import {showNoty, TASK_TYPES} from '../utility'
-import DatePicker from 'vue2-datepicker';
+import { showNoty, TASK_TYPES } from "../utility";
+import DatePicker from "vue2-datepicker";
+import InputTag from "vue-input-tag";
+import { required, maxLength } from "vuelidate/lib/validators";
 
 export default {
-  name: 'TaskAddEdit',
+  name: "TaskAddEdit",
 
   components: {
-    DatePicker
+    DatePicker,
+    InputTag
   },
 
-  data () {
+  data() {
     return {
       task: {
-        category: 'В работе'
+        name: '',
+        category: "В работе",
+        description:''
       },
-      taskTypes: TASK_TYPES
-      
+      taskTypes: TASK_TYPES,
+      noErrors: false
+    };
+  },
+
+   validations: {
+    task: {
+      name: { required},
+      description: { required, max:maxLength(2048)}
     }
   },
 
+ 
   computed: {
-    isEdit () { return (this.$route.params && this.$route.params.id) }
+    isEdit() {
+      return this.$route.params && this.$route.params.id;
+    }
   },
 
-  async mounted () {
+  async mounted() {
     if (this.isEdit) {
-      await this.getTask()
+      await this.getTask();
     }
   },
 
   methods: {
-    async getTask () {
+    async getTask() {
       try {
-        const response = await this.$http.get('tasks/' + this.$route.params.id)
+        const response = await this.$http.get("tasks/" + this.$route.params.id);
 
         if (response.data === null) {
-          this.$router.push({ name: 'task-list' })
-          showNoty('Requested Task not found.')
-          return
+          this.$router.push({ name: "task-list" });
+          showNoty("Задача не Найдена.");
+          return;
         }
 
-        this.task = response.data
+        this.task = response.data;
       } catch (error) {
-        showNoty(error)
+        showNoty(error);
       }
     },
 
-    async saveTask (isComplete) {
+    async saveTask(isComplete) {  
       try {
         const response = this.isEdit
-          ? await this.$http.put('tasks', this.task)
-          : await this.$http.post('tasks', this.task)
+          ? await this.$http.put("tasks", this.task)
+          : await this.$http.post("tasks", this.task);
 
         if (this.checkErrors(response) && isComplete) {
           this.$router.push({
-            path: this.isEdit
-              /* istanbul ignore next */
-              ? '/task/' + this.task.id
-              : '/'
-          })
-          showNoty(`Task ${response.data.name} ` + (this.isEdit
-                  /* istanbul ignore next */
-                   ? 'edited'
-                   : 'added'),
-                   'success')
-          return
+            path: this.isEdit ? "/task/" + this.task.id : "/"
+          });
+          showNoty(
+            `Task ${response.data.name} ` +
+              (this.isEdit ? "Отредактировано" : "Добавлено"),
+            "success"
+          );
+          return;
         }
-      } catch(e) {
-        showNoty('There was an error saving the task. Please try again.')
-        return
+      } catch (e) {
+        showNoty("Ошибка с добавлением задания. Попробуйте еще раз!");
+        return;
       }
 
-      this.resetForm()
+
+      this.resetForm();
     },
 
-    resetForm () {
+    resetForm() {
       this.task = {
-        name: '',
-        category: 'В работе', 
-        description: '',
-        tag:''
-      }
+        name: "",
+        category: "В работе",
+        description: "",
+        tag: ""
+      };
     },
 
-    cancel () {
+    cancel() {
       //Вернуться назад
-      this.$router.go(-1)
+      this.$router.go(-1);
     },
 
-    checkErrors (response) {
-      if (response.data.message === 'success') {
-        return true
+/**
+ * Проверка ошибок возврата с сервера
+ * @constructor
+ * @param {boolean} response - ответ сервера
+ * 
+ */
+    checkErrors(response) {
+      if (response.data.message === "success") {
+        return true;
       }
 
-      response.data.errors
-        .forEach(error => showNoty(this.transformErrorMessage(error.message)))
+      response.data.errors.forEach(error =>
+        showNoty(this.transformErrorMessage(error.message))
+      );
 
-      return false
+      return false;
     },
 
-    transformErrorMessage (message) {
-      message = message.replace('.', ' ')
-      message = message
-        .replace(/([A-Z])/, (match, p1) => ' ' + p1.toLowerCase())
-      message = message.charAt(0).toUpperCase() + message.slice(1) + '.'
+    transformErrorMessage(message) {
+      message = message.replace(".", " ");
+      message = message.replace(
+        /([A-Z])/,
+        (match, p1) => " " + p1.toLowerCase()
+      );
+      message = message.charAt(0).toUpperCase() + message.slice(1) + ".";
 
-      return message
+      return message;
+    },
+
+ /**
+ * Проверяем форму на валидность
+ * @constructor
+ * @param {boolean} isComplete - параметр создания еще одной задачи после создания текущей.
+ * 
+ */
+ validateForm(isComplete) {
+      this.$v.task.$touch();
+      if(this.$v.task.$error) {
+        
+      if(this.$v.task.name.$error){
+         showNoty("Имя должно быть заполнено");
+      }
+
+      if(this.$v.task.description.$error){
+         showNoty("Описание должно быть заполнено - не может быть более 2048 символов");
+      }
+          showNoty("Форма не может быть отправлена - ошибки в форме");
+      } else{
+     
+       this.saveTask(isComplete);
+      }
     }
-  }
-}
 
+
+  }
+};
 </script>
 
 <style lang="scss" scoped>
 form {
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-              0 1px 5px 0 rgba(0, 0, 0, 0.12),
-              0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
   padding: 1rem;
 
   h2 {
@@ -207,38 +229,31 @@ form {
     span {
       border-left: 2px solid #841c26;
       color: #999;
-      font-size: .7rem;
+      font-size: 0.7rem;
       font-weight: normal;
       margin-left: 2rem;
-      padding-left: .4rem;
- 
+      padding-left: 0.4rem;
     }
 
-    span.required{
-      
-        font-size: 1rem;
-      
+    span.required {
+      font-size: 1rem;
     }
   }
 
   [required] {
     border-left: 3px solid #841c26 !important;
-
   }
 
   .row {
     border-bottom: 1px solid #ccc;
     line-height: 3rem;
     padding-bottom: 3px;
-
   }
 
   .short-label {
     display: inline-block;
     width: 49%;
   }
-
-     
 
   input,
   select,
@@ -283,12 +298,11 @@ form {
     margin-right: 1rem;
     margin-top: 9px;
     width: 45%;
-  
   }
 
-  input[type="text"]#task-tag{
-     padding-right: 100px;
-    }
+  input[type="text"]#task-tag {
+    padding-right: 100px;
+  }
 
   .preview {
     display: block;
@@ -308,7 +322,7 @@ form {
     margin-top: 1rem;
     outline: 0;
     padding: 10px;
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
   }
 
   button:hover {
