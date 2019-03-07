@@ -1,12 +1,8 @@
-const uuid = require('uuid/v4');
-
 'use strict'
 
 const Sequelize = require('sequelize');
 const database = require('../database');
 const moment = require('moment');
-
-
 
 const Task = database.define('task', {
     id: {
