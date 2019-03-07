@@ -143,10 +143,10 @@ export default {
 
       switch (this.filterDateDeadline) {
         case "Непросроченные Задачи":
-          return task.dateOfTask <= nowDate;
+          return dateDeadline >= nowDate;
 
         case "Просроченные Задачи":
-          return dateDeadline > nowDate;
+          return dateDeadline < nowDate;
 
         default:
           return true;
