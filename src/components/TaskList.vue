@@ -41,13 +41,7 @@ export default {
     TaskCard
   },
 
-  props: {
-    search: {
-      type: String,
-      default: ""
-    }
-  },
-
+ 
   data() {
     return {
       isLoading: true,
@@ -91,10 +85,6 @@ export default {
         );
       }
       this.filteredTasks = this.filteredTasksDeadline;
-    },
-
-    search: function() {
-      this.filteredTasks = this.tasks.filter(this.filterSearch);
     }
   },
 
@@ -143,10 +133,10 @@ export default {
 
       switch (this.filterDateDeadline) {
         case "Непросроченные Задачи":
-          return task.dateOfTask <= nowDate;
+          return dateDeadline >= nowDate;
 
         case "Просроченные Задачи":
-          return dateDeadline > nowDate;
+          return dateDeadline < nowDate;
 
         default:
           return true;
@@ -154,14 +144,6 @@ export default {
     }
   },
 
-  /**
-   * Поиск задачи по имени
-   * @param {object} task - объект текущей задачи
-   *
-   */
-  filterSearch(task) {
-    return task.name.toLowerCase().includes(this.search);
-  },
 
   /**
    * Переход на добавление задачи
