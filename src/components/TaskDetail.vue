@@ -8,133 +8,130 @@
 
       <div class="description">Описание: {{ task.description }}</div>
 
-      <div class="tag">Тэги: <input-tag id="task-tag" v-model="task.tag" :read-only="true"></input-tag></div>
+      <div class="tag">Тэги:
+        <input-tag id="task-tag" v-model="task.tag" :read-only="true"></input-tag>
+      </div>
 
-    <div class="datetimeDeadline">Дата Дедлайна: {{ task.dateOfTask }}</div>
-
-     
+      <div class="datetimeDeadline">Дата Дедлайна: {{ task.dateOfTask }}</div>
     </div>
 
     <footer>
-      <a
-        id="edit"
-        @click.prevent="editTask()">Редактировать</a>
-      <a
-        id="delete"
-        @click.prevent="deleteTask()">Удалить</a>
+      <a id="edit" @click.prevent="editTask()">Редактировать</a>
+      <a id="delete" @click.prevent="deleteTask()">Удалить</a>
     </footer>
   </div>
 </template>
 
 <script>
-import Noty from 'noty'
+import Noty from "noty";
 
-import {showNoty} from '../utility'
-import InputTag from 'vue-input-tag'; 
+import { showNoty } from "../utility";
+import InputTag from "vue-input-tag";
 
 export default {
-  name: 'TaskDetail',
+  name: "TaskDetail",
 
   components: {
     InputTag
   },
 
-  data () {
+  data() {
     return {
       task: {
-        name: 'Ошибка',
-        category: '',
-        description: 'Неправильно задаете задание',
+        name: "Ошибка отображения Задачи",
+        category: "",
+        description: ""
       },
       check: undefined
-    }
+    };
   },
 
-  computed: {
-    
-  },
-
-//Вызвать получение задания при загрузке компонента
   mounted() {
-    this.getTask()
+    this.getTask();
   },
 
   methods: {
-    async getTask () {
+    /**
+     * Получить задачу
+     */
+    async getTask() {
       try {
-        const response = await this.$http.get('tasks/' + this.$route.params.id)
+        const response = await this.$http.get("tasks/" + this.$route.params.id);
 
         if (response.data === null) {
           //Перенаправление на страницу
-          this.$router.push({ name: 'task-list' })
-          showNoty('Requested task not found.')
-          return
+          this.$router.push({ name: "task-list" });
+          showNoty("Requested task not found.");
+          return;
         }
 
-        this.task = response.data
+        this.task = response.data;
       } catch (error) {
-        showNoty('TaskDetail ' + error)
+        showNoty("TaskDetail " + error);
       }
     },
 
-    editTask () {
-      //Перенаправить на страницу
-      this.$router.push({ name: 'task-edit', params: { id: this.task.id } })
+    /**
+     * Отредактировать задачу
+     */
+    editTask() {
+      this.$router.push({ name: "task-edit", params: { id: this.task.id } });
     },
 
-    deleteTask () {
+    /**
+     * Отображение оповещение задачи
+     */
+    deleteTask() {
       this.check = new Noty({
-        text: 'Удаление задачи нельзя будет отменить.<br>Вы уверены?',
-        type: 'alert',
-        layout: 'topCenter',
+        text: "Удаление задачи нельзя будет отменить.<br>Вы уверены?",
+        type: "alert",
+        layout: "topCenter",
         buttons: [
-          Noty.button('Да',
-                      'danger',
-                      /* istanbul ignore next */ () => this.realDelete(),
-                      { id: 'delete-yes' }),
-          Noty.button('Нет',
-                      '',
-                      /* istanbul ignore next */ () => this.closeCheck(),
-                      { id: 'delete-no' })
+          Noty.button("Да", "danger", () => this.realDelete(), {
+            id: "delete-yes"
+          }),
+          Noty.button("Нет", "", () => this.closeCheck(), { id: "delete-no" })
         ]
-      })
+      });
 
-      this.check.show()
+      this.check.show();
     },
 
-    closeCheck () {
-      //Если нет экземпляра Noty то закрыть функцию !! не Окно
+    /**
+     * Закрыть всплывающее окно
+     */
+    closeCheck() {
       if (!this.check) {
-        return
+        return;
       }
-      //Если есть экзмепляр то закрыть окно
-      this.check.close()
+      //Если есть экземпляр то закрыть окно
+      this.check.close();
     },
 
-
-    async realDelete () {
+    /**
+     * Удаление задачи
+     */
+    async realDelete() {
       try {
-        //Вызов запрос типа http.
-        await this.$http.delete('tasks/' + this.task.id)
+        await this.$http.delete("tasks/" + this.task.id);
 
-        this.check.close()
-        this.$router.push({ name: 'task-list' })
+        this.check.close();
+        this.$router.push({ name: "task-list" });
 
-        showNoty('Задача Удалена.', 'success')
+        showNoty("Задача Удалена.", "success");
       } catch (error) {
-        this.check.close()
-        showNoty(error)
+        this.check.close();
+        showNoty(error);
       }
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
 .task {
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-              0 1px 5px 0 rgba(0, 0, 0, 0.12),
-              0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
   margin-bottom: 1rem;
   padding: 1rem;
 
@@ -158,7 +155,7 @@ export default {
     display: flex;
 
     .times {
-      font-size: .9rem;
+      font-size: 0.9rem;
       margin-bottom: 1rem;
 
       span {
@@ -176,7 +173,7 @@ export default {
     }
 
     .ingredient {
-      font-size: .9rem;
+      font-size: 0.9rem;
 
       div {
         float: right;
@@ -203,9 +200,8 @@ export default {
 
 footer {
   background-color: #2b87d8;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-              0 1px 5px 0 rgba(0, 0, 0, 0.12),
-              0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
   display: flex;
   margin-bottom: 1em;
   padding: 1em;

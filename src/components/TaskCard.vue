@@ -37,6 +37,12 @@ export default {
   },
 
   methods: {
+
+    /**
+     * Переход на детальное отображение задачи
+     * @param {number} id - id задачи
+     *
+     */
     viewTask(id) {
       this.$router.push({ name: "view-task", params: { id } });
     }

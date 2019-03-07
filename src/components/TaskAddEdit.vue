@@ -1,11 +1,11 @@
 <template>
-
-  <form v-if="task" @submit.prevent="submit">
-    
-    <h2 v-if="!isEdit">Добавить задачу
+  <form v-if="task">
+    <h2 v-if="!isEdit">
+      Добавить задачу
       <span class="required">= обязательное поле</span>
     </h2>
-    <h2 v-else>Редактировать задачу
+    <h2 v-else>
+      Редактировать задачу
       <span class="required">= обязательное поле</span>
     </h2>
 
@@ -14,8 +14,7 @@
         Имя:
         <input id="task-name" v-model="task.name" type="text" required>
       </label>
- 
-
+      
       <label class="short-label">
         Категория:
         <select id="task-category" v-model="task.category" required>
@@ -73,23 +72,21 @@ export default {
   data() {
     return {
       task: {
-        name: '',
+        name: "",
         category: "В работе",
-        description:''
+        description: ""
       },
-      taskTypes: TASK_TYPES,
-      noErrors: false
+      taskTypes: TASK_TYPES
     };
   },
 
-   validations: {
+  validations: {
     task: {
-      name: { required},
-      description: { required, max:maxLength(2048)}
+      name: { required },
+      description: { required, max: maxLength(2048) }
     }
   },
 
- 
   computed: {
     isEdit() {
       return this.$route.params && this.$route.params.id;
@@ -103,6 +100,11 @@ export default {
   },
 
   methods: {
+
+    /**
+     * Получить все задачи с сервера
+     *
+     */
     async getTask() {
       try {
         const response = await this.$http.get("tasks/" + this.$route.params.id);
@@ -119,7 +121,13 @@ export default {
       }
     },
 
-    async saveTask(isComplete) {  
+    /**
+     * Сохранить задачу
+     * 
+     *@param {string} response - ответ сервера
+     *
+     */
+    async saveTask(isComplete) {
       try {
         const response = this.isEdit
           ? await this.$http.put("tasks", this.task)
@@ -137,34 +145,41 @@ export default {
           return;
         }
       } catch (e) {
-        showNoty("Ошибка с добавлением задания. Попробуйте еще раз!");
+        showNoty("Ошибка с добавлением задачи. Попробуйте еще раз!");
         return;
       }
-
 
       this.resetForm();
     },
 
+    /**
+     * Очистить форму
+     *
+     */
     resetForm() {
       this.task = {
         name: "",
         category: "В работе",
         description: "",
-        tag: ""
+        tag: "",
+        dateOfTask: ""
       };
     },
 
+    /**
+     * Отмена выполнения
+     *
+     */
     cancel() {
       //Вернуться назад
       this.$router.go(-1);
     },
 
-/**
- * Проверка ошибок возврата с сервера
- * @constructor
- * @param {boolean} response - ответ сервера
- * 
- */
+    /**
+     * Проверка ошибок возврата с сервера
+     * @param {object} response - ответ сервера
+     *
+     */
     checkErrors(response) {
       if (response.data.message === "success") {
         return true;
@@ -177,6 +192,11 @@ export default {
       return false;
     },
 
+    /**
+     * Форматирование ответа сервера
+     * @param {string} response - ответ сервера
+     *
+     */
     transformErrorMessage(message) {
       message = message.replace(".", " ");
       message = message.replace(
@@ -188,31 +208,28 @@ export default {
       return message;
     },
 
- /**
- * Проверяем форму на валидность
- * @constructor
- * @param {boolean} isComplete - параметр создания еще одной задачи после создания текущей.
- * 
- */
- validateForm(isComplete) {
+    /**
+     * Проверяем форму на валидность
+     * @param {boolean} isComplete - параметр создания еще одной задачи после создания текущей.
+     *
+     */
+    validateForm(isComplete) {
       this.$v.task.$touch();
-      if(this.$v.task.$error) {
-        
-      if(this.$v.task.name.$error){
-         showNoty("Имя должно быть заполнено");
-      }
+      if (this.$v.task.$error) {
+        if (this.$v.task.name.$error) {
+          showNoty("Имя должно быть заполнено");
+        }
 
-      if(this.$v.task.description.$error){
-         showNoty("Описание должно быть заполнено - не может быть более 2048 символов");
-      }
-          showNoty("Форма не может быть отправлена - ошибки в форме");
-      } else{
-     
-       this.saveTask(isComplete);
+        if (this.$v.task.description.$error) {
+          showNoty(
+            "Описание должно быть заполнено - не может быть более 2048 символов"
+          );
+        }
+        showNoty("Форма не может быть отправлена - ошибки в форме");
+      } else {
+        this.saveTask(isComplete);
       }
     }
-
-
   }
 };
 </script>

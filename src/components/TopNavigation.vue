@@ -43,6 +43,7 @@ export default {
   },
 
   methods: {
+  
     emitSearch (event) {
       this.$emit('search', event.target.value)
     }

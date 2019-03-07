@@ -20,15 +20,11 @@
 
     <!-- Если есть isLoading то ставим Loader -->
     <div v-if="isLoading" class="loading">Загружаю задачи</div>
-    <!-- Если есть noTasks то задач нет -->
-    <div v-if="noTasks" class="no-tasks" @click="addTask()">
-      <h3>Задачи не найдены</h3>Нажмите сюда чтобы добавить новую задачу
+    <div v-if="noTasks" class="no-tasks">
+      <h3>Задачи не найдены</h3>Нажмите вверху на панели Добавить Новую задачу 
     </div>
 
     <div id="tasks">
-      <!-- Тут выводим компонент TaskCard -->
-      <!-- Тут выводятся только данные из отфильтрованных по умолчанию 
-      в filteredTasks пусто поэтому-->
       <task-card v-for="task in filteredTasks" :key="task.id" :task="task"/>
     </div>
   </div>
@@ -57,7 +53,6 @@ export default {
       isLoading: true,
       tasks: [],
       filteredTasks: [],
-      //Значение по умолчанию в фильтре
       filterCategory: "",
       filterDateDeadline: "",
       taskTypes: TASK_TYPES,
@@ -80,7 +75,9 @@ export default {
       if (this.filteredTasksDeadline.length === 0) {
         this.filteredTasksTime = this.tasks.filter(this.filterTask);
       } else {
-        this.filteredTasksTime = this.filteredTasksDeadline.filter(this.filterTask);
+        this.filteredTasksTime = this.filteredTasksDeadline.filter(
+          this.filterTask
+        );
       }
       this.filteredTasks = this.filteredTasksTime;
     },
@@ -106,6 +103,9 @@ export default {
   },
 
   methods: {
+    /**
+     * Получить задачи
+     */
     async getTasks() {
       try {
         const response = await this.$http.get("tasks");
@@ -119,24 +119,29 @@ export default {
       this.isLoading = false;
     },
 
+    /**
+     * Фильтровать задачу по категории
+     * @param {object} task - объект текущей задачи
+     *
+     */
     filterTask(task) {
-
-      if(this.filterCategory !== ''){
-      return task.category.toString() === this.filterCategory.toString();
+      if (this.filterCategory !== "") {
+        return task.category.toString() === this.filterCategory.toString();
+      } else {
+        return true;
       }
-      else{
-      return true;
-      }
-
     },
 
+    /**
+     * Фильтровать задачу по деадлайну
+     * @param {object} task - объект текущей задачи
+     *
+     */
     filterTaskDeadline(task) {
-
       var dateDeadline = new Date(task.dateOfTask).getTime();
       var nowDate = new Date().getTime();
 
       switch (this.filterDateDeadline) {
-
         case "Непросроченные Задачи":
           return task.dateOfTask <= nowDate;
 
@@ -146,14 +151,23 @@ export default {
         default:
           return true;
       }
-     
     }
   },
 
+  /**
+   * Поиск задачи по имени
+   * @param {object} task - объект текущей задачи
+   *
+   */
   filterSearch(task) {
     return task.name.toLowerCase().includes(this.search);
   },
 
+  /**
+   * Переход на добавление задачи
+   * @param {object} task - объект текущей задачи
+   *
+   */
   addTask() {
     this.$router.push("task-add");
   }
