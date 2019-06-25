@@ -15,8 +15,6 @@ const keys = require('./config/clientConfigs');
 
 const api = axios.create({ baseURL: keys.baseURL })
 
-// Метод Object.defineProperty() определяет новое или изменяет существующее свойство непосредственно на объекте, возвращая этот объект.
-// Vue.prototype - Объект на котором применяется, $http - новое свойство
 Object.defineProperty(Vue.prototype, '$http', {
   get() {
     return api

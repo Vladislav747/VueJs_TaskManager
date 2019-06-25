@@ -1,5 +1,7 @@
 # vuejs_taskmanager
 
+Don't forget to launch server
+
 ## Project setup
 ```
 npm install

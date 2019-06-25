@@ -82,9 +82,14 @@ nav {
     font-size: 1rem;
     outline: 0;
     padding: 7px;
+    width: 209px;
+    transition: width 0.2s ease-in-out;
   }
-}
 
+  input[type="text"]:focus {
+        width: 400px;
+}
+}
 @media screen and (max-width: 550px) {
   nav {
     flex-wrap: wrap;
