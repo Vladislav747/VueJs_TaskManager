@@ -47,6 +47,6 @@ database
   .sync({ force: true })
   .then(() => {
     app.listen(configs.defultPort, () => {
-      console.log('listening to port localhost:8081')
+      console.log('listening to port localhost: '+configs.defultPort)
     })
   })

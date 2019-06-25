@@ -9,12 +9,6 @@
 
     <div class="spacer"/>
 
-    <input
-      v-if="isHome"
-      v-model="searchText"
-      type="text"
-      placeholder="Искать Задачи..."
-      @input="emitSearch">
 
   </nav>
 </template>
@@ -23,31 +17,12 @@
 export default {
   name: 'TopNavigation',
 
-  props: {
-    search: {
-      type: String,
-      default: ''
-    }
-  },
-
-  data () {
-    return {
-      searchText: this.search
-    }
-  },
 
   computed: {
     isHome () {
       return this.$route.path === '/'
     }
   },
-
-  methods: {
-  
-    emitSearch (event) {
-      this.$emit('search', event.target.value)
-    }
-  }
 }
 </script>
 
