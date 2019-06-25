@@ -1,7 +1,5 @@
 const Sequelize = require('sequelize');
 
-
-
 // Create Database in sql to store the data
 let database = new Sequelize({
     dialect: 'sqlite',

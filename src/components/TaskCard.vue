@@ -135,6 +135,8 @@ export default {
   .card {
     /* Три значения: flex-grow | flex-shrink | flex-basis */
     flex: 0 0 100%;
+    padding: 5%;
   }
+  
 }
 </style>

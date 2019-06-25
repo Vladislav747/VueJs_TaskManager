@@ -175,6 +175,14 @@ export default {
       width: 40%;
     }
   }
+
+  .card:nth-child(3n) {
+      margin-right: 1em;
+    }
+
+    .card:nth-child(2n) {
+      margin-right: 0;
+    }
 }
 
 @media screen and (max-width: 550px) {
@@ -182,6 +190,10 @@ export default {
     select {
       width: 60%;
     }
+  }
+
+  #tasks{
+        padding: 5%;
   }
 }
 
@@ -204,14 +216,5 @@ export default {
     margin-right: 0;
   }
 
-  @media screen and (max-width: 800px) {
-    .card:nth-child(3n) {
-      margin-right: 1em;
-    }
-
-    .card:nth-child(2n) {
-      margin-right: 0;
-    }
-  }
 }
 </style>
