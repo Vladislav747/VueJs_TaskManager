@@ -15,7 +15,7 @@ npm run serve
 
 ### Start server node server
 ```
-npm run start_server
+npm run start
 ```
 
 ### Compiles and minifies for production
