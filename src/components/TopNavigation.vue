@@ -5,10 +5,18 @@
       :to="{ name: 'task-list' }">Список Задач</router-link>
     <router-link
       id="task-add"
-      :to="{ name: 'task-add' }">Добавить Новую задачу</router-link>
+      :to="{ name: 'task-add' }">Создать Новую задачу
+        <font-awesome-icon icon="plus-circle" />
+      </router-link>
 
     <div class="spacer"/>
 
+<input
+      v-if="isHome"
+      v-model="searchText"
+      type="text"
+      placeholder="Искать Задачи..."
+      @input="emitSearch">
 
   </nav>
 </template>
@@ -58,7 +66,7 @@ nav {
     outline: 0;
     padding: 7px;
     width: 209px;
-    transition: width 0.2s ease-in-out;
+    transition: width 0.6s ease-in-out;
   }
 
   input[type="text"]:focus {
@@ -70,9 +78,11 @@ nav {
     flex-wrap: wrap;
 
     input {
-      margin-top: 1rem;
-      width: 100%;
+      margin: 1rem auto 0;
+      width: 80%;
     }
   }
 }
+
 </style>
+

@@ -1,7 +1,7 @@
 <template>
   <form v-if="task">
     <h2 v-if="!isEdit">
-      Добавить задачу
+      Создать задачу
       <span class="required">= обязательное поле</span>
     </h2>
     <h2 v-else>
