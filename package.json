@@ -7,8 +7,10 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "start": "cd ./server && node server.js",
+    "start_sqlite":"cd ./server && $typeDB=sqlite node server.js",
     "postinstall": "if test \"$NODE_ENV\" = \"production\" ; then npm run build ; fi ",
-    "debug": "cd ./server && node --nolazy --inspect-brk=9229 server.js"
+    "debug": "cd ./server && node --nolazy --inspect-brk=9229 server.js",
+    "server_and_client": "npm run start & npm run serve"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
@@ -17,7 +19,9 @@
     "axios": "^0.18.1",
     "cors": "^2.8.5",
     "epilogue": "^0.7.1",
+    "express": "^4.17.1",
     "moment": "^2.24.0",
+    "mongoose": "^5.6.3",
     "node-sass": "^4.12.0",
     "noty": "^3.2.0-beta",
     "sass-loader": "^7.1.0",

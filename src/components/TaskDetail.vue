@@ -2,17 +2,17 @@
   <div>
     <div class="task">
       <h3>
-        Имя: {{ task.name }}
+       {{ task.name }}
         <span>{{ task.category }}</span>
       </h3>
 
-      <div class="description">Описание: {{ task.description }}</div>
+      <div class="description">{{ task.description }}</div>
 
       <div class="tag">Тэги:
         <input-tag id="task-tag" v-model="task.tag" :read-only="true"></input-tag>
       </div>
 
-      <div class="datetimeDeadline">Дата Дедлайна: {{ task.dateOfTask }}</div>
+      <div class="datetimeDeadline">Дата окончания: {{ task.dateOfTask }}</div>
     </div>
 
     <footer>

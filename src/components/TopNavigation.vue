@@ -2,11 +2,13 @@
   <nav>
     <router-link
       id="task-list"
-      :to="{ name: 'task-list' }">Список Задач</router-link>
+      :to="{ name: 'task-list' }"><span class="top-desktop">Список Задач</span>
+       <font-awesome-icon icon="list-ul" size="2x" class="top-icon"/>
+      </router-link>
     <router-link
       id="task-add"
-      :to="{ name: 'task-add' }">Создать Новую задачу
-        <font-awesome-icon icon="plus-circle" />
+      :to="{ name: 'task-add' }"><span class="top-desktop">Создать задачу</span>
+        <font-awesome-icon icon="plus-circle" size="2x" class="top-icon"/>
       </router-link>
 
     <div class="spacer"/>
@@ -25,7 +27,13 @@
 export default {
   name: 'TopNavigation',
 
-
+data() {
+    return {
+      searchText: '',
+      emitSearch: ''
+    };
+  },
+  
   computed: {
     isHome () {
       return this.$route.path === '/'
@@ -72,6 +80,10 @@ nav {
   input[type="text"]:focus {
         width: 400px;
 }
+
+.top-icon{
+  display:none;
+}
 }
 @media screen and (max-width: 550px) {
   nav {
@@ -79,8 +91,14 @@ nav {
 
     input {
       margin: 1rem auto 0;
-      width: 80%;
+      width: 100%;
     }
+    .top-desktop{
+      display:none;
+    }
+.top-icon{
+  display:block;
+}
   }
 }
 

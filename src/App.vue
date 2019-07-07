@@ -58,20 +58,10 @@ html {
   font-size: 1.1rem;
   line-height: 1.6rem;
   margin: 0 auto;
-  max-width: 1000px;
+  max-width: 1440px;
 }
 
-@media screen and (max-width: 800px) {
-  #container {
-    max-width: 98%;
-  }
-}
 
-@media screen and (max-width: 550px) {
-  #container {
-    max-width: 100%;
-  }
-}
 
 .noty_type__alert {
   border: none;

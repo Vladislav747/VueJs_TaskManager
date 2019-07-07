@@ -1,31 +1,36 @@
 <template>
-  <div>
-    <!-- Фильтр по категориям  -->
-    <div v-if="!isLoading && !noTasks" id="filter">
-      Фильтр по категориям:
-      <select v-model="filterCategory">
-        <option></option>
-        <option v-for="type in taskTypes" :key="type">{{ type }}</option>
-      </select>
+  <div class="taskList">
+    
+    <div class="filterWrapper hidden">
+      <div class="filterIcon">
+      <font-awesome-icon icon="filter" size="2x" class="top-icon" v-on:click="showFilter()"/>
     </div>
+      <!-- Фильтр по категориям  -->
+      <div v-if="!isLoading && !noTasks" id="filter">
+        <p class="filterWrapper-text">Фильтр задач</p>Категория:
+        <select v-model="filterCategory">
+          <option></option>
+          <option v-for="type in taskTypes" :key="type">{{ type }}</option>
+        </select>
+      </div>
 
-    <!-- Фильтр по Дедлайну  -->
-    <div v-if="!isLoading && !noTasks" id="filter">
-      Фильтр по срочности:
-      <select v-model="filterDateDeadline">
-        <option></option>
-        <option v-for="type in deadlineTypes" :key="type">{{ type }}</option>
-      </select>
+      <!-- Фильтр по Дедлайну  -->
+      <div v-if="!isLoading && !noTasks" id="filter">
+        Срочность:
+        <select v-model="filterDateDeadline">
+          <option></option>
+          <option v-for="type in deadlineTypes" :key="type">{{ type }}</option>
+        </select>
+      </div>
     </div>
-
     <!-- Если есть isLoading то ставим Loader -->
     <div v-if="isLoading" class="loading">Загружаю задачи</div>
     <div v-if="noTasks" class="no-tasks">
-      <h3>Задачи не найдены</h3>Нажмите вверху на панели Добавить Новую задачу 
+      <h3>Задачи не найдены</h3>Нажмите вверху на панели Добавить Новую задачу
     </div>
 
     <div id="tasks">
-      <task-card v-for="task in filteredTasks" :key="task.id" :task="task"/>
+      <task-card v-for="task in filteredTasks" :key="task._id" :task="task"/>
     </div>
   </div>
 </template>
@@ -41,7 +46,6 @@ export default {
     TaskCard
   },
 
- 
   data() {
     return {
       isLoading: true,
@@ -101,6 +105,7 @@ export default {
         const response = await this.$http.get("tasks");
         this.tasks = response.data;
         //Создается копия массива
+        console.log(this.tasks);
         this.filteredTasks = this.tasks.slice();
       } catch (error) {
         showNoty("Ошибка вывода списка задач  " + error);
@@ -141,9 +146,17 @@ export default {
         default:
           return true;
       }
+    },
+
+    /**
+     * Показывать/Скрывать блок фильтра
+     */
+    showFilter() {
+      console.log("oddity");
+      var divFilter = document.getElementsByClassName("filterWrapper")[0];
+      divFilter.classList.toggle("hidden");
     }
   },
-
 
   /**
    * Переход на добавление задачи
@@ -165,9 +178,48 @@ export default {
     border-radius: 3px;
     outline: 0;
     padding: 5px;
-    width: 25%;
+    width: 60%;
   }
 }
+
+.filterWrapper-text {
+  margin-right: 150px;
+  margin-bottom: 20px;
+}
+
+.filterWrapper.hidden {
+transition: 1s linear;
+left:620px;
+}
+
+.filterWrapper {
+  position: fixed;
+  width: 300px;
+  background-color:#F2F2F2;
+  margin-left:1140px; 
+  z-index: 2;
+   box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  border-radius:10px;
+  left:320px;
+  transition: 1s linear;
+  padding:15px;
+  opacity:0.8;
+}
+
+.taskList{
+  z-index: 1;
+}
+
+.filterIcon{
+  position: absolute;
+    top: 50px;
+    left: -30px;
+    background-color: #F2F2F2;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 25%;
+}
+
 
 @media screen and (max-width: 800px) {
   #filter {
@@ -177,12 +229,12 @@ export default {
   }
 
   .card:nth-child(3n) {
-      margin-right: 1em;
-    }
+    margin-right: 1em;
+  }
 
-    .card:nth-child(2n) {
-      margin-right: 0;
-    }
+  .card:nth-child(2n) {
+    margin-right: 0;
+  }
 }
 
 @media screen and (max-width: 550px) {
@@ -192,8 +244,8 @@ export default {
     }
   }
 
-  #tasks{
-        padding: 5%;
+  #tasks {
+    padding: 5%;
   }
 }
 
@@ -215,6 +267,5 @@ export default {
   .card:nth-child(3n) {
     margin-right: 0;
   }
-
 }
 </style>

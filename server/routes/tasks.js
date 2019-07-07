@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
     res.json(tasks)
   })
   .catch(errors => {
-    res.json({ message: 'error', errors: errors.errors })
+    res.json({ message: 'error', errors: errors.errors})
   });
 });
 
@@ -31,7 +31,7 @@ router.put('/', (req, res) => {
   task.findById(req.body.id)
   .then(task => {
     /* Метод Object.assign() копирует из исходных объектов в целевой объект
-    recipe - целевой, req.body исходный*/
+    task - целевой, req.body исходный*/
     task = Object.assign(task, req.body);
     return task.save();
   })
@@ -42,8 +42,8 @@ router.put('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   task.findById(req.params.id)
-  .then(recipe => {
-    res.json(recipe)
+  .then(task => {
+    res.json(task)
   });
 });
 

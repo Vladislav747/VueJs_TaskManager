@@ -1,10 +1,13 @@
-'use strict'
+'use strict';
 
-const Sequelize = require('sequelize');
-const database = require('../database');
-const moment = require('moment');
+if(process.env.typeDB === 'sqlite'){
 
-const Task = database.define('task', {
+let Sequelize = require('sequelize');
+let database = require('../database');
+let moment = require('moment');
+
+
+var Task = database.define('task', {
     id: {
         type: Sequelize.INTEGER,
         allowNull:false,
@@ -14,13 +17,13 @@ const Task = database.define('task', {
     name: {
         type: Sequelize.STRING,
         allowNull: false,
-        //Валидация средствами sequlize
+        //Validation by sequlize
         validate: { notEmpty: true }
     },
     category: {
         type: Sequelize.STRING,
         allowNull: false,
-        //Валидация средствами sequlize
+        //Validation by sequlize
         validate: { notEmpty: true }
     },
     description: {
@@ -43,5 +46,57 @@ const Task = database.define('task', {
         }
     }
 });
+
+
+} else{
+
+ //Models by mongoose
+let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
+
+//Создание схемы данных
+let TaskSchema = new Schema({
+    id: {
+        type: String,
+        required: false
+      },
+  name: {
+    type: String,
+    required: true
+  },
+  category: {
+    type: String,
+    required: true
+  },
+  tag: {
+    type: String,
+    required: false,
+    set: function (arr) {
+        var str = arr.join(',');
+    return str;    
+    }
+    // ,
+    // get: function (str) {
+    //     console.log(str);
+    //     var asd = str.split(',');
+    //     return str.split(',');
+    // }
+  },
+
+  description: {
+    type: String,
+    required: true
+  },
+  dateOfTask: {
+    type: Date,
+    required: true
+  }
+},
+{ collection : 'tasks' });
+
+// Create collection and add schema
+var Task = mongoose.model('Task', TaskSchema);
+}
+
 
 module.exports = Task;

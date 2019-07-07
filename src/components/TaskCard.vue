@@ -61,7 +61,9 @@ export default {
   margin-bottom: 1rem;
   margin-right: 1rem;
   flex-wrap: wrap;
-
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  border-radius:10px;
   header,
   .description,
   .times {
