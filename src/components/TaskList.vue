@@ -198,7 +198,7 @@ left:620px;
   background-color:#F2F2F2;
   margin-left:1140px; 
   z-index: 2;
-   box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
   border-radius:10px;
   left:320px;
   transition: 1s linear;
@@ -213,7 +213,7 @@ left:620px;
 .filterIcon{
   position: absolute;
     top: 50px;
-    left: -30px;
+    left: -45px;
     background-color: #F2F2F2;
     padding: 5px;
     border: 1px solid black;

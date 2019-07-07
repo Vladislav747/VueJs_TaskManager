@@ -1,15 +1,17 @@
 <template>
   <section class="card" @click="viewTask(task.id)">
     <header>
-      Имя: {{ task.name }}
+      {{ task.name }}
       <span>{{ task.category }}</span>
     </header>
 
-    <div class="description"> Описание: {{ task.description }}</div>
+    <div class="description"> {{ task.description }}</div>
 
-   Тэги: <input-tag id="task-tag" v-model="task.tag" :read-only="true"></input-tag>
+<div class="datetimeDeadline">{{ task.dateOfTask }}</div>
 
-    <div class="datetimeDeadline">Дата Дедлайна: {{ task.dateOfTask }}</div>
+   <input-tag id="task-tag" v-model="task.tag" :read-only="true"></input-tag>
+
+    
   </section>
 </template>
 
@@ -62,7 +64,7 @@ export default {
   margin-right: 1rem;
   flex-wrap: wrap;
   padding: 20px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  
   border-radius:10px;
   header,
   .description,
@@ -70,6 +72,11 @@ export default {
     padding: 1rem;
     
   }
+
+&:hover {
+ box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  }
+
 
   header {
     font-weight: bold;
@@ -99,7 +106,7 @@ export default {
 
   .description {
   word-wrap: break-word;
-  width: 200px;
+  width: 400px;
   }
 
   .tag {
@@ -111,6 +118,9 @@ export default {
     height: 70px;
   }
 
+.vue-input-tag-wrapper {
+  border: 0px;
+}
   .datetimeDeadline {
     font-size: 1rem;
     font-weight: bold;

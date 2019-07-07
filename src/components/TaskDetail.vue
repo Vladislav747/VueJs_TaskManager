@@ -2,17 +2,19 @@
   <div>
     <div class="task">
       <h3>
-       {{ task.name }}
+        Имя: {{ task.name }}
         <span>{{ task.category }}</span>
       </h3>
 
-      <div class="description">{{ task.description }}</div>
+      <div class="description">Описание: {{ task.description }}</div>
+
+<div class="datetimeDeadline">Дата Дедлайна: {{ task.dateOfTask }}</div>
 
       <div class="tag">Тэги:
         <input-tag id="task-tag" v-model="task.tag" :read-only="true"></input-tag>
       </div>
 
-      <div class="datetimeDeadline">Дата окончания: {{ task.dateOfTask }}</div>
+      
     </div>
 
     <footer>
@@ -149,6 +151,7 @@ export default {
 
   .description {
     margin-bottom: 1rem;
+    word-break: break-word;
   }
 
   .tags {
@@ -196,6 +199,15 @@ export default {
       min-height: 240px;
     }
   }
+
+  .tag{
+    margin:10px 0;
+  }
+
+}
+
+.vue-input-tag-wrapper {
+  border: 0px;
 }
 
 footer {
