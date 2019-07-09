@@ -30,11 +30,11 @@
       </label>
     </div>
 
-    <div class="row">
+    <!-- <div class="row">
       <label>Тэги:
         <input-tag id="task-tag" v-model="task.tag"></input-tag>
       </label>
-    </div>
+    </div> -->
 
     <div class="row">
       <label>Дата Дедлайна:

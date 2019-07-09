@@ -28,6 +28,8 @@ router.post('/', (req, res) => {
     dateOfTask: req.body.dateOfTask
   };
 
+ //newTask.tag = newTask.tag.join(",");
+
   task.create(newTask)
     .then(task => {
       res.json({
@@ -50,7 +52,6 @@ router.put('/', (req, res) => {
     }, {
       name: req.body.name,
       category: req.body.category,
-     
       description: req.body.description,
       dateOfTask: req.body.dateOfTask
     })

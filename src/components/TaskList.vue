@@ -1,10 +1,10 @@
 <template>
   <div class="taskList">
-    
-    <div class="filterWrapper hidden">
-      <div class="filterIcon">
+    <div v-if="!isLoading && !noTasks" class="filterIcon">
       <font-awesome-icon icon="filter" size="2x" class="top-icon" v-on:click="showFilter()"/>
     </div>
+
+    <div v-if="!isLoading && !noTasks" class="filterWrapper">
       <!-- Фильтр по категориям  -->
       <div v-if="!isLoading && !noTasks" id="filter">
         <p class="filterWrapper-text">Фильтр задач</p>Категория:
@@ -23,6 +23,7 @@
         </select>
       </div>
     </div>
+
     <!-- Если есть isLoading то ставим Loader -->
     <div v-if="isLoading" class="loading">Загружаю задачи</div>
     <div v-if="noTasks" class="no-tasks">
@@ -38,6 +39,7 @@
 <script>
 import { showNoty, TASK_TYPES, DEADLINE_TYPES } from "../utility";
 import TaskCard from "./TaskCard.vue";
+import { bus } from "../utility/bus.js";
 
 export default {
   name: "TaskList",
@@ -104,13 +106,15 @@ export default {
       try {
         const response = await this.$http.get("tasks");
         this.tasks = response.data;
+        this.$emit("remove", this.tasks);
+        this.$emit("get-tasks", this.tasks);
         //Создается копия массива
-        console.log(this.tasks);
         this.filteredTasks = this.tasks.slice();
       } catch (error) {
         showNoty("Ошибка вывода списка задач  " + error);
       }
 
+      this.$parent.$children[0].tasks = this.filteredTasks;
       this.isLoading = false;
     },
 
@@ -152,9 +156,10 @@ export default {
      * Показывать/Скрывать блок фильтра
      */
     showFilter() {
-      console.log("oddity");
       var divFilter = document.getElementsByClassName("filterWrapper")[0];
-      divFilter.classList.toggle("hidden");
+      var iconFilter = document.getElementsByClassName("filterIcon")[0];
+      divFilter.classList.toggle("show");
+      iconFilter.classList.toggle("show");
     }
   },
 
@@ -187,39 +192,46 @@ export default {
   margin-bottom: 20px;
 }
 
-.filterWrapper.hidden {
-transition: 1s linear;
-left:620px;
-}
-
 .filterWrapper {
+  transition: 0.5s linear;
+  opacity: 0;
+  visibility: hidden;
+  left: 620px;
   position: fixed;
   width: 300px;
-  background-color:#F2F2F2;
-  margin-left:1140px; 
+  background-color: #f2f2f2;
+  margin-left: 1140px;
   z-index: 2;
-  box-shadow: 0 0 15px rgba(0,0,0,0.5);
-  border-radius:10px;
-  left:320px;
-  transition: 1s linear;
-  padding:15px;
-  opacity:0.8;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  transition: 0.5s linear;
+  padding: 15px;
+  &.show {
+    left: 320px;
+    opacity: 0.8;
+    visibility: visible;
+    transition-delay: 0s;
+  }
 }
 
-.taskList{
+.taskList {
   z-index: 1;
+  overflow: hidden;
 }
 
-.filterIcon{
+.filterIcon {
+  transition: 0.5s linear;
+  right: 320px;
   position: absolute;
-    top: 50px;
-    left: -45px;
-    background-color: #F2F2F2;
-    padding: 5px;
-    border: 1px solid black;
-    border-radius: 25%;
-}
+  top: 140px;
+  background-color: #f2f2f2;
+  padding: 5px;
 
+  border-radius: 25%;
+  &.show {
+    right: 640px;
+  }
+}
 
 @media screen and (max-width: 800px) {
   #filter {

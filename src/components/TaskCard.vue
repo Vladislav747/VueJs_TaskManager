@@ -9,7 +9,7 @@
 
 <div class="datetimeDeadline">{{ task.dateOfTask }}</div>
 
-   <input-tag id="task-tag" v-model="task.tag" :read-only="true"></input-tag>
+   <!-- <input-tag id="task-tag" v-model="task.tag" :read-only="true"></input-tag> -->
 
     
   </section>
@@ -107,6 +107,7 @@ export default {
   .description {
   word-wrap: break-word;
   width: 400px;
+  flex: 300px;
   }
 
   .tag {
@@ -145,9 +146,13 @@ export default {
 
 @media screen and (max-width: 550px) {
   .card {
-    /* Три значения: flex-grow | flex-shrink | flex-basis */
     flex: 0 0 100%;
     padding: 5%;
+
+.description {
+  word-wrap: break-word;
+  width: 250px;
+  }
   }
   
 }

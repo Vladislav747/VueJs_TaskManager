@@ -1,8 +1,9 @@
 <template>
   <div id="container">
     <top-navigation
-      :search="searchText"
-      @search="updateSearch"/>
+      @search="updateSearch"
+      @get-tasks="get-tasks"
+     />
     <router-view :search="searchText"/>
   </div>
 </template>
@@ -14,15 +15,13 @@ export default {
   name: 'App',
 
   components: {
-    TopNavigation
+    TopNavigation,
   },
-
   data () {
     return {
       searchText: ''
     }
   },
-
   methods: {
     updateSearch (text) {
       this.searchText = text

@@ -1,53 +1,79 @@
 <template>
   <nav>
-    <router-link
-      id="task-list"
-      :to="{ name: 'task-list' }"><span class="top-desktop">Список Задач</span>
-       <font-awesome-icon icon="list-ul" size="2x" class="top-icon"/>
-      </router-link>
-    <router-link
-      id="task-add"
-      :to="{ name: 'task-add' }"><span class="top-desktop">Создать задачу</span>
-        <font-awesome-icon icon="plus-circle" size="2x" class="top-icon"/>
-      </router-link>
+    <router-link id="task-list" :to="{ name: 'task-list' }">
+      <span class="top-desktop">Список Задач</span>
+      <font-awesome-icon icon="list-ul" size="2x" class="top-icon"/>
+    </router-link>
+    <router-link id="task-add" :to="{ name: 'task-add' }">
+      <span class="top-desktop">Создать задачу</span>
+      <font-awesome-icon icon="plus-circle" size="2x" class="top-icon"/>
+    </router-link>
 
     <div class="spacer"/>
 
-<input
-      v-if="isHome"
-      v-model="searchText"
-      type="text"
-      placeholder="Искать Задачи..."
-      @input="emitSearch">
-
+    <input v-if="isHome" v-model="searchText" type="search" placeholder="Искать Задачи...">
   </nav>
 </template>
 
 <script>
-export default {
-  name: 'TopNavigation',
+import { bus } from "../utility/bus.js";
 
-data() {
+export default {
+  name: "TopNavigation",
+
+  data() {
     return {
-      searchText: '',
-      emitSearch: ''
+      searchText: "",
+      tasks: ["a"]
     };
   },
-  
+
+  props: ["tasks1"],
+
   computed: {
-    isHome () {
-      return this.$route.path === '/'
+    isHome() {
+      return this.$route.path === "/";
     }
   },
-}
+
+  mounted: function() {
+    bus.$on("remove", function(tasks) {
+     
+      var vm = this;
+      vm.tasks = tasks;
+      this.$on("get-task", function(param) {
+    
+      });
+    });
+  },
+
+  watch: {
+
+      /**
+     * Поиск задач по имени (name)
+     */
+    searchText: function() {
+      var tasks = this.tasks;
+      var searchedTasks = [];
+      var str = new RegExp(this.searchText);
+      tasks.forEach(element => {
+        var found = str.test(element.name);
+        if (found) {
+          searchedTasks.push(element);
+        }
+      });
+
+      this.$parent.$children[1].filteredTasks = searchedTasks;
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
 nav {
   background-color: #2b87d8;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-              0 1px 5px 0 rgba(0, 0, 0, 0.12),
-              0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
   display: flex;
   margin-bottom: 1em;
   padding: 1em;
@@ -78,12 +104,12 @@ nav {
   }
 
   input[type="text"]:focus {
-        width: 400px;
-}
+    width: 400px;
+  }
 
-.top-icon{
-  display:none;
-}
+  .top-icon {
+    display: none;
+  }
 }
 @media screen and (max-width: 550px) {
   nav {
@@ -93,14 +119,13 @@ nav {
       margin: 1rem auto 0;
       width: 100%;
     }
-    .top-desktop{
-      display:none;
+    .top-desktop {
+      display: none;
     }
-.top-icon{
-  display:block;
-}
+    .top-icon {
+      display: block;
+    }
   }
 }
-
 </style>
 

@@ -28,9 +28,15 @@ Object.defineProperty(Vue.prototype, '$http', {
   }
 })
 
+
+var eventBus = new Vue();
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  components:{
+    
+  },
   router,
   render: h => h(App)
 });

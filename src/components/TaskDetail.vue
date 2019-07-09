@@ -10,9 +10,9 @@
 
 <div class="datetimeDeadline">Дата Дедлайна: {{ task.dateOfTask }}</div>
 
-      <div class="tag">Тэги:
-        <input-tag id="task-tag" v-model="task.tag" :read-only="true"></input-tag>
-      </div>
+      <!--<div class="tag">Тэги:
+      //   <input-tag id="task-tag" v-model="task.tag" :read-only="true"></input-tag>
+      // </div>-->
 
       
     </div>
@@ -131,6 +131,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+#container{
+  max-width:940px !important;
+}
+
 .task {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
     0 3px 1px -2px rgba(0, 0, 0, 0.2);
@@ -153,6 +158,10 @@ export default {
     margin-bottom: 1rem;
     word-break: break-word;
   }
+
+.datetineDeadline{
+  margin-bottom:1rem;
+}
 
   .tags {
     display: flex;
