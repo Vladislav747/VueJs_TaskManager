@@ -1,7 +1,7 @@
 <template>
   <div class="taskList">
     <div v-if="!isLoading && !noTasks" class="filterIcon">
-      <font-awesome-icon icon="filter" size="2x" class="top-icon" v-on:click="showFilter()"/>
+      <font-awesome-icon icon="filter" size="1.5x" class="top-icon" v-on:click="showFilter()"/>
     </div>
 
     <div v-if="!isLoading && !noTasks" class="filterWrapper">
@@ -196,7 +196,7 @@ export default {
   transition: 0.5s linear;
   opacity: 0;
   visibility: hidden;
-  left: 620px;
+  right: -100px;
   position: fixed;
   width: 300px;
   background-color: #f2f2f2;
@@ -205,9 +205,9 @@ export default {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   transition: 0.5s linear;
-  padding: 15px;
+  padding: 10px 14px;
   &.show {
-    left: 320px;
+    right: 0px;
     opacity: 0.8;
     visibility: visible;
     transition-delay: 0s;
@@ -221,15 +221,18 @@ export default {
 
 .filterIcon {
   transition: 0.5s linear;
-  right: 320px;
-  position: absolute;
+  right: 0px;
+  position: fixed;
   top: 140px;
-  background-color: #f2f2f2;
-  padding: 5px;
+  background-color: #2b87d8;
+  padding: 10px 14px;
 
   border-radius: 25%;
   &.show {
-    right: 640px;
+    right: 19%;
+  }
+  svg{
+    color:white;
   }
 }
 

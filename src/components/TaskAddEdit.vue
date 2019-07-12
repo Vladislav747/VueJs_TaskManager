@@ -2,22 +2,24 @@
   <form v-if="task">
     <h2 v-if="!isEdit">
       Создать задачу
-      <span class="required">= обязательное поле</span>
+      <span class="required">- обязательное поле</span>
     </h2>
     <h2 v-else>
       Редактировать задачу
-      <span class="required">= обязательное поле</span>
+      <span class="required">- обязательное поле</span>
     </h2>
 
     <div class="row">
       <label class="short-label">
         Имя:
-        <input id="task-name" v-model="task.name" type="text" required>
+        <input id="task-name" v-model="task.name" type="text" placeholder="Заполните поле"/>
       </label>
-      
+    </div>
+
+    <div class="row">
       <label class="short-label">
         Категория:
-        <select id="task-category" v-model="task.category" required>
+        <select id="task-category" v-model="task.category">
           <option v-for="type in taskTypes" :key="type">{{ type }}</option>
         </select>
       </label>
@@ -26,7 +28,7 @@
     <div class="row">
       <label>
         Описание:
-        <textarea id="task-description" v-model="task.description"/>
+        <textarea id="task-description" v-model="task.description" placeholder="Заполните поле"/>
       </label>
     </div>
 
@@ -34,10 +36,11 @@
       <label>Тэги:
         <input-tag id="task-tag" v-model="task.tag"></input-tag>
       </label>
-    </div> -->
+    </div>-->
 
     <div class="row">
-      <label>Дата Дедлайна:
+      <label>
+        Дата Дедлайна:
         <date-picker
           v-model="task.dateOfTask"
           type="datetime"
@@ -100,7 +103,6 @@ export default {
   },
 
   methods: {
-
     /**
      * Получить все задачи с сервера
      *
@@ -123,7 +125,7 @@ export default {
 
     /**
      * Сохранить задачу
-     * 
+     *
      *@param {string} response - ответ сервера
      *
      */
@@ -222,7 +224,7 @@ export default {
 
         if (this.$v.task.description.$error) {
           showNoty(
-            "Описание должно быть заполнено - не может быть более 2048 символов"
+            "Описание должно быть заполнено и не может быть более 2048 символов"
           );
         }
         showNoty("Форма не может быть отправлена - ошибки в форме");
@@ -240,11 +242,20 @@ form {
     0 3px 1px -2px rgba(0, 0, 0, 0.2);
   padding: 1rem;
 
+
+textarea#task-description:placeholder-shown,
+ input:placeholder-shown{
+      background: pink;
+    }
+  
+
+
+
   h2 {
     margin-bottom: 1rem;
 
     span {
-      border-left: 2px solid #841c26;
+      border-left: 20px solid pink;
       color: #999;
       font-size: 0.7rem;
       font-weight: normal;
@@ -258,7 +269,7 @@ form {
   }
 
   [required] {
-    border-left: 3px solid #841c26 !important;
+    border-left: 20px solid pink !important;
   }
 
   .row {

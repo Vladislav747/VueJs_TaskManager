@@ -72,19 +72,19 @@ if (process.env.typeDB === 'sqlite') {
             type: String,
             required: true
         },
-        tag: {
-            type: String,
-            required: false,
-            set: function (arr) {
-                var str = arr.join(',');
-                return str;
-            },
-            get: function (str) {
-                console.log(str);
-                var asd = str.split(',');
-                return str;
-            }
-        },
+        // tag: {
+        //     type: String,
+        //     required: false,
+        //     set: function (arr) {
+        //         var str = arr.join(',');
+        //         return str;
+        //     },
+        //     get: function (str) {
+        //         console.log(str);
+        //         var asd = str.split(',');
+        //         return str;
+        //     }
+        // },
 
         description: {
             type: String,
@@ -99,15 +99,15 @@ if (process.env.typeDB === 'sqlite') {
     });
 
 
-    TaskSchema.path('tag').set(function (v) {
-        console.log(v);
-        return v.join(',');
-    });
+    // TaskSchema.path('tag').set(function (v) {
+    //     console.log(v);
+    //     return v.join(',');
+    // });
 
-    TaskSchema.path('tag').get(function (v) {
-        console.log(v);
-        return v.split(',');
-    });
+    // TaskSchema.path('tag').get(function (v) {
+    //     console.log(v);
+    //     return v.split(',');
+    // });
 
 
     // Create collection and add schema
