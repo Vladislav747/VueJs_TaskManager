@@ -10,7 +10,7 @@
     "start_sqlite":"cd ./server && $typeDB=sqlite node server.js",
     "postinstall": "if test \"$NODE_ENV\" = \"production\" ; then npm run build ; fi ",
     "debug": "cd ./server && node --nolazy --inspect-brk=9229 server.js",
-    "server_and_client": "npm run start & npm run serve"
+    "server_and_client": "PORT=8080 npm run start & PORT=8081 npm run serve"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
@@ -44,6 +44,9 @@
     "vue-loader": "^15.7.0",
     "vue-template-compiler": "^2.6.10"
   },
+  "engines": {
+    "node": "8.x"
+  },
   "eslintConfig": {
     "root": true,
     "env": {
@@ -63,6 +66,7 @@
       "autoprefixer": {}
     }
   },
+
   "browserslist": [
     "> 1%",
     "last 2 versions",
