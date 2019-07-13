@@ -1,10 +1,16 @@
-let express = require('express')
-let router = express.Router();
+// let express = require('express')
+// let router = express.Router();
+// var appRoot = require('app-root-path');
+// app = express();
+// let path = require('path');
 
-router.get('/', (req, res) => {
-  res.json({
-    message: 'Nothing to see here'
-  })
-})
+// app.use(express.static(appRoot + '/dist/'))
 
-module.exports = router;
+
+// console.log(appRoot);
+// router.get(/.*/, (req, res) => {
+//   res.sendFile('index.html');
+// })
+
+// module.exports = router;
+

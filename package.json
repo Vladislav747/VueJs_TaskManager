@@ -7,7 +7,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "start": "cd ./server && node server.js",
-    "start_sqlite":"cd ./server && $typeDB=sqlite node server.js",
+    "start_sqlite": "cd ./server && $typeDB=sqlite node server.js",
     "postinstall": "if test \"$NODE_ENV\" = \"production\" ; then npm run build ; fi ",
     "debug": "cd ./server && node --nolazy --inspect-brk=9229 server.js",
     "server_and_client": "PORT=8080 npm run start & PORT=8081 npm run serve"
@@ -16,14 +16,18 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
     "@fortawesome/free-solid-svg-icons": "^5.9.0",
     "@fortawesome/vue-fontawesome": "^0.1.6",
+    "app-root-path": "^2.2.1",
     "axios": "^0.18.1",
     "cors": "^2.8.5",
     "epilogue": "^0.7.1",
     "express": "^4.17.1",
+    "html": "^1.0.0",
     "moment": "^2.24.0",
     "mongoose": "^5.6.3",
     "node-sass": "^4.12.0",
     "noty": "^3.2.0-beta",
+    "path": "^0.12.7",
+    "pug": "^2.0.4",
     "sass-loader": "^7.1.0",
     "sequelize": "^4.44.0",
     "sqlite3": "^4.0.9",
@@ -66,7 +70,6 @@
       "autoprefixer": {}
     }
   },
-
   "browserslist": [
     "> 1%",
     "last 2 versions",

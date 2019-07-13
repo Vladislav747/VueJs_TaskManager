@@ -5,8 +5,9 @@ const database = require('./database');
 
 let configs = require('./config/serverConfigs');
 let port = process.env.PORT || configs.defultPort;
-let routes = require('./routes/index');
+//let routes = require('./routes/index');
 
+var appRoot = require('app-root-path');
 
 let tasks = (process.env.typeDB === 'sqlite') ? require('./routes/tasks') : require('./routes/tasksM');
 
@@ -24,11 +25,21 @@ app.use((req, res, next) => {
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use('/', routes);
+//app.use('/', routes);
 
 app.use('/tasks', tasks);
 
-//Отлов ошибок
+// Handle production
+if (process.env.NODE_ENV === 'production') {
+  // Static folder
+  app.use(express.static(appRoot + '/dist/'));
+
+  // Handle SPA
+  app.get('/', (req, res) => 
+  res.sendFile(appRoot + '/dist/index.html'));
+}
+
+//Error capture
 app.use((req, res, next) => {
   let err = new Error('Invalid Endpoint')
   err.status = 404
@@ -61,7 +72,7 @@ if (process.env.typeDB === 'sqlite') {
     })
 } else {
 
-  console.log("You are now using mongodb database");
+  console.log("You are now using mongodb databas");
   //Config DB and start it
   require('./config/db');
   // Start server
