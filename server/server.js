@@ -25,8 +25,6 @@ app.use((req, res, next) => {
 app.use(cors());
 app.use(bodyParser.json());
 
-//app.use('/', routes);
-
 app.use('/tasks', tasks);
 
 // Handle production

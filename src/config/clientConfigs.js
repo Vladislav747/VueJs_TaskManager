@@ -1,3 +1,4 @@
 module.exports = {
-    baseURL: 'http://localhost:8081/'
+  //!!!It matches the port we launch node server
+    baseURL: 'http://localhost:8082/'
   };

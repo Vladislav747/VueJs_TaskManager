@@ -12,10 +12,10 @@ Vue.use(Vuelidate);
 
 
 library.add(faPlusCircle, faListUl, faFilter);
-// library.add(faListUl);
-// library.add(faFilter);
+
 Vue.component('font-awesome-icon', FontAwesomeIcon);
-//Установка false отключает предупреждение о работе в режиме разработки при запуске Vue.
+
+//Set up false turn off  warning about work in production mode when we launch volume.
 Vue.config.productionTip = false
 
 const keys = require('./config/clientConfigs');
