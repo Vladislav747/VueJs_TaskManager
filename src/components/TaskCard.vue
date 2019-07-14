@@ -1,22 +1,29 @@
 <template>
   <section class="card" @click="viewTask(task.id)">
+    <div class="card-icons">
+      <a id="delete" @click.prevent="deleteTask()" class="top-icon-link">
+        <font-awesome-icon icon="trash" size="2x" class="top-icon" alt="Удалить задачу"/>
+      </a>
+      <a id="edit" @click.prevent="editTask()" class="top-icon-link">
+        <font-awesome-icon icon="edit" size="2x" class="top-icon" alt="Редактировать задачу"/>
+      </a>
+    </div>
     <header>
       {{ task.name }}
       <span>{{ task.category }}</span>
     </header>
 
-    <div class="description"> {{ task.description }}</div>
+    <div class="description">{{ task.description }}</div>
 
-<div class="datetimeDeadline">{{ task.dateOfTask }}</div>
+    <div class="datetimeDeadline">{{ task.dateOfTask }}</div>
 
-   <!-- <input-tag id="task-tag" v-model="task.tag" :read-only="true"></input-tag> -->
-
-    
+    <!-- <input-tag id="task-tag" v-model="task.tag" :read-only="true"></input-tag> -->
   </section>
 </template>
 
 <script>
-import InputTag from 'vue-input-tag'; 
+import InputTag from "vue-input-tag";
+import Noty from "noty";
 
 export default {
   name: "TaskCard",
@@ -34,12 +41,11 @@ export default {
           category: "",
           description: ""
         };
-      },
+      }
     }
   },
 
   methods: {
-
     /**
      * Переход на детальное отображение задачи
      * @param {number} id - id задачи
@@ -47,6 +53,32 @@ export default {
      */
     viewTask(id) {
       this.$router.push({ name: "view-task", params: { id } });
+    },
+
+    /**
+     * Отредактировать задачу
+     */
+    editTask() {
+      this.$router.push({ name: "task-edit", params: { id: this.task.id } });
+    },
+
+    /**
+     * Отображение оповещение задачи
+     */
+    deleteTask() {
+      this.check = new Noty({
+        text: "Удаление задачи нельзя будет отменить.<br>Вы уверены?",
+        type: "alert",
+        layout: "topCenter",
+        buttons: [
+          Noty.button("Да", "danger", () => this.realDelete(), {
+            id: "delete-yes"
+          }),
+          Noty.button("Нет", "", () => this.closeCheck(), { id: "delete-no" })
+        ]
+      });
+
+      this.check.show();
     }
   }
 };
@@ -64,19 +96,17 @@ export default {
   margin-right: 1rem;
   flex-wrap: wrap;
   padding: 20px;
-  
-  border-radius:10px;
+
+  border-radius: 10px;
   header,
   .description,
   .times {
     padding: 1rem;
-    
   }
 
-&:hover {
- box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  &:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
   }
-
 
   header {
     font-weight: bold;
@@ -105,9 +135,9 @@ export default {
   }
 
   .description {
-  word-wrap: break-word;
-  width: 400px;
-  flex: 300px;
+    word-wrap: break-word;
+    width: 400px;
+    flex: 300px;
   }
 
   .tag {
@@ -119,9 +149,9 @@ export default {
     height: 70px;
   }
 
-.vue-input-tag-wrapper {
-  border: 0px;
-}
+  .vue-input-tag-wrapper {
+    border: 0px;
+  }
   .datetimeDeadline {
     font-size: 1rem;
     font-weight: bold;
@@ -136,6 +166,10 @@ export default {
       float: right;
     }
   }
+  a.top-icon-link {
+      float:right;
+      padding:10px;
+    }
 }
 
 @media screen and (max-width: 800px) {
@@ -149,11 +183,10 @@ export default {
     flex: 0 0 100%;
     padding: 5%;
 
-.description {
-  word-wrap: break-word;
-  width: 250px;
+    .description {
+      word-wrap: break-word;
+      width: 250px;
+    }
   }
-  }
-  
 }
 </style>

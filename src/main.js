@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import axios from 'axios';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faPlusCircle, faListUl, faFilter} from '@fortawesome/free-solid-svg-icons';
+import { faPlusCircle, faListUl, faFilter, faEdit, faTrash} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import App from './App';
 import router from './router';
@@ -11,7 +11,7 @@ import Vuelidate from "vuelidate";
 Vue.use(Vuelidate);
 
 
-library.add(faPlusCircle, faListUl, faFilter);
+library.add(faPlusCircle, faListUl, faFilter,faEdit, faTrash);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
