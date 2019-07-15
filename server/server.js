@@ -5,7 +5,7 @@ const database = require('./database');
 
 let configs = require('./config/serverConfigs');
 let port = process.env.PORT || configs.defultPort;
-//let routes = require('./routes/index');
+
 
 var appRoot = require('app-root-path');
 

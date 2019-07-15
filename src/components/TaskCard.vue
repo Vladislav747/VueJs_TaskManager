@@ -10,7 +10,7 @@
     </div>
     <header>
       {{ task.name }}
-      <span>{{ task.category }}</span>
+      <span class="category_sticker">{{ task.category }}</span>
     </header>
 
     <div class="description">{{ task.description }}</div>
@@ -24,6 +24,7 @@
 <script>
 import InputTag from "vue-input-tag";
 import Noty from "noty";
+import { showNoty } from "../utility";
 
 export default {
   name: "TaskCard",
@@ -79,6 +80,33 @@ export default {
       });
 
       this.check.show();
+    },
+    /**
+     * Закрыть всплывающее окно
+     */
+    closeCheck() {
+      if (!this.check) {
+        return;
+      }
+      //Если есть экземпляр то закрыть окно
+      this.check.close();
+    },
+
+    /**
+     * Удаление задачи
+     */
+    async realDelete() {
+      try {
+        await this.$http.delete("tasks/" + this.task.id);
+
+        this.check.close();
+        this.$router.push({ name: "task-list" });
+
+        showNoty("Задача Удалена.", "success");
+      } catch (error) {
+        this.check.close();
+        showNoty(error);
+      }
     }
   }
 };
@@ -112,10 +140,15 @@ export default {
     font-weight: bold;
 
     span {
-      color: lighten(#333, 25%);
+      color: grey;
       float: right;
       font-size: 0.9rem;
       font-weight: normal;
+      background-color: yellow;
+      border-radius: 5px;
+      padding: 4px 10px 5px;
+      text-transform: uppercase;
+      border-radius: 2px;
     }
   }
 
@@ -167,9 +200,9 @@ export default {
     }
   }
   a.top-icon-link {
-      float:right;
-      padding:10px;
-    }
+    float: right;
+    padding: 10px;
+  }
 }
 
 @media screen and (max-width: 800px) {
