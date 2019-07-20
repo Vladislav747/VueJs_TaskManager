@@ -1,9 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  devServer: {
-    proxy: 'http://localhost:8082'
-  },
+
   configureWebpack: {
     devtool: 'source-map'
   },
@@ -12,9 +10,5 @@ module.exports = {
     '/',
     
     outputDir:path.resolve(__dirname, '../dist/')
-  // devServer: {
-  //   proxy: {
-
-  //   }
-  // }
+  
 }
