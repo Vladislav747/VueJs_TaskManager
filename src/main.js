@@ -20,7 +20,7 @@ Vue.config.productionTip = false
 
 const keys = require('./config/clientConfigs');
 
-const api = axios.create({ baseURL: keys.baseURL })
+const api = axios.create({ baseURL: keys.baseURLProduction })
 
 Object.defineProperty(Vue.prototype, '$http', {
   get() {
