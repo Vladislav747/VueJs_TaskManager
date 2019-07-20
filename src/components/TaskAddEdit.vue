@@ -79,6 +79,7 @@ export default {
         category: "В работе",
         description: ""
       },
+      isLoading:false,
       taskTypes: TASK_TYPES
     };
   },

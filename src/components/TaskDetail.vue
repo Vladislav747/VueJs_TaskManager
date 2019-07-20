@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <div class="task">
+  <div class="task-container">
+    <div v-if="isLoading" class="lds-dual-ring"></div>
+    <div v-if="!isLoading" class="task">
       <h3>
         Имя: {{ task.name }}
         <span>{{ task.category }}</span>
@@ -40,11 +41,11 @@ export default {
   data() {
     return {
       task: {
-        name: "Ошибка отображения Задачи",
+        name: "",
         category: "",
         description: ""
       },
-      check: undefined
+      isLoading:true,
     };
   },
 
@@ -68,6 +69,7 @@ export default {
         }
 
         this.task = response.data;
+        this.isLoading = false;
       } catch (error) {
         showNoty("TaskDetail " + error);
       }
@@ -233,6 +235,10 @@ footer {
     line-height: 28px;
     margin-right: 1em;
     text-decoration: none;
-  }
+  } 
 }
+
+
+//preloader
+@import "../scss/preloader.scss";
 </style>

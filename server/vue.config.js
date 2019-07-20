@@ -1,7 +1,9 @@
 const path = require('path');
 
 module.exports = {
-
+  devServer: {
+    proxy: 'https://vue-taskmanager.herokuapp.com/'
+  },
   configureWebpack: {
     devtool: 'source-map'
   },
