@@ -31,7 +31,7 @@ Vue.config.productionTip = false
 const keys = require('./config/clientConfigs');
 
 const api = axios.create({
-  baseURL: keys.baseURL
+  baseURL: keys.baseURLProduction
 })
 
 if (keys.baseURL) {
