@@ -278,7 +278,7 @@ export default {
 }
 
 #tasks {
-  padding-top:10px;
+  padding:10px;
   display: flex;
   flex-wrap: wrap;
 
