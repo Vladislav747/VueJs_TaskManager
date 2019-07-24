@@ -1,13 +1,13 @@
 <template>
   <div class="taskList">
-    <div v-if="!isLoading && !noTasks" class="filterIcon">
-      <font-awesome-icon icon="filter" size="1.5x" class="top-icon" v-on:click="showFilter()"/>
-    </div>
-
     <div v-if="!isLoading && !noTasks" class="filterWrapper">
+      <div class="filterIcon">
+        <font-awesome-icon icon="filter" size="1.5x" class="top-icon" v-on:click="showFilter()"/>
+      </div>
       <!-- Фильтр по категориям  -->
       <div v-if="!isLoading && !noTasks" id="filter">
-        <p class="filterWrapper-text">Фильтр задач</p>Категория:
+        <p class="filterWrapper-text">Фильтр задач</p>
+        <span>Категория:</span>
         <select v-model="filterCategory">
           <option></option>
           <option v-for="type in taskTypes" :key="type">{{ type }}</option>
@@ -16,7 +16,7 @@
 
       <!-- Фильтр по Дедлайну  -->
       <div v-if="!isLoading && !noTasks" id="filter">
-        Срочность:
+        <span>Срочность:</span>
         <select v-model="filterDateDeadline">
           <option></option>
           <option v-for="type in deadlineTypes" :key="type">{{ type }}</option>
@@ -188,26 +188,26 @@ export default {
 }
 
 .filterWrapper-text {
-  margin-right: 150px;
+  font-size: 22px;
   margin-bottom: 20px;
 }
 
 .filterWrapper {
   transition: 0.5s linear;
-  opacity: 0;
-  visibility: hidden;
-  right: -100px;
+  top: 120px;
+  right: -302px;
   position: fixed;
   width: 300px;
   background-color: #f2f2f2;
-  margin-left: 1140px;
+  box-shadow: none;
   z-index: 2;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   transition: 0.5s linear;
   padding: 10px 14px;
   &.show {
-    right: 0px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.19);
+    right: 2px;
     opacity: 0.8;
     visibility: visible;
     transition-delay: 0s;
@@ -221,22 +221,17 @@ export default {
 
 .filterIcon {
   transition: 0.5s linear;
-  right: 0px;
-  position: fixed;
-  top: 140px;
+  left: -50px;
+  position: absolute;
+  top: 0px;
   background-color: #2b87d8;
   padding: 10px 14px;
-
   border-radius: 25%;
-  &.show {
-    right: 19%;
-  }
-  svg{
-    color:white;
+
+  svg {
+    color: white;
   }
 }
-
- 
 
 @media screen and (max-width: 800px) {
   #filter {
@@ -278,7 +273,7 @@ export default {
 }
 
 #tasks {
-  padding:10px;
+  padding: 10px;
   display: flex;
   flex-wrap: wrap;
 

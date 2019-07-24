@@ -124,7 +124,7 @@ export default {
   margin-right: 1rem;
   flex-wrap: wrap;
   padding: 20px;
-
+  margin:16px;
   border-radius: 10px;
   header,
   .description,
