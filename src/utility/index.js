@@ -10,9 +10,9 @@ export const showNoty = function (text, type = 'error') {
 }
 
 export const TASK_TYPES = [
+  'Просрочено',
   'В работе',
-  'Завершено',
-  'Сделать'
+  'Сделано'
 ];
 
 //Для тестирования в случае если нету никаких заданий

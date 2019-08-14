@@ -10,7 +10,8 @@
     </div>
     <header>
       {{ task.name }}
-      <span class="category_sticker">{{ task.category }}</span>
+      <span v-bind:class="classObject">{{ task.category }}</span>
+
     </header>
 
     <div class="description">{{ task.description }}</div>
@@ -45,6 +46,34 @@ export default {
       }
     }
   },
+
+  computed: {
+  classObject: function () {
+
+    console.log(this.task.category);
+    var className;
+
+    switch(this.task.category){
+
+  case 'Просрочено':
+    className = 'category_sticker expired_sticker';
+    break;
+  case 'В работе':
+    className = 'category_sticker inwork_sticker';
+    break;
+  case 'Сделано':
+    className = 'category_sticker ready_sticker';
+    break;
+  default:
+    className = 'category_sticker';
+    break;
+
+    }
+
+    return className
+    }
+  
+},
 
   methods: {
     /**
@@ -113,6 +142,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    
+   
 .card {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
     0 3px 1px -2px rgba(0, 0, 0, 0.2);
@@ -140,19 +171,30 @@ export default {
     font-weight: bold;
 
     span {
-      color: grey;
+      color: black;
       float: right;
       font-size: 0.9rem;
       font-weight: normal;
-      background-color: yellow;
       border-radius: 5px;
       padding: 4px 10px 5px;
       text-transform: uppercase;
       border-radius: 2px;
+
     }
   }
 
+  .inwork_sticker{
+    background-color: yellow;
+  }
+  .expired_sticker{
+    background-color: red;
+  }
+  .ready_sticker{
+    background-color: green;
+  }
+
   .image,
+
   .spacer {
     background-position: center;
     background-size: cover;
