@@ -50,7 +50,6 @@ export default {
   computed: {
   classObject: function () {
 
-    console.log(this.task.category);
     var className;
 
     switch(this.task.category){
@@ -67,10 +66,9 @@ export default {
   default:
     className = 'category_sticker';
     break;
-
     }
 
-    return className
+      return className
     }
   
 },

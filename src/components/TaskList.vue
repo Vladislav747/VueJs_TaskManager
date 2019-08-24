@@ -227,7 +227,8 @@ export default {
   background-color: #2b87d8;
   padding: 10px 14px;
   border-radius: 25%;
-
+  cursor: pointer;
+  
   svg {
     color: white;
   }
