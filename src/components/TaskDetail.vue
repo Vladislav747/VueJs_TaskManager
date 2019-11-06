@@ -9,13 +9,8 @@
 
       <div class="description">Описание: {{ task.description }}</div>
 
-<div class="datetimeDeadline">Дата Дедлайна: {{ task.dateOfTask }}</div>
+      <div class="datetimeDeadline">Дата Дедлайна: {{ task.dateOfTask }}</div>
 
-      <!--<div class="tag">Тэги:
-      //   <input-tag id="task-tag" v-model="task.tag" :read-only="true"></input-tag>
-      // </div>-->
-
-      
     </div>
 
     <footer>
@@ -29,14 +24,9 @@
 import Noty from "noty";
 
 import { showNoty } from "../utility";
-import InputTag from "vue-input-tag";
 
 export default {
   name: "TaskDetail",
-
-  components: {
-    InputTag
-  },
 
   data() {
     return {
@@ -133,6 +123,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+//preloader
+@import "../scss/preloader.scss";
 
 #container{
   max-width:940px !important;
@@ -239,6 +232,4 @@ footer {
 }
 
 
-//preloader
-@import "../scss/preloader.scss";
 </style>

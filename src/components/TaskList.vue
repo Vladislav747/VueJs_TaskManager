@@ -39,7 +39,6 @@
 <script>
 import { showNoty, TASK_TYPES, DEADLINE_TYPES } from "../utility";
 import TaskCard from "./TaskCard.vue";
-import { bus } from "../utility/bus.js";
 
 export default {
   name: "TaskList",
@@ -175,6 +174,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 #filter {
   margin-bottom: 1em;
   text-align: center;
@@ -250,6 +250,16 @@ export default {
   }
 }
 
+#tasks {
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+
+  .card:nth-child(3n) {
+    margin-right: 0;
+  }
+}
+
 @media screen and (max-width: 550px) {
   #filter {
     select {
@@ -259,6 +269,14 @@ export default {
 
   #tasks {
     padding: 5%;
+  }
+}
+
+
+@media screen and (max-width: 800px){
+   #tasks{
+        justify-content: center;
+
   }
 }
 
@@ -273,13 +291,5 @@ export default {
   text-align: center;
 }
 
-#tasks {
-  padding: 10px;
-  display: flex;
-  flex-wrap: wrap;
 
-  .card:nth-child(3n) {
-    margin-right: 0;
-  }
-}
 </style>

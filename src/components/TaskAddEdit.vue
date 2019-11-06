@@ -61,15 +61,13 @@
 <script>
 import { showNoty, TASK_TYPES } from "../utility";
 import DatePicker from "vue2-datepicker";
-import InputTag from "vue-input-tag";
 import { required, maxLength } from "vuelidate/lib/validators";
 
 export default {
   name: "TaskAddEdit",
 
   components: {
-    DatePicker,
-    InputTag
+    DatePicker
   },
 
   data() {
@@ -238,20 +236,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 form {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
     0 3px 1px -2px rgba(0, 0, 0, 0.2);
   padding: 1rem;
 
 
-textarea#task-description:placeholder-shown,
- input:placeholder-shown{
-      background: pink;
-    }
-  
-
-
-
+  textarea#task-description:placeholder-shown,
+  input:placeholder-shown{
+    background: pink;
+  }
+    
   h2 {
     margin-bottom: 1rem;
 
@@ -282,6 +278,12 @@ textarea#task-description:placeholder-shown,
   .short-label {
     display: inline-block;
     width: 49%;
+  }
+
+  @media screen and (max-width: 725px) {
+    .short-label {
+      width: 100%;
+    }
   }
 
   input,
@@ -329,6 +331,15 @@ textarea#task-description:placeholder-shown,
     width: 45%;
   }
 
+   @media screen and (max-width: 725px) {
+    input[type="text"],
+    input[type="number"],
+    select {
+      margin-right: 0;
+    }
+  }
+
+
   input[type="text"]#task-tag {
     padding-right: 100px;
   }
@@ -362,16 +373,5 @@ textarea#task-description:placeholder-shown,
     background-color: darken(#2b87d8, 10%);
   }
 
-  @media screen and (max-width: 725px) {
-    .short-label {
-      width: 100%;
-    }
-
-    input[type="text"],
-    input[type="number"],
-    select {
-      margin-right: 0;
-    }
-  }
 }
 </style>

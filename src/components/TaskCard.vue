@@ -18,21 +18,16 @@
 
     <div class="datetimeDeadline">{{ task.dateOfTask }}</div>
 
-    <!-- <input-tag id="task-tag" v-model="task.tag" :read-only="true"></input-tag> -->
   </section>
 </template>
 
 <script>
-import InputTag from "vue-input-tag";
 import Noty from "noty";
 import { showNoty } from "../utility";
 
 export default {
   name: "TaskCard",
 
-  components: {
-    InputTag
-  },
 
   props: {
     task: {
@@ -245,12 +240,6 @@ export default {
   }
 }
 
-@media screen and (max-width: 800px) {
-  .card {
-    flex: 0 0 calc(50% - calc(1rem * 0.55));
-  }
-}
-
 @media screen and (max-width: 550px) {
   .card {
     flex: 0 0 100%;
@@ -262,4 +251,13 @@ export default {
     }
   }
 }
+
+@media screen and (max-width: 800px) {
+  .card {
+    flex: 0 0 calc(50% - calc(1rem * 0.55));
+  }
+ 
+}
+
+
 </style>

@@ -41,9 +41,6 @@ export default {
      
       var vm = this;
       vm.tasks = tasks;
-      this.$on("get-task", function(param) {
-    
-      });
     });
   },
 
@@ -70,6 +67,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 nav {
   background-color: #2b87d8;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
@@ -127,5 +125,6 @@ nav {
     }
   }
 }
+
 </style>
 
