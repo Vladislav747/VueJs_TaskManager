@@ -6,7 +6,7 @@
       </div>
       <!-- Фильтр по категориям  -->
       <div v-if="!isLoading && !noTasks" id="filter">
-        <p class="filterWrapper-text">Фильтр задач</p>
+        <p class="filterWrapper__text">Фильтр задач</p>
         <span>Категория:</span>
         <select v-model="filterCategory">
           <option></option>
@@ -185,9 +185,8 @@ export default {
     padding: 5px;
     width: 60%;
   }
-}
-
-.filterWrapper-text {
+}__
+.filterWrapper__text {
   font-size: 22px;
   margin-bottom: 20px;
 }
@@ -205,6 +204,7 @@ export default {
   border-radius: 10px;
   transition: 0.5s linear;
   padding: 10px 14px;
+
   &.show {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.19);
     right: 2px;
@@ -212,6 +212,7 @@ export default {
     visibility: visible;
     transition-delay: 0s;
   }
+
 }
 
 .taskList {
@@ -240,14 +241,7 @@ export default {
       width: 40%;
     }
   }
-
-  .card:nth-child(3n) {
-    margin-right: 1em;
-  }
-
-  .card:nth-child(2n) {
-    margin-right: 0;
-  }
+  
 }
 
 #tasks {
@@ -255,9 +249,6 @@ export default {
   display: flex;
   flex-wrap: wrap;
 
-  .card:nth-child(3n) {
-    margin-right: 0;
-  }
 }
 
 @media screen and (max-width: 550px) {

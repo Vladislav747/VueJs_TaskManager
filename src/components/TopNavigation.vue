@@ -81,10 +81,11 @@ nav {
     line-height: 28px;
     margin-right: 1em;
     text-decoration: none;
-  }
+    cursor: pointer;
 
-  .router-link-exact-active {
-    color: #86deb7;
+    &:hover{
+      color: #86deb7; 
+    }
   }
 
   .spacer {
@@ -99,16 +100,17 @@ nav {
     padding: 7px;
     width: 209px;
     transition: width 0.6s ease-in-out;
-  }
 
-  input[type="text"]:focus {
-    width: 400px;
+    &[type="search"]:focus{
+     width: 400px;
+    }
   }
 
   .top-icon {
     display: none;
   }
 }
+
 @media screen and (max-width: 550px) {
   nav {
     flex-wrap: wrap;

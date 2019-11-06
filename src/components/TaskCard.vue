@@ -160,6 +160,10 @@ export default {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
   }
 
+  &:nth-child(3n) {
+    margin-right: 0;
+  }
+
   header {
     font-weight: bold;
 
@@ -193,9 +197,6 @@ export default {
     background-size: cover;
     height: 240px;
     max-width: 100%;
-  }
-
-  .spacer {
     border-bottom: 1px solid #eee;
     border-top: 1px solid #eee;
     padding-top: 32%;
@@ -220,6 +221,7 @@ export default {
   .vue-input-tag-wrapper {
     border: 0px;
   }
+
   .datetimeDeadline {
     font-size: 1rem;
     font-weight: bold;
@@ -255,6 +257,14 @@ export default {
 @media screen and (max-width: 800px) {
   .card {
     flex: 0 0 calc(50% - calc(1rem * 0.55));
+
+    &:nth-child(3n) {
+    margin-right: 1em;
+    }
+
+    &:nth-child(2n) {
+      margin-right: 0;
+    }
   }
  
 }
