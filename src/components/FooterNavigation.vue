@@ -1,8 +1,8 @@
 <template>
   <footer>
-   <font-awesome-icon icon="trash" size="2x" class="footer-icon" alt="Удалить задачу"/>
-   <input type="checkbox" id="change_theme" class="custom-switch" name="change_theme" v-model="checked">
-   <label for="change_theme">{{ checked }}</label>
+   <font-awesome-icon icon="palette" size="2x" class="footer-icon" alt="Удалить задачу"/>
+   <input type="checkbox" class="theme-switch" id="change_theme" v-model="isBlackTheme" @click="changeTheme()">
+   <label for="change_theme">{{ isBlackTheme }}</label>
   </footer>
 </template>
 
@@ -12,7 +12,7 @@ export default {
 
   data() {
     return {
-    
+      isBlackTheme: false,
     };
   },
 
@@ -25,13 +25,82 @@ export default {
   },
 
   methods:{
+    changeTheme() {
+     this.isBlackTheme = !this.isBlackTheme;
+     var iconTheme = document.getElementsByClassName("footer-icon")[0];
+     var footerElement = document.getElementsByTagName("footer")[0];
 
+      if(this.isBlackTheme){
+        iconTheme.style.color = "white";
+        footerElement.style.backgroundColor = "#232323";
+      } else {
+        iconTheme.style.color = "black";
+        footerElement.style.backgroundColor = "#2b87d8";
+      }
+     this.$emit('changeTheme', this.isBlackTheme);
+    },
   }
 };
 </script>
 
 <style lang="scss" scoped>
 
+footer{
+  background-color: #2b87d8;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.footer-icon{
+  margin: 0 10px;
+  color: white
+}
+
+
+.theme-switch {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+	margin: 10px 10px 0 20px;
+}
+.theme-switch + label {
+	position: relative;
+	padding: 0 0 0 60px;
+	cursor: pointer;
+}
+.theme-switch + label:before {
+	content: '';
+	position: absolute;
+	top: -4px;
+	left: 0;
+	width: 50px;
+	height: 26px;
+	border-radius: 13px;
+	background: #CDD1DA;
+	box-shadow: inset 0 2px 3px rgba(0,0,0,.2);
+	transition: .2s;
+}
+.theme-switch + label:after {
+	content: '';
+	position: absolute;
+	top: -2px;
+	left: 2px;
+	width: 22px;
+	height: 22px;
+	border-radius: 10px;
+	background: #FFF;
+	box-shadow: 0 2px 5px rgba(0,0,0,.3);
+	transition: .2s;
+}
+.theme-switch:checked + label:before {
+	background: #000000;
+}
+.theme-switch:checked + label:after {
+	left: 26px;
+}
+.theme-switch:focus + label:before {
+	box-shadow: inset 0 2px 3px rgba(0,0,0,.2), 0 0 0 3px rgba(255,255,0,.7);
+}
 
 @media screen and (max-width: 768px){
 

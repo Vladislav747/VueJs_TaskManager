@@ -8,7 +8,8 @@ import {
   faListUl,
   faFilter,
   faEdit,
-  faTrash
+  faTrash,
+  faPalette,
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
@@ -22,7 +23,7 @@ import Vuelidate from "vuelidate";
 Vue.use(Vuelidate);
 
 
-library.add(faPlusCircle, faListUl, faFilter, faEdit, faTrash);
+library.add(faPlusCircle, faListUl, faFilter, faEdit, faTrash, faPalette);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 

@@ -5,7 +5,7 @@
       @get-tasks="get-tasks"
      />
     <router-view :search="searchText"/>
-    <footer-navigation />
+    <footer-navigation @changeTheme='onChange' />
   </div>
 
 </template>
@@ -29,6 +29,21 @@ export default {
   methods: {
     updateSearch (text) {
       this.searchText = text
+    },
+
+    onChange(data){
+
+      var el = document.getElementsByClassName("header")[0];
+      var containerElement = document.getElementById("container");
+      if(data){
+        
+        console.log(el);
+        el.style.backgroundColor = "#232323";
+        containerElement.style.backgroundColor = "#000";
+      }else{
+        el.style.backgroundColor = "#2b87d8";
+        containerElement.style.backgroundColor = "#fff";
+      }
     }
   }
 }

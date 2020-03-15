@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <div class="header">
     <router-link id="task-list" :to="{ name: 'task-list' }">
       <span class="top-desktop">Список Задач</span>
       <font-awesome-icon icon="list-ul" size="2x" class="top-icon"/>
@@ -12,7 +12,7 @@
     <div class="spacer"/>
 
     <input v-if="isHome" v-model="searchText" type="search" placeholder="Искать Задачи...">
-  </nav>
+  </div>
 </template>
 
 <script>
@@ -68,7 +68,7 @@ export default {
 
 <style lang="scss" scoped>
 
-nav {
+.header {
   background-color: #2b87d8;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
     0 3px 1px -2px rgba(0, 0, 0, 0.2);
@@ -110,7 +110,7 @@ nav {
   }
 }
 @media screen and (max-width: 550px) {
-  nav {
+  .header {
     flex-wrap: wrap;
 
     input {
