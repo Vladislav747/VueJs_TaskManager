@@ -15,8 +15,8 @@ import TopNavigation from './components/TopNavigation'
 import Footer from "./components/Footer";
 
 export default {
+  
   name: 'App',
-
   components: {
     TopNavigation,
     Footer,
