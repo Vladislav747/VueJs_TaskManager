@@ -404,7 +404,7 @@ form {
       flex-direction: column;
 
     .formEdit-button{
-      width: 50%;
+      width: 70%;
       margin: 5px auto;
     }
     }
