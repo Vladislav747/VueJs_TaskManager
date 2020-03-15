@@ -2,7 +2,7 @@
   <footer class="bg-blue">
    <font-awesome-icon icon="palette" size="2x" class="footer-icon" alt="Удалить задачу"/>
    <input type="checkbox" class="theme-switch" id="change_theme" v-model="isBlackTheme" @click="changeTheme()">
-   <label for="change_theme">{{ isBlackTheme }}</label>
+   <label for="change_theme"></label>
   </footer>
 </template>
 
@@ -64,11 +64,14 @@ footer{
 	opacity: 0;
 	margin: 10px 10px 0 20px;
 }
+
 .theme-switch + label {
 	position: relative;
 	padding: 0 0 0 60px;
 	cursor: pointer;
 }
+
+
 .theme-switch + label:before {
 	content: '';
 	position: absolute;
@@ -81,6 +84,7 @@ footer{
 	box-shadow: inset 0 2px 3px rgba(0,0,0,.2);
 	transition: .2s;
 }
+
 .theme-switch + label:after {
 	content: '';
 	position: absolute;
