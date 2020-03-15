@@ -1,5 +1,5 @@
 <template>
-  <div id="container">
+  <div id="container" class="bg-white">
     <top-navigation
       @search="updateSearch"
       @get-tasks="get-tasks"
@@ -37,12 +37,20 @@ export default {
       var containerElement = document.getElementById("container");
       if(data){
         
-        console.log(el);
-        el.style.backgroundColor = "#232323";
-        containerElement.style.backgroundColor = "#000";
+        //el.style.backgroundColor = "#232323";
+        el.classList.toggle("bg-dark");
+        el.classList.toggle("bg-blue");
+        
+        containerElement.classList.toggle("bg-dark");
+        containerElement.classList.toggle("bg-white");
+
       }else{
-        el.style.backgroundColor = "#2b87d8";
-        containerElement.style.backgroundColor = "#fff";
+        //el.style.backgroundColor = "#2b87d8";
+        el.classList.toggle("bg-dark");
+        el.classList.toggle("bg-blue");
+        
+        containerElement.classList.toggle("bg-dark");
+        containerElement.classList.toggle("bg-white");
       }
     }
   }
@@ -69,6 +77,7 @@ html {
   font-family: "Oxygen", sans-serif;
 }
 
+
 #container {
   color: #333;
   display: flex;
@@ -79,7 +88,17 @@ html {
   max-width: 1440px;
 }
 
+.bg-blue{
+  background-color: #2b87d8;
+}
 
+.bg-dark{
+  background-color: #232323;
+}
+
+.bg-white{
+  background-color: white;
+}
 
 .noty_type__alert {
   border: none;

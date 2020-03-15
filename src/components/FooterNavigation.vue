@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer class="bg-blue">
    <font-awesome-icon icon="palette" size="2x" class="footer-icon" alt="Удалить задачу"/>
    <input type="checkbox" class="theme-switch" id="change_theme" v-model="isBlackTheme" @click="changeTheme()">
    <label for="change_theme">{{ isBlackTheme }}</label>
@@ -32,10 +32,12 @@ export default {
 
       if(this.isBlackTheme){
         iconTheme.style.color = "white";
-        footerElement.style.backgroundColor = "#232323";
+        footerElement.classList.toggle("bg-dark");
+        footerElement.classList.toggle("bg-blue");
       } else {
         iconTheme.style.color = "black";
-        footerElement.style.backgroundColor = "#2b87d8";
+        footerElement.classList.toggle("bg-dark");
+        footerElement.classList.toggle("bg-blue");
       }
      this.$emit('changeTheme', this.isBlackTheme);
     },
@@ -46,7 +48,6 @@ export default {
 <style lang="scss" scoped>
 
 footer{
-  background-color: #2b87d8;
   padding: 20px;
   border-radius: 10px;
 }
