@@ -1,6 +1,8 @@
 <template>
   <footer>
-   <a>Футер</a>
+   <font-awesome-icon icon="trash" size="2x" class="footer-icon" alt="Удалить задачу"/>
+   <input type="checkbox" id="change_theme" class="custom-switch" name="change_theme" v-model="checked">
+   <label for="change_theme">{{ checked }}</label>
   </footer>
 </template>
 
@@ -10,8 +12,7 @@ export default {
 
   data() {
     return {
-      searchText: "",
-      tasks: ["a"]
+    
     };
   },
 
@@ -20,6 +21,10 @@ export default {
   },
 
   watch: {
+
+  },
+
+  methods:{
 
   }
 };

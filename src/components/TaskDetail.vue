@@ -12,11 +12,6 @@
       <div class="datetimeDeadline">Дата Дедлайна: {{ task.dateOfTask }}</div>
 
     </div>
-
-    <footer>
-      <a id="edit" @click.prevent="editTask()">Редактировать</a>
-      <a id="delete" @click.prevent="deleteTask()">Удалить</a>
-    </footer>
   </div>
 </template>
 
