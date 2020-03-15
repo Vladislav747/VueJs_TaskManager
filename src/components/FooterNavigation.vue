@@ -15,8 +15,6 @@ export default {
     };
   },
 
-  props: ["tasks1"],
-
   mounted: function() {
    
   },

@@ -12,7 +12,7 @@
 
 <script>
 import TopNavigation from './components/TopNavigation'
-import FooterNavigation from "./components/FooterNavigation";
+import FooterNavigation from './components/FooterNavigation';
 
 export default {
   
