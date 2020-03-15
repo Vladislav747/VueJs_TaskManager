@@ -5,7 +5,7 @@
       @get-tasks="get-tasks"
      />
     <router-view :search="searchText"/>
-    <footer-element />
+    <footer-navigation />
   </div>
 
 </template>
