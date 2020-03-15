@@ -2,24 +2,24 @@
   <form v-if="task">
     <h2 v-if="!isEdit">
       Создать задачу
-      <span class="required">- обязательное поле</span>
     </h2>
     <h2 v-else>
       Редактировать задачу
-      <span class="required">- обязательное поле</span>
     </h2>
+
+    <span class="required">- обязательное поле</span>
 
     <div class="row">
       <label class="short-label">
         Имя:
-        <input id="task-name" v-model="task.name" type="text" placeholder="Заполните поле"/>
+        <input id="task-name" v-model="task.name" class="formEdit-input" type="text" placeholder="Заполните поле"/>
       </label>
     </div>
 
     <div class="row">
       <label class="short-label">
         Категория:
-        <select id="task-category" v-model="task.category">
+        <select id="task-category" v-model="task.category" class="formEdit-input">
           <option v-for="type in taskTypes" :key="type">{{ type }}</option>
         </select>
       </label>
@@ -50,10 +50,10 @@
       </label>
     </div>
 
-    <div>
-      <button id="save" type="submit" @click.prevent="validateForm(true)">Сохранить Задачу</button>
-      <button id="save-new" @click.prevent="validateForm(false)">Сохранить и Начать Новую Задачу</button>
-      <button id="cancel" @click.prevent="cancel()">Отмена</button>
+    <div class=formEdit-wrapper>
+      <button id="save" class="formEdit-button" type="submit" @click.prevent="validateForm(true)">Сохранить Задачу</button>
+      <button id="save-new" class="formEdit-button" @click.prevent="validateForm(false)">Сохранить и Начать Новую Задачу</button>
+      <button id="cancel" class="formEdit-button" @click.prevent="cancel()">Отмена</button>
     </div>
   </form>
 </template>
@@ -286,6 +286,15 @@ form {
     }
   }
 
+  @media screen and (max-width: 425px) {
+    .short-label {
+      .formEdit-input{
+        width: 50%;
+      }
+    }
+  }
+  
+
   input,
   select,
   textarea {
@@ -371,6 +380,35 @@ form {
 
   button:active {
     background-color: darken(#2b87d8, 10%);
+  }
+
+  .formEdit-wrapper{
+    padding: 10px;
+    margin: 0 -5px;
+  }
+
+  @media screen and (max-width: 425px) {
+    .formEdit-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .formEdit-button{
+    margin: 0 5px;
+  }
+
+   @media screen and (max-width: 425px) {
+    .formEdit-wrapper {
+      display: flex;
+      flex-direction: column;
+
+    .formEdit-button{
+      width: 50%;
+      margin: 5px auto;
+    }
+    }
+
   }
 
 }

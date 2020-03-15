@@ -5,17 +5,21 @@
       @get-tasks="get-tasks"
      />
     <router-view :search="searchText"/>
+    <footer />
   </div>
+
 </template>
 
 <script>
 import TopNavigation from './components/TopNavigation'
+import Footer from "./components/Footer";
 
 export default {
   name: 'App',
 
   components: {
     TopNavigation,
+    Footer,
   },
   data () {
     return {

@@ -15,7 +15,6 @@
     </header>
 
     <div class="description">{{ task.description }}</div>
-
     <div class="datetimeDeadline">{{ task.dateOfTask }}</div>
 
   </section>
@@ -27,8 +26,6 @@ import { showNoty } from "../utility";
 
 export default {
   name: "TaskCard",
-
-
   props: {
     task: {
       type: Object,
@@ -43,24 +40,24 @@ export default {
   },
 
   computed: {
-  classObject: function () {
 
+  classObject: function () {
     var className;
 
     switch(this.task.category){
 
-  case 'Просрочено':
-    className = 'category_sticker expired_sticker';
-    break;
-  case 'В работе':
-    className = 'category_sticker inwork_sticker';
-    break;
-  case 'Сделано':
-    className = 'category_sticker ready_sticker';
-    break;
-  default:
-    className = 'category_sticker';
-    break;
+      case 'Просрочено':
+        className = 'category_sticker expired_sticker';
+        break;
+      case 'В работе':
+        className = 'category_sticker inwork_sticker';
+        break;
+      case 'Сделано':
+        className = 'category_sticker ready_sticker';
+        break;
+      default:
+        className = 'category_sticker';
+        break;
     }
 
       return className
@@ -150,6 +147,7 @@ export default {
   padding: 20px;
   margin:16px;
   border-radius: 10px;
+
   header,
   .description,
   .times {
@@ -234,6 +232,7 @@ export default {
       float: right;
     }
   }
+
   a.top-icon-link {
     float: right;
     padding: 10px;
@@ -241,6 +240,7 @@ export default {
 }
 
 @media screen and (max-width: 550px) {
+
   .card {
     flex: 0 0 100%;
     padding: 5%;
@@ -258,6 +258,4 @@ export default {
   }
  
 }
-
-
 </style>

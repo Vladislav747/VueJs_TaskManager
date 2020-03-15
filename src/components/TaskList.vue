@@ -33,7 +33,7 @@
     <div id="tasks">
       <task-card v-for="task in filteredTasks" :key="task._id" :task="task"/>
     </div>
-  </div>
+  </div>  
 </template>
 
 <script>
