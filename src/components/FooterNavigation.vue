@@ -39,7 +39,7 @@ export default {
         footerElement.classList.toggle("bg-dark");
         footerElement.classList.toggle("bg-blue");
       }
-     this.$emit('changeTheme', this.isBlackTheme);
+     this.$root.$emit('changeTheme', this.isBlackTheme);
     },
   }
 };

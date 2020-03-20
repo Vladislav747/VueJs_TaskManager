@@ -2,10 +2,16 @@
   <div class="task-container">
     <div v-if="isLoading" class="lds-dual-ring"></div>
     <div v-if="!isLoading" class="task">
-      <h3>
-        Имя: {{ task.name }}
-        <span>{{ task.category }}</span>
-      </h3>
+      <div class="header-task">
+        <div class="header-title">
+          <h3>
+            Имя: {{ task.name }}
+          </h3>
+        </div>
+        <div class="category">
+          <span>{{ task.category }}</span>
+        </div>
+      </div>
 
       <div class="description">Описание: {{ task.description }}</div>
 
@@ -131,6 +137,9 @@ export default {
     0 3px 1px -2px rgba(0, 0, 0, 0.2);
   margin-bottom: 1rem;
   padding: 1rem;
+  width: 60%;
+  margin: auto;
+  min-height: 300px;
 
   h3,
   h4 {
@@ -165,31 +174,8 @@ export default {
       }
     }
 
-    .ingredients,
     .image {
       flex: 0 0 50%;
-    }
-
-    .ingredients {
-      padding-right: 1rem;
-    }
-
-    .ingredient {
-      font-size: 0.9rem;
-
-      div {
-        float: right;
-        font-weight: bold;
-        text-align: right;
-        width: 40%;
-
-        span {
-          float: right;
-          padding-left: 5px;
-          text-align: left;
-          width: 60%;
-        }
-      }
     }
 
     .image {
@@ -203,6 +189,10 @@ export default {
     margin:10px 0;
   }
 
+}
+
+.header-task{
+  display: flex;
 }
 
 .vue-input-tag-wrapper {
