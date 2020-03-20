@@ -1,6 +1,6 @@
 <template>
   <section class="card bg-grey" @click="viewTask(task.id)">
-    <div class="card-icons">
+    <div class="card-icons"> 
       <a id="delete" @click.prevent="deleteTask()" class="top-icon-link">
         <font-awesome-icon icon="trash" size="2x" class="top-icon" alt="Удалить задачу"/>
       </a>
