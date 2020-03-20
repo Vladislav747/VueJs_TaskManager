@@ -193,9 +193,6 @@ export default {
     background-size: cover;
     height: 240px;
     max-width: 100%;
-  }
-
-  .spacer {
     border-bottom: 1px solid #eee;
     border-top: 1px solid #eee;
     padding-top: 32%;
