@@ -27,7 +27,7 @@ export default {
       tasks: ["a"]
     };
   },
-
+ 
   props: ["tasks1"],
 
   computed: {
