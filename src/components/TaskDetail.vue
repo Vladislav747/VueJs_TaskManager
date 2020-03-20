@@ -193,6 +193,7 @@ export default {
 
 .header-task{
   display: flex;
+  justify-content: space-between;
 }
 
 .vue-input-tag-wrapper {
