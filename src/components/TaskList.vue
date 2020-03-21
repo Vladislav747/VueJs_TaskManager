@@ -1,5 +1,5 @@
 <template>
-  <div class="taskList">
+  <div class="taskList max-width-block">
     <div v-if="!isLoading && !noTasks" class="filterWrapper">
       <div class="filterIcon">
         <font-awesome-icon icon="filter" size="1.5x" class="top-icon" v-on:click="showFilter()"/>

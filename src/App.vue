@@ -1,9 +1,9 @@
 <template>
-  <div id="container" class="bg-white">
+  <div id="main-wrapper">
     <top-navigation
       @search="updateSearch"
       @get-tasks="get-tasks"
-     />
+      />
     <router-view :search="searchText"/>
     <footer-navigation />
   </div>
@@ -60,9 +60,13 @@ html {
   display: flex;
   flex-direction: column;
   font-size: 1.1rem;
-  line-height: 1.6rem;
-  margin: 0 auto;
+  line-height: 1.6rem;  
+}
+
+.max-width-block {
   max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .bg-blue{

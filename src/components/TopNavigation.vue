@@ -1,17 +1,19 @@
 <template>
   <div class="header bg-blue">
-    <router-link id="task-list" :to="{ name: 'task-list' }">
-      <span class="top-desktop">Список Задач</span>
-      <font-awesome-icon icon="list-ul" size="2x" class="top-icon"/>
-    </router-link>
-    <router-link id="task-add" :to="{ name: 'task-add' }">
-      <span class="top-desktop">Создать задачу</span>
-      <font-awesome-icon icon="plus-circle" size="2x" class="top-icon"/>
-    </router-link>
+    <div class="max-width-block header-inner">
+      <router-link id="task-list" :to="{ name: 'task-list' }">
+        <span class="top-desktop">Список Задач</span>
+        <font-awesome-icon icon="list-ul" size="2x" class="top-icon"/>
+      </router-link>
+      <router-link id="task-add" :to="{ name: 'task-add' }">
+        <span class="top-desktop">Создать задачу</span>
+        <font-awesome-icon icon="plus-circle" size="2x" class="top-icon"/>
+      </router-link>
 
-    <div class="spacer"/>
+      <div class="spacer"/>
 
-    <input v-if="isHome" v-model="searchText" type="search" placeholder="Искать Задачи...">
+      <input v-if="isHome" v-model="searchText" type="search" placeholder="Искать Задачи...">
+    </div>
   </div>
 </template>
 
@@ -85,6 +87,11 @@ export default {
   display: flex;
   margin-bottom: 1em;
   padding: 1em;
+
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+  }
 
   a {
     color: #fff;

@@ -1,8 +1,10 @@
 <template>
   <footer class="bg-blue">
-   <font-awesome-icon icon="palette" size="2x" class="footer-icon" alt="Удалить задачу"/>
-   <input type="checkbox" class="theme-switch" id="change_theme" v-model="isBlackTheme" @click="changeTheme()">
-   <label for="change_theme"></label>
+    <div class="max-width-block footer-inner">
+      <font-awesome-icon icon="palette" size="2x" class="footer-icon" alt="Удалить задачу"/>
+      <input type="checkbox" class="theme-switch" id="change_theme" v-model="isBlackTheme" @click="changeTheme()">
+      <label for="change_theme"></label>
+    </div>
   </footer>
 </template>
 
@@ -49,7 +51,6 @@ export default {
 
 footer{
   padding: 20px;
-  border-radius: 10px;
 }
 
 .footer-icon{
