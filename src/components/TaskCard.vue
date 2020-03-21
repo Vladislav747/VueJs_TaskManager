@@ -1,5 +1,5 @@
 <template>
-  <section class="card bg-grey" @click="viewTask(task.id)">
+  <section class="card" v-bind:class="{'bg-grey': blackTheme}" @click="viewTask(task.id)">
     <div class="card-icons"> 
       <a id="delete" @click.prevent="deleteTask()" class="top-icon-link">
         <font-awesome-icon icon="trash" size="2x" class="top-icon" alt="Удалить задачу"/>
@@ -37,6 +37,12 @@ export default {
         };
       }
     }
+  },
+
+  data() {
+    return {
+      blackTheme: false,
+    };
   },
 
   computed: {
@@ -126,8 +132,16 @@ export default {
         this.check.close();
         showNoty(error);
       }
-    }
-  }
+    },
+
+    changeTheme(){
+        this.blackTheme = !this.blackTheme;  
+    } 
+  },
+
+  mounted: function() {
+      this.$root.$on('changeTheme', this.changeTheme);
+  },
 };
 </script>
 

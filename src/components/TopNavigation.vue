@@ -24,7 +24,8 @@ export default {
   data() {
     return {
       searchText: "",
-      tasks: ["a"]
+      tasks: ["a"],
+      blackTheme: false,
     };
   },
 
