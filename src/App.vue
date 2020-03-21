@@ -5,7 +5,7 @@
       @get-tasks="get-tasks"
      />
     <router-view :search="searchText"/>
-    <footer-navigation @changeTheme='onChange' />
+    <footer-navigation />
   </div>
 
 </template>
@@ -29,30 +29,7 @@ export default {
   methods: {
     updateSearch (text) {
       this.searchText = text
-    },
-
-    onChange(data){
-
-      var el = document.getElementsByClassName("header")[0];
-      var containerElement = document.getElementById("container");
-      if(data){
-        
-        //el.style.backgroundColor = "#232323";
-        el.classList.toggle("bg-dark");
-        el.classList.toggle("bg-blue");
-        
-        containerElement.classList.toggle("bg-dark");
-        containerElement.classList.toggle("bg-white");
-
-      }else{
-        //el.style.backgroundColor = "#2b87d8";
-        el.classList.toggle("bg-dark");
-        el.classList.toggle("bg-blue");
-        
-        containerElement.classList.toggle("bg-dark");
-        containerElement.classList.toggle("bg-white");
-      }
-    }
+    } 
   }
 }
 </script>

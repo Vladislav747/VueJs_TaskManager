@@ -241,6 +241,8 @@ form {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
     0 3px 1px -2px rgba(0, 0, 0, 0.2);
   padding: 1rem;
+  width: 80%;
+  margin: auto;
 
 
   textarea#task-description:placeholder-shown,
@@ -297,7 +299,7 @@ form {
 
   input,
   select,
-  textarea {
+  form textarea {
     background: #fff;
     border: 1px solid #aaa;
     border-radius: 3px;
@@ -307,6 +309,7 @@ form {
     max-width: 100%;
     outline: 0;
     padding: 2px 7px;
+    width: 48%;
   }
 
   input:hover,

@@ -36,12 +36,21 @@ export default {
     }
   },
 
+  methods:{
+    changeTheme(){
+        var el = document.getElementsByClassName("header")[0];
+        el.classList.toggle("bg-dark");
+    } 
+  },
+
   mounted: function() {
     bus.$on("remove", function(tasks) {
      
       var vm = this;
       vm.tasks = tasks;
     });
+
+    this.$root.$on('changeTheme', this.changeTheme);
   },
 
   watch: {
@@ -61,7 +70,7 @@ export default {
       });
 
       this.$parent.$children[1].filteredTasks = searchedTasks;
-    }
+    },
   }
 };
 </script>
@@ -109,6 +118,7 @@ export default {
     display: none;
   }
 }
+
 @media screen and (max-width: 550px) {
   .header {
     flex-wrap: wrap;

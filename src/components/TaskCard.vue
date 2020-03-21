@@ -1,6 +1,6 @@
 <template>
-  <section class="card" @click="viewTask(task.id)">
-    <div class="card-icons">
+  <section class="card bg-grey" @click="viewTask(task.id)">
+    <div class="card-icons"> 
       <a id="delete" @click.prevent="deleteTask()" class="top-icon-link">
         <font-awesome-icon icon="trash" size="2x" class="top-icon" alt="Удалить задачу"/>
       </a>
@@ -132,7 +132,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    
+.bg-grey{
+  background-color: #C3C1C0;
+}    
    
 .card {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
@@ -191,9 +193,6 @@ export default {
     background-size: cover;
     height: 240px;
     max-width: 100%;
-  }
-
-  .spacer {
     border-bottom: 1px solid #eee;
     border-top: 1px solid #eee;
     padding-top: 32%;
