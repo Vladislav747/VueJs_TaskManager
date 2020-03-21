@@ -199,7 +199,6 @@ export default {
 }
 
 .filterWrapper {
-  transition: 0.5s linear;
   right: -302px;
   top: 0;
   height: 100%;
@@ -208,7 +207,7 @@ export default {
   background-color: #f2f2f2;
   box-shadow: none;
   z-index: 2;
-  transition: 0.2s linear;
+  transition: right 0.2s linear;
   padding: 10px 14px;
   &.show {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.19);
