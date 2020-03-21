@@ -156,9 +156,15 @@ export default {
      */
     showFilter() {
       var divFilter = document.getElementsByClassName("filterWrapper")[0];
-      var iconFilter = document.getElementsByClassName("filterIcon")[0];
+      var overlay = this.$root.$data.showOverlay();
+      divFilter.style['z-index'] = overlay.index;
+      overlay.div.onclick = function(e){
+        if(typeof(e.target.remove) == 'function') {
+          e.target.remove();
+          divFilter.classList.toggle("show");
+        }
+      }
       divFilter.classList.toggle("show");
-      iconFilter.classList.toggle("show");
     }
   },
 
@@ -195,22 +201,24 @@ export default {
 }
 
 .filterWrapper {
-  transition: 0.5s linear;
-  top: 120px;
   right: -302px;
+  top: 0;
+  height: 100%;
   position: fixed;
   width: 300px;
   background-color: #f2f2f2;
   box-shadow: none;
   z-index: 2;
-  border-radius: 10px;
-  transition: 0.2s linear;
+  transition: right 0.2s linear;
   padding: 10px 14px;
   &.show {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.19);
-    right: 2px;
     visibility: visible;
     transition-delay: 0s;
+    right: 0px;
+  }
+  &.show .filterIcon {
+    display: none;
   }
 }
 
@@ -225,14 +233,14 @@ export default {
 
 .filterIcon {
   transition: 0.5s linear;
-  left: -50px;
-  position: absolute;
-  top: 0px;
+  right: 2px;
+  position: fixed;
+  top: 15%;
   background-color: #2b87d8;
   padding: 10px 14px;
   border-radius: 25%;
   cursor: pointer;
-  
+  box-shadow: 0px 0px 5px 1px #c5c5c5;
   svg {
     color: white;
   }

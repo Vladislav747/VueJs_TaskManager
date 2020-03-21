@@ -36,12 +36,14 @@ Vue.config.productionTip = false
 
 import App from './App';
 import router from './router';
+import globalData from './globalFunctions';
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   components: {
 
   },
+  data: globalData,
   router,
   render: h => h(App)
 });

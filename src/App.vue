@@ -31,7 +31,8 @@ export default {
   methods: {
     updateSearch (text) {
       this.searchText = text
-    } 
+    },
+    
   }
 }
 </script>
@@ -58,6 +59,16 @@ html, body {
 
 * {
   font-family: "Oxygen", sans-serif;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #000;
+    opacity: 0.3;
 }
 
 #main-wrapper {
