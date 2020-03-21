@@ -4,7 +4,9 @@
       @search="updateSearch"
       @get-tasks="get-tasks"
       />
-    <router-view :search="searchText"/>
+    <div class="content-wrapper">
+      <router-view :search="searchText"/>
+    </div>
     <footer-navigation />
   </div>
 
@@ -42,6 +44,10 @@ html {
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100vh;
+}
+
 *,
 *:before,
 *:after {
@@ -54,13 +60,14 @@ html {
   font-family: "Oxygen", sans-serif;
 }
 
-
-#container {
+#main-wrapper {
   color: #333;
-  display: flex;
-  flex-direction: column;
   font-size: 1.1rem;
   line-height: 1.6rem;  
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .max-width-block {
