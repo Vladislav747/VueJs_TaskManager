@@ -1,8 +1,8 @@
 <template>
   <div class="taskList max-width-block">
     <div v-if="!isLoading && !noTasks" class="filterWrapper">
-      <div class="filterIcon">
-        <font-awesome-icon icon="filter" size="1.5x" class="top-icon" v-on:click="showFilter()"/>
+      <div class="filterIcon" v-on:click="showFilter()">
+        <font-awesome-icon icon="filter" size="1.5x" class="top-icon"/>
       </div>
       <!-- Фильтр по категориям  -->
       <div v-if="!isLoading && !noTasks" id="filter">
@@ -201,14 +201,12 @@ export default {
   background-color: #f2f2f2;
   box-shadow: none;
   z-index: 2;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
-  transition: 0.5s linear;
+  transition: 0.2s linear;
   padding: 10px 14px;
   &.show {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.19);
     right: 2px;
-    opacity: 0.8;
     visibility: visible;
     transition-delay: 0s;
   }
