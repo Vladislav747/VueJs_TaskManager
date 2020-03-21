@@ -4,8 +4,7 @@ const bodyParser = require('body-parser');
 const database = require('./database');
 
 let configs = require('./config/serverConfigs');
-let port = process.env.PORT || configs.defultPort;
-
+let port = process.env.PORT || configs.defaultPort;
 
 var appRoot = require('app-root-path');
 
@@ -39,6 +38,7 @@ if (process.env.NODE_ENV === 'production') {
 
 //Error capture
 app.use((req, res, next) => {
+
   let err = new Error('Invalid Endpoint')
   err.status = 404
 

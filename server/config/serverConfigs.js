@@ -1,3 +1,3 @@
 module.exports = {
-    defultPort: 8082
+    defaultPort: 8082
   };
