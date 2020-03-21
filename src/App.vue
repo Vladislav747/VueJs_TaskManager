@@ -61,6 +61,14 @@ html, body {
   font-family: "Oxygen", sans-serif;
 }
 
+.icon-size-m{
+  font-size: 1em;
+}
+
+.icon-size-xl{
+  font-size: 2em;
+}
+
 .overlay {
     position: fixed;
     top: 0;

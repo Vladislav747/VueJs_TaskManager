@@ -2,10 +2,10 @@
   <section class="card" @click="viewTask(task.id)">
     <div class="card-icons"> 
       <a id="delete" @click.prevent="deleteTask()" class="top-icon-link">
-        <font-awesome-icon icon="trash" size="2x" class="top-icon" alt="Удалить задачу"/>
+        <font-awesome-icon icon="trash" class="top-icon icon-size-xl" alt="Удалить задачу"/>
       </a>
       <a id="edit" @click.prevent="editTask()" class="top-icon-link">
-        <font-awesome-icon icon="edit" size="2x" class="top-icon" alt="Редактировать задачу"/>
+        <font-awesome-icon icon="edit" class="top-icon icon-size-xl" alt="Редактировать задачу"/>
       </a>
     </div>
     <header>
@@ -74,8 +74,8 @@ export default {
         day: 'numeric',
         hour: 'numeric',
         minute: 'numeric',
-      });;
-    }
+      });
+    },
   
 },
 

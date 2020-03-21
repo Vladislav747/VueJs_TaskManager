@@ -2,7 +2,7 @@
   <div class="taskList max-width-block">
     <div v-if="!isLoading && !noTasks" class="filterWrapper">
       <div class="filterIcon" v-on:click="showFilter()">
-        <font-awesome-icon icon="filter" size="1.5x" class="top-icon"/>
+        <font-awesome-icon icon="filter" class="top-icon icon-size-m"/>
       </div>
       <!-- Фильтр по категориям  -->
       <div v-if="!isLoading && !noTasks" id="filter">
