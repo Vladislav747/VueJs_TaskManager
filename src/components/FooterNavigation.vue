@@ -1,7 +1,7 @@
 <template>
   <footer class="bg-blue">
     <div class="max-width-block footer-inner">
-      <font-awesome-icon icon="palette" size="2x" class="footer-icon" alt="Удалить задачу"/>
+      <font-awesome-icon icon="palette" class="footer-icon icon-size-xl" alt="Удалить задачу"/>
       <input type="checkbox" class="theme-switch" id="change_theme" v-model="isBlackTheme" @click="changeTheme()">
       <label for="change_theme"></label>
     </div>
