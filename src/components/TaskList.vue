@@ -187,6 +187,8 @@ export default {
   }
 }
 
+
+
 .filterWrapper-text {
   font-size: 22px;
   margin-bottom: 20px;
@@ -210,6 +212,10 @@ export default {
     visibility: visible;
     transition-delay: 0s;
   }
+}
+
+.bg-dark .filterIcon {
+  background-color: #232323;
 }
 
 .taskList {

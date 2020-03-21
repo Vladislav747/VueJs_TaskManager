@@ -31,10 +31,12 @@ export default {
      this.isBlackTheme = !this.isBlackTheme;
      var iconTheme = document.getElementsByClassName("footer-icon")[0];
      var footerElement = document.getElementsByTagName("footer")[0];
+     var bodyElement = document.body;
 
       if(this.isBlackTheme){
         iconTheme.style.color = "white";
         footerElement.classList.toggle("bg-dark");
+        footerElement.classList.toggle("bg-blue");
         footerElement.classList.toggle("bg-blue");
       } else {
         iconTheme.style.color = "black";
