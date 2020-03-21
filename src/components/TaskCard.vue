@@ -15,7 +15,7 @@
     </header>
 
     <div class="description">{{ task.description }}</div>
-    <div class="datetimeDeadline">{{ task.dateOfTask }}</div>
+    <div class="datetimeDeadline">{{ formatData }}</div>
 
   </section>
 </template>
@@ -65,8 +65,17 @@ export default {
         className = 'category_sticker';
         break;
     }
-
       return className
+    },
+
+    formatData: function(){
+        return new Date(this.task.dateOfTask).toLocaleString('ru', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+      });;
     }
   
 },
@@ -129,14 +138,15 @@ export default {
 
         showNoty("Задача Удалена.", "success");
       } catch (error) {
-        this.check.close();
-        showNoty(error);
+          this.check.close();
+          showNoty(error);
       }
     },
 
     changeTheme(){
         this.blackTheme = !this.blackTheme;  
-    } 
+    },
+  
   },
 
   mounted: function() {
