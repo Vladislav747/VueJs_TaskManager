@@ -95,6 +95,49 @@ html, body {
   background-color: #232323;
 }
 
+.bg-grey{
+  background-color: #C3C1C0;
+}
+
+body.bg-dark{
+
+  #main-wrapper{
+    color: white;
+  }
+
+  .header.bg-blue{
+    background-color: #232323;
+  }
+
+  .card{
+    background-color: #C3C1C0;
+  }
+
+  .task{
+    background-color: #C3C1C0;
+  }
+
+  footer {
+    background-color: #232323;
+  }
+
+  .footer-icon{
+    color: white;
+  }
+
+  .filterIcon {
+    background-color: #232323;
+  }
+
+  .filterWrapper{
+    color: white;
+    background-color: #232323;
+  }
+
+}
+
+
+
 .bg-white{
   background-color: white;
 }

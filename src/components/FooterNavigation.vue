@@ -18,30 +18,17 @@ export default {
     };
   },
 
-  mounted: function() {
-   
-  },
-
-  watch: {
-
-  },
-
   methods:{
     changeTheme() {
      this.isBlackTheme = !this.isBlackTheme;
      var iconTheme = document.getElementsByClassName("footer-icon")[0];
-     var footerElement = document.getElementsByTagName("footer")[0];
      var bodyElement = document.body;
+     console.log(bodyElement, "bodyElement");
 
       if(this.isBlackTheme){
-        iconTheme.style.color = "white";
-        footerElement.classList.toggle("bg-dark");
-        footerElement.classList.toggle("bg-blue");
-        footerElement.classList.toggle("bg-blue");
+        bodyElement.classList.toggle("bg-dark");
       } else {
-        iconTheme.style.color = "black";
-        footerElement.classList.toggle("bg-dark");
-        footerElement.classList.toggle("bg-blue");
+        bodyElement.classList.toggle("bg-dark");
       }
      this.$root.$emit('changeTheme', this.isBlackTheme);
     },
@@ -57,10 +44,10 @@ footer{
 
 .footer-icon{
   margin: 0 10px;
-  color: white
+  color: color;
 }
 
-
+//Checkbox theme switcher
 .theme-switch {
 	position: absolute;
 	z-index: -1;

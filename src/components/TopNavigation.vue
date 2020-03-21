@@ -40,10 +40,7 @@ export default {
   },
 
   methods:{
-    changeTheme(){
-        var el = document.getElementsByClassName("header")[0];
-        el.classList.toggle("bg-dark");
-    } 
+  
   },
 
   mounted: function() {

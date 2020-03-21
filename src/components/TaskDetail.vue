@@ -15,7 +15,7 @@
 
       <div class="description">Описание: {{ task.description }}</div>
 
-      <div class="datetimeDeadline">Дата Дедлайна: {{ task.dateOfTask }}</div>
+      <div class="datetimeDeadline">Дата Дедлайна: {{ formatData }}</div>
 
     </div>
   </div>
@@ -42,6 +42,18 @@ export default {
 
   mounted() {
     this.getTask();
+  },
+
+  computed: {
+    formatData: function(){
+        return new Date(this.task.dateOfTask).toLocaleString('ru', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+      });
+    },
   },
 
   methods: {
@@ -138,7 +150,7 @@ export default {
   margin-bottom: 1rem;
   padding: 1rem;
   width: 60%;
-  margin: auto;
+  margin: 1rem auto;
   min-height: 300px;
 
   h3,

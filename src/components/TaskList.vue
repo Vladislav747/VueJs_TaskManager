@@ -222,10 +222,6 @@ export default {
   }
 }
 
-.bg-dark .filterIcon {
-  background-color: #232323;
-}
-
 .taskList {
   z-index: 1;
   overflow: hidden;
