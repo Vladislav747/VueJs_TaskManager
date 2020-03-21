@@ -34,13 +34,7 @@ const keys = require('./config/clientConfigs');
 
 const api = axios.create({
   baseURL: keys.baseURLProduction
-})
-
-// if (keys.baseURL) {
-//   console.log("You are now using this Url " + keys.baseURL);
-// } else {
-//   console.log("You are now using this Url " + keys.baseURLProduction);
-// }
+});
 
 
 Object.defineProperty(Vue.prototype, '$http', {
