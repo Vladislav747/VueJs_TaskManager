@@ -4,23 +4,31 @@
       <div class="filterIcon" v-on:click="showFilter()">
         <font-awesome-icon icon="filter" class="top-icon icon-size-m"/>
       </div>
-      <!-- Фильтр по категориям  -->
+      
       <div v-if="!isLoading && !noTasks" id="filter">
-        <p class="filterWrapper-text">Фильтр задач</p>
-        <span>Категория:</span>
-        <select v-model="filterCategory">
-          <option></option>
-          <option v-for="type in taskTypes" :key="type">{{ type }}</option>
-        </select>
-      </div>
+        <p class="filterWrapper-text">Фильтр</p>
 
-      <!-- Фильтр по Дедлайну  -->
-      <div v-if="!isLoading && !noTasks" id="filter">
-        <span>Срочность:</span>
-        <select v-model="filterDateDeadline">
-          <option></option>
-          <option v-for="type in deadlineTypes" :key="type">{{ type }}</option>
-        </select>
+        <div class="filter-inner">
+
+          <!-- Фильтр по категориям  -->
+          <div class="filter-property">
+            <span class="filter-property--title">Категория:</span>
+            <select class="filter-property--body" v-model="filterCategory">
+              <option></option>
+              <option v-for="type in taskTypes" :key="type">{{ type }}</option>
+            </select>
+          </div>
+
+          <!-- Фильтр по Дедлайну  -->
+          <div class="filter-property">
+            <span class="filter-property--title">Срочность:</span>
+            <select class="filter-property--body" v-model="filterDateDeadline">
+              <option></option>
+              <option v-for="type in deadlineTypes" :key="type">{{ type }}</option>
+            </select>
+          </div>
+
+        </div>
       </div>
     </div>
 
@@ -186,31 +194,28 @@ export default {
   text-align: center;
 
   select {
-    border-radius: 3px;
-    outline: 0;
-    padding: 5px;
-    width: 60%;
+    
   }
 }
 
 
 
 .filterWrapper-text {
-  font-size: 22px;
+  font-size: 20px;
   margin-bottom: 20px;
 }
 
 .filterWrapper {
-  right: -302px;
+  right: -100%;
   top: 0;
   height: 100%;
   position: fixed;
   width: 300px;
-  background-color: #f2f2f2;
+  background-color: #f9f9f9;
   box-shadow: none;
   z-index: 2;
   transition: right 0.2s linear;
-  padding: 10px 14px;
+  padding: 20px;
   &.show {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.19);
     visibility: visible;
@@ -220,6 +225,29 @@ export default {
   &.show .filterIcon {
     display: none;
   }
+
+    .filter-inner {
+      .filter-property {
+        margin: 10px 0;
+        text-align: left;
+
+        .filter-property--title {
+          font-size: 15px;
+          color: #333;
+          margin-bottom: 5px;
+          display: block;
+        }
+
+        select {
+          &.filter-property--body {
+            border-radius: 3px;
+            outline: 0;
+            padding: 5px;
+            width: 100%;
+          }
+        }
+      }
+    }
 }
 
 .taskList {
