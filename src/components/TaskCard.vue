@@ -211,10 +211,15 @@ export default {
       font-weight: bold;
     }
 
-    .card-icons--link {
-      padding: 0 10px;
-      cursor: pointer;
-    }
+    .card-icons {
+      margin-right: -10px;
+
+      .card-icons--link {
+        display: inline-block;
+        padding: 0 10px;
+        cursor: pointer;
+      }
+    }    
   }
 
   .inwork_sticker{
