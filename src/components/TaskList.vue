@@ -192,10 +192,6 @@ export default {
 #filter {
   margin-bottom: 1em;
   text-align: center;
-
-  select {
-    
-  }
 }
 
 
@@ -252,7 +248,13 @@ export default {
 
 .taskList {
   z-index: 1;
-  overflow: hidden;
+}
+
+#tasks {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -16px;
+  padding: 16px 0;
 }
 
 .filterIcon {
@@ -286,25 +288,11 @@ export default {
   }
 }
 
-#tasks {
-  padding: 10px;
-  display: flex;
-  flex-wrap: wrap;
-
-  .card:nth-child(3n) {
-    margin-right: 0;
-  }
-}
-
 @media screen and (max-width: 550px) {
   #filter {
     select {
       width: 60%;
     }
-  }
-
-  #tasks {
-    padding: 5%;
   }
 }
 

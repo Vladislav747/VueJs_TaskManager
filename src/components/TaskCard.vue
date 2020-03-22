@@ -1,21 +1,29 @@
 <template>
   <section class="card" @click="viewTask(task.id)">
-    <div class="card-icons"> 
-      <a id="delete" @click.prevent="deleteTask()" class="top-icon-link">
-        <font-awesome-icon icon="trash" class="top-icon icon-size-xl" alt="Удалить задачу"/>
-      </a>
-      <a id="edit" @click.prevent="editTask()" class="top-icon-link">
-        <font-awesome-icon icon="edit" class="top-icon icon-size-xl" alt="Редактировать задачу"/>
-      </a>
+    <div class="card-inner">
+      <div class="card-header">
+        <div class="card-header--top">
+          <div class="card-title">{{ task.name }}</div>
+          <span class="card-sticker top-right" v-bind:class="classObject">{{ task.category }}</span>
+        </div>
+
+        <div class="description">{{ task.description }}</div>
+      </div>
+
+      <div class="card-footer">
+        <div class="datetimeDeadline">{{ formatData }}</div>
+
+        <div class="card-icons"> 
+          <a id="edit" @click.prevent="editTask()" class="card-icons--link">
+            <font-awesome-icon icon="edit" class="top-icon icon-size-xl" alt="Редактировать задачу"/>
+          </a>
+          <a id="delete" @click.prevent="deleteTask()" class="card-icons--link">
+            <font-awesome-icon icon="trash" class="top-icon icon-size-xl" alt="Удалить задачу"/>
+          </a>
+        </div>
+      </div>
+        
     </div>
-    <header>
-      {{ task.name }}
-      <span v-bind:class="classObject">{{ task.category }}</span>
-    </header>
-
-    <div class="description">{{ task.description }}</div>
-    <div class="datetimeDeadline">{{ formatData }}</div>
-
   </section>
 </template>
 
@@ -152,57 +160,73 @@ export default {
 <style lang="scss" scoped> 
    
 .card {
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
-    0 3px 1px -2px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  display: flex;
-  flex: 0 0 calc(33.3333% - calc(1rem * 0.6666));
-  flex-direction: column;
-  margin-bottom: 1rem;
-  margin-right: 1rem;
-  flex-wrap: wrap;
-  padding: 20px;
-  margin:16px;
-  border-radius: 10px;
+  padding: 16px;
+  width: 33.333%;
 
-  header,
-  .description,
-  .times {
-    padding: 1rem;
+  .card-inner {
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #e1e1e1;
+    transition: box-shadow 0.2s ease-in-out;
+
+    &:hover {
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
   }
 
-  &:hover {
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-  }
+  .card-header--top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-  header {
-    font-weight: bold;
+    .card-title {
+      font-weight: bold;
+      padding-top: 2px;
+    }
 
-    span {
+    .card-sticker {
       color: black;
       float: right;
       font-size: 0.9rem;
-      font-weight: normal;
       border-radius: 5px;
-      padding: 4px 10px 5px;
+      padding: 3px 10px 2px;
       text-transform: uppercase;
       border-radius: 2px;
+    }
+  }
 
+  .card-footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: 15px;
+
+    .datetimeDeadline {
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    .card-icons--link {
+      padding: 0 10px;
     }
   }
 
   .inwork_sticker{
-    background-color: yellow;
+    background-color: #ffd83a;
   }
   .expired_sticker{
-    background-color: red;
+    background-color: #ff4f4f;
   }
   .ready_sticker{
-    background-color: green;
+    background-color: #6ecc6e;
   }
 
   .image,
-
   .spacer {
     background-position: center;
     background-size: cover;
@@ -216,8 +240,7 @@ export default {
 
   .description {
     word-wrap: break-word;
-    width: 400px;
-    flex: 300px;
+    margin-top: 15px;
   }
 
   .tag {
@@ -231,25 +254,6 @@ export default {
 
   .vue-input-tag-wrapper {
     border: 0px;
-  }
-  .datetimeDeadline {
-    font-size: 1rem;
-    font-weight: bold;
-    flex-grow: 1;
-    text-align: center;
-
-    .center {
-      text-align: center;
-    }
-
-    span {
-      float: right;
-    }
-  }
-
-  a.top-icon-link {
-    float: right;
-    padding: 10px;
   }
 }
 
