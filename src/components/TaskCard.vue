@@ -1,9 +1,9 @@
 <template>
-  <section class="card" @click="viewTask(task.id)">
+  <section class="card">
     <div class="card-inner">
       <div class="card-header">
         <div class="card-header--top">
-          <div class="card-title">{{ task.name }}</div>
+          <div class="card-title" @click="viewTask(task.id)">{{ task.name }}</div>
           <span class="card-sticker top-right" v-bind:class="classObject">{{ task.category }}</span>
         </div>
 
@@ -164,7 +164,6 @@ export default {
   width: 33.333%;
 
   .card-inner {
-    cursor: pointer;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -185,6 +184,7 @@ export default {
     justify-content: space-between;
 
     .card-title {
+      cursor: pointer;
       font-weight: bold;
       padding-top: 2px;
     }
@@ -213,6 +213,7 @@ export default {
 
     .card-icons--link {
       padding: 0 10px;
+      cursor: pointer;
     }
   }
 
