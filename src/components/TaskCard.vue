@@ -160,9 +160,10 @@ export default {
 <style lang="scss" scoped> 
    
 .card {
-  padding: 16px;
-  width: 33.333%;
-
+  margin: 10px;
+  width: 30%;
+  border-radius: 10px;
+  
   .card-inner {
     height: 100%;
     display: flex;
