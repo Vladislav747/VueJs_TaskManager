@@ -1,5 +1,8 @@
 <template>     
-    <div v-if="!isLoading && !noTasks" id="filter">
+     <div v-if="!isLoading && !noTasks" class="filterWrapper">
+        <div class="filterIcon" v-on:click="showFilter()">
+          <font-awesome-icon icon="filter" class="top-icon icon-size-m"/>
+        </div>
         <p class="filterWrapper-text">Фильтр</p>
 
         <div class="filter-inner">
@@ -31,10 +34,14 @@ import { showNoty, TASK_TYPES, DEADLINE_TYPES } from "../utility";
 
 export default {
   name: "FilterTasks",
+
+  props:{
+    isLoading: "",
+    noTasks:"",
+  },
   
   data() {
     return {
-      isLoading: true,
       tasks: [],
       filteredTasks: [],
       filterCategory: "",
@@ -83,24 +90,6 @@ export default {
   },
 
   methods: {
-    /**
-     * Получить задачи
-     */
-    async getTasks() {
-      try {
-        const response = await this.$http.get("tasks");
-        this.tasks = response.data;
-        this.$emit("remove", this.tasks);
-        this.$emit("get-tasks", this.tasks);
-        //Создается копия массива
-        this.filteredTasks = this.tasks.slice();
-      } catch (error) {
-        showNoty("Ошибка вывода списка задач  " + error);
-      }
-
-      this.$parent.$children[0].tasks = this.filteredTasks;
-      this.isLoading = false;
-    },
 
     /**
      * Фильтровать задачу по категории
