@@ -1,32 +1,37 @@
-<template>
-  <div class="taskList max-width-block">
-    <filter-tasks />
+<template>     
+    <div v-if="!isLoading && !noTasks" id="filter">
+        <p class="filterWrapper-text">Фильтр</p>
 
-    <!-- Если есть isLoading то ставим Loader -->
-    <div v-if="isLoading" class="loading">Загружаю задачи</div>
-    <div v-if="noTasks" class="no-tasks">
-      <h3>Задачи не найдены</h3>Нажмите вверху на панели Добавить Новую задачу
+        <div class="filter-inner">
+
+            <!-- Фильтр по категориям  -->
+            <div class="filter-property">
+                <span class="filter-property--title">Категория:</span>
+                <select class="filter-property--body" v-model="filterCategory">
+                    <option></option>
+                    <option v-for="type in taskTypes" :key="type">{{ type }}</option>
+                </select>
+            </div>
+
+            <!-- Фильтр по Дедлайну  -->
+            <div class="filter-property">
+                <span class="filter-property--title">Срочность:</span>
+                <select class="filter-property--body" v-model="filterDateDeadline">
+                    <option></option>
+                    <option v-for="type in deadlineTypes" :key="type">{{ type }}</option>
+                </select>
+            </div>
+        </div>
     </div>
 
-    <div id="tasks">
-      <task-card v-for="task in filteredTasks" :key="task._id" :task="task"/>
-    </div>
-  </div>  
 </template>
 
 <script>
 import { showNoty, TASK_TYPES, DEADLINE_TYPES } from "../utility";
-import TaskCard from "./TaskCard.vue";
-import FilterTasks from "./FilterTasks.vue";
 
 export default {
-  name: "TaskList",
-
-  components: {
-    TaskCard,
-    FilterTasks,
-  },
-
+  name: "FilterTasks",
+  
   data() {
     return {
       isLoading: true,
