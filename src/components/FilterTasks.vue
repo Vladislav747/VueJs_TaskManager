@@ -74,13 +74,11 @@ export default {
         );
       }
       this.filteredTasks = this.filteredTasksTime;
-      console.log(this.filteredTasks, "Отфильтрованные задачи по Категориям");
-      console.log(this.tasks);
-      console.log(this.filterCategory);
       this.$emit('filter_tasks', this.filteredTasks);
     },
 
     filterDateDeadline: function() {
+
       if (this.filteredTasksTime.length === 0) {
         this.filteredTasksDeadline = this.tasks.filter(this.filterTaskDeadline);
       } else {
@@ -89,9 +87,6 @@ export default {
         );
       }
       this.filteredTasks = this.filteredTasksDeadline;
-
-      console.log(this.filteredTasks);
-      console.log("check filterDateDeadline");
       this.$emit('filter_tasks', this.filteredTasks);
     }
   },
