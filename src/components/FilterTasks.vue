@@ -156,6 +156,23 @@ export default {
 
 <style lang="scss" scoped>
 
+
+
+.filterIcon {
+  transition: 0.5s linear;
+  right: 2px;
+  position: fixed;
+  top: 15%;
+  background-color: #2b87d8;
+  padding: 10px 14px;
+  border-radius: 25%;
+  cursor: pointer;
+  box-shadow: 0px 0px 5px 1px #c5c5c5;
+  svg {
+    color: white;
+  }
+}
+
 #filter {
   margin-bottom: 1em;
   text-align: center;
@@ -211,34 +228,19 @@ export default {
         }
       }
     }
-}
 
-.clear-result__wrapper{
+    .clear-result__wrapper{
 
-  text-align: center;
-  margin: 20px 0;
+      text-align: center;
+      margin: 20px 0;
 
-  .clear-results__btn{
-  outline: none;
-  padding: 10px;
-  border: 1px solid black;
-  
-  }
-} 
-
-.filterIcon {
-  transition: 0.5s linear;
-  right: 2px;
-  position: fixed;
-  top: 15%;
-  background-color: #2b87d8;
-  padding: 10px 14px;
-  border-radius: 25%;
-  cursor: pointer;
-  box-shadow: 0px 0px 5px 1px #c5c5c5;
-  svg {
-    color: white;
-  }
+      .clear-results__btn{
+      outline: none;
+      padding: 10px;
+      border: 1px solid black;
+    
+    }
+  } 
 }
 
 @media screen and (max-width: 800px) {
