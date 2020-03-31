@@ -92,6 +92,7 @@ export default {
 
       console.log(this.filteredTasks);
       console.log("check filterDateDeadline");
+      this.$emit('filter_tasks', this.filteredTasks);
     }
   },
 

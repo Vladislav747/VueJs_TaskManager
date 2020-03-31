@@ -74,6 +74,7 @@ export default {
     },
 
     filterDateDeadline: function() {
+      
       if (this.filteredTasksTime.length === 0) {
         this.filteredTasksDeadline = this.tasks.filter(this.filterTaskDeadline);
       } else {
