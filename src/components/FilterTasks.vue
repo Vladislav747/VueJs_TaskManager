@@ -7,23 +7,27 @@
 
         <div class="filter-inner">
 
-            <!-- Фильтр по категориям  -->
-            <div class="filter-property">
-                <span class="filter-property--title">Категория:</span>
-                <select class="filter-property--body" v-model="filterCategory">
-                    <option></option>
-                    <option v-for="type in taskTypes" :key="type">{{ type }}</option>
-                </select>
-            </div>
+          <!-- Фильтр по категориям  -->
+          <div class="filter-property">
+              <span class="filter-property--title">Категория:</span>
+              <select class="filter-property--body" v-model="filterCategory">
+                  <option></option>
+                  <option v-for="type in taskTypes" :key="type">{{ type }}</option>
+              </select>
+          </div>
 
-            <!-- Фильтр по Дедлайну  -->
-            <div class="filter-property">
-                <span class="filter-property--title">Срочность:</span>
-                <select class="filter-property--body" v-model="filterDateDeadline">
-                    <option></option>
-                    <option v-for="type in deadlineTypes" :key="type">{{ type }}</option>
-                </select>
-            </div>
+          <!-- Фильтр по Дедлайну  -->
+          <div class="filter-property">
+              <span class="filter-property--title">Срочность:</span>
+              <select class="filter-property--body" v-model="filterDateDeadline">
+                  <option></option>
+                  <option v-for="type in deadlineTypes" :key="type">{{ type }}</option>
+              </select>
+          </div>
+
+          <div class="clear-result__wrapper">
+              <button @click="clearResults()" class="clear-results__btn">Сбросить результаты</button>
+          </div>
         </div>
     </div>
 
@@ -38,11 +42,14 @@ export default {
   props:{
     isLoading: "",
     noTasks:"",
+    tasks: {
+      type: Array,
+      default: [],
+    },
   },
   
   data() {
     return {
-      tasks: [],
       filteredTasks: [],
       filterCategory: "",
       filterDateDeadline: "",
@@ -54,11 +61,7 @@ export default {
   },
 
   computed: {
-    noTasks() {
-      return (
-        this.isLoading === false && (this.tasks && this.tasks.length === 0)
-      );
-    }
+      
   },
 
   watch: {
@@ -71,6 +74,10 @@ export default {
         );
       }
       this.filteredTasks = this.filteredTasksTime;
+      console.log(this.filteredTasks, "Отфильтрованные задачи по Категориям");
+      console.log(this.tasks);
+      console.log(this.filterCategory);
+      this.$emit('filter_tasks', this.filteredTasks);
     },
 
     filterDateDeadline: function() {
@@ -82,11 +89,10 @@ export default {
         );
       }
       this.filteredTasks = this.filteredTasksDeadline;
-    }
-  },
 
-  mounted() {
-    this.getTasks();
+      console.log(this.filteredTasks);
+      console.log("check filterDateDeadline");
+    }
   },
 
   methods: {
@@ -139,16 +145,15 @@ export default {
         }
       }
       divFilter.classList.toggle("show");
-    }
-  },
+    },
 
-  /**
-   * Переход на добавление задачи
-   * @param {object} task - объект текущей задачи
-   *
-   */
-  addTask() {
-    this.$router.push("task-add");
+    /* Очистить результаты фильтрации */
+    clearResults() {
+     
+      console.log(this.tasks, "clear Results");
+      this.$emit('clear_results', this.tasks);
+
+    },
   }
 };
 </script>
@@ -212,16 +217,18 @@ export default {
     }
 }
 
-.taskList {
-  z-index: 1;
-}
+.clear-result__wrapper{
 
-#tasks {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 -16px;
-  padding: 16px 0;
-}
+  text-align: center;
+  margin: 20px 0;
+
+  .clear-results__btn{
+  outline: none;
+  padding: 10px;
+  border: 1px solid black;
+  
+  }
+} 
 
 .filterIcon {
   transition: 0.5s linear;

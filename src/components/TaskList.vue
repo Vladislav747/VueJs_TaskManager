@@ -1,6 +1,12 @@
 <template>
   <div class="taskList max-width-block">
-    <filter-tasks />
+    <filter-tasks
+        v-bind:tasks="tasks"
+        v-bind:isLoading="isLoading"
+        v-bind:noTasks="noTasks"
+        v-on:filter_tasks="filterResults"
+        v-on:clear_results="filterResults"
+      ></filter-tasks>
 
     <!-- Если есть isLoading то ставим Loader -->
     <div v-if="isLoading" class="loading">Загружаю задачи</div>
@@ -46,6 +52,12 @@ export default {
       return (
         this.isLoading === false && (this.tasks && this.tasks.length === 0)
       );
+    },
+
+    checkTasks(){
+      this.$on('filter_tasks', function(data){
+        console.log(data, "Event filter_tasks");
+      });
     }
   },
 
@@ -93,8 +105,11 @@ export default {
         showNoty("Ошибка вывода списка задач  " + error);
       }
 
-      this.$parent.$children[0].tasks = this.filteredTasks;
       this.isLoading = false;
+    },
+
+    async filterResults(data){
+      this.filteredTasks = data;
     },
 
     /**
@@ -110,52 +125,7 @@ export default {
       }
     },
 
-    /**
-     * Фильтровать задачу по деадлайну
-     * @param {object} task - объект текущей задачи
-     *
-     */
-    filterTaskDeadline(task) {
-      var dateDeadline = new Date(task.dateOfTask).getTime();
-      var nowDate = new Date().getTime();
-
-      switch (this.filterDateDeadline) {
-        case "Непросроченные Задачи":
-          return dateDeadline >= nowDate;
-
-        case "Просроченные Задачи":
-          return dateDeadline < nowDate;
-
-        default:
-          return true;
-      }
-    },
-
-    /**
-     * Показывать/Скрывать блок фильтра
-     */
-    showFilter() {
-      var divFilter = document.getElementsByClassName("filterWrapper")[0];
-      var overlay = this.$root.$data.showOverlay();
-      divFilter.style['z-index'] = overlay.index;
-      overlay.div.onclick = function(e){
-        if(typeof(e.target.remove) == 'function') {
-          e.target.remove();
-          divFilter.classList.toggle("show");
-        }
-      }
-      divFilter.classList.toggle("show");
-    }
   },
-
-  /**
-   * Переход на добавление задачи
-   * @param {object} task - объект текущей задачи
-   *
-   */
-  addTask() {
-    this.$router.push("task-add");
-  }
 };
 </script>
 
@@ -165,8 +135,6 @@ export default {
   margin-bottom: 1em;
   text-align: center;
 }
-
-
 
 .filterWrapper-text {
   font-size: 20px;
