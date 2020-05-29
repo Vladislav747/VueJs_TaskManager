@@ -98,6 +98,8 @@ export default {
       try {
         const response = await this.$http.get("tasks");
         this.tasks = response.data;
+        var check = "tasks";
+        console.log(this[check], "Check tasks");
         this.$emit("remove", this.tasks);
         this.$emit("get-tasks", this.tasks);
         //Создается копия массива

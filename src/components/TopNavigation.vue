@@ -11,8 +11,8 @@
       </router-link>
 
       <div class="spacer"/>
-
-      <input v-if="isHome" v-model="searchText" type="search" placeholder="Искать Задачи...">
+      <!-- TODO: Не работает поиск - лучше всего ввести  -->
+      <!-- <input v-if="isHome" v-model="searchText" type="search" placeholder="Искать Задачи..."> -->
     </div>
   </div>
 </template>
@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       searchText: "",
-      tasks: ["a"],
+      tasks: [],
       blackTheme: false,
     };
   },
@@ -59,6 +59,7 @@ export default {
      * Поиск задач по имени (name)
      */
     searchText: function() {
+      console.log(this, "search");
       var tasks = this.tasks;
       var searchedTasks = [];
       var str = new RegExp(this.searchText);
