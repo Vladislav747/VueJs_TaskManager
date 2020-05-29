@@ -40,6 +40,7 @@ export default {
 <style lang="scss">
 @import '../node_modules/noty/lib/noty.css';
 @import '../node_modules/noty/lib/themes/mint.css';
+@import './scss/main.scss';
 
 html {
   box-sizing: border-box;
