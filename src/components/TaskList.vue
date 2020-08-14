@@ -9,12 +9,12 @@
       ></filter-tasks>
 
     <!-- Если есть isLoading то ставим Loader -->
-    <div v-if="isLoading" class="loading">Загружаю задачи</div>
+    <div v-if="isLoading" class="lds-dual-ring"></div>
     <div v-if="noTasks" class="no-tasks">
       <h3>Задачи не найдены</h3>Нажмите вверху на панели Добавить Новую задачу
     </div>
 
-    <div id="tasks">
+    <div v-else id="tasks">
       <task-card v-for="task in filteredTasks" :key="task._id" :task="task"/>
     </div>
     <scroll-up/>
@@ -132,4 +132,5 @@ export default {
 
 <style lang="scss" scoped>
 @import "../scss/components/TaskList.scss";
+@import "../scss/preloader.scss";
 </style>
