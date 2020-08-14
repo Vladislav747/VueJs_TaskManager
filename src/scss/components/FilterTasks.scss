@@ -6,7 +6,9 @@
     padding: 10px 14px;
     border-radius: 25%;
     cursor: pointer;
-    box-shadow: 0px 0px 5px 1px #c5c5c5;
+    &:hover{
+      box-shadow: 0px 0px 5px 1px #c5c5c5;
+    }
     svg {
       color: white;
     }

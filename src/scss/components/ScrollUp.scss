@@ -1,0 +1,20 @@
+.scroll-up{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px;
+    &__svg{
+        width: auto;
+        height: 50px;
+        cursor: pointer;
+        border-radius: 17px;
+
+        &:hover{
+            box-shadow: 0px 0px 5px 1px #c5c5c5;
+        }
+        
+    }
+    &__path{
+        
+    }
+}

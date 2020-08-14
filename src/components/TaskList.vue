@@ -17,13 +17,16 @@
     <div id="tasks">
       <task-card v-for="task in filteredTasks" :key="task._id" :task="task"/>
     </div>
+    <scroll-up/>
   </div>  
 </template>
 
 <script>
 import { showNoty, TASK_TYPES, DEADLINE_TYPES } from "../utility";
+
 import TaskCard from "./TaskCard.vue";
 import FilterTasks from "./FilterTasks.vue";
+import ScrollUp from "./ScrollUp.vue";
 
 export default {
   name: "TaskList",
@@ -31,6 +34,7 @@ export default {
   components: {
     TaskCard,
     FilterTasks,
+    ScrollUp,
   },
 
   data() {

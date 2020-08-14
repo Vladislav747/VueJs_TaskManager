@@ -59,7 +59,6 @@ export default {
      * Поиск задач по имени (name)
      */
     searchText: function() {
-      console.log(this, "search");
       var tasks = this.tasks;
       var searchedTasks = [];
       var str = new RegExp(this.searchText);
