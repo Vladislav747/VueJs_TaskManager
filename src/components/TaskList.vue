@@ -53,12 +53,6 @@ export default {
         this.isLoading === false && (this.tasks && this.tasks.length === 0)
       );
     },
-
-    checkTasks(){
-      this.$on('filter_tasks', function(data){
-        console.log(data, "Event filter_tasks");
-      });
-    }
   },
 
   watch: {
@@ -98,8 +92,6 @@ export default {
       try {
         const response = await this.$http.get("tasks");
         this.tasks = response.data;
-        var check = "tasks";
-        console.log(this[check], "Check tasks");
         this.$emit("remove", this.tasks);
         this.$emit("get-tasks", this.tasks);
         //Создается копия массива
@@ -110,6 +102,8 @@ export default {
 
       this.isLoading = false;
     },
+
+    /* Фильтровать результаты */
 
     async filterResults(data){
       this.filteredTasks = data;

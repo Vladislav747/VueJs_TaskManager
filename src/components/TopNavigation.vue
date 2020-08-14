@@ -1,11 +1,11 @@
 <template>
   <div class="header bg-blue">
     <div class="max-width-block header-inner">
-      <router-link id="task-list" :to="{ name: 'task-list' }">
+      <router-link id="task-list" class="header__link active" :to="{ name: 'task-list' }">
         <span class="top-desktop">Задачи</span>
         <font-awesome-icon icon="list-ul" size="2x" class="top-icon"/>
       </router-link>
-      <router-link id="task-add" :to="{ name: 'task-add' }">
+      <router-link id="task-add" class="header__link" :to="{ name: 'task-add' }">
         <span class="top-desktop">Создать</span>
         <font-awesome-icon icon="plus-circle" size="2x" class="top-icon"/>
       </router-link>
