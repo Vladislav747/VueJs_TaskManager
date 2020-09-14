@@ -77,7 +77,10 @@ export default {
         category: "В работе",
         description: ""
       },
-      isLoading:false,
+      isLoading:{
+        type: Boolean,
+        default: false,
+      },
       taskTypes: TASK_TYPES
     };
   },

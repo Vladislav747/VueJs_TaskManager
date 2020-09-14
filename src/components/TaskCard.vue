@@ -6,7 +6,6 @@
           <div class="card-title" @click="viewTask(task.id)">{{ task.name }}</div>
           <span class="card-sticker top-right" v-bind:class="classObject">{{ task.category }}</span>
         </div>
-
         <div class="description">{{ task.description }}</div>
       </div>
 
@@ -38,9 +37,9 @@ export default {
       type: Object,
       default: () => {
         return {
-          name: "",
-          category: "",
-          description: ""
+          name: "Новое",
+          category: "Тестовая",
+          description: "Тестовое описание"
         };
       }
     }
@@ -48,7 +47,10 @@ export default {
 
   data() {
     return {
-      blackTheme: false,
+      blackTheme: {
+        type: Boolean,
+        deafult: false,
+      },
     };
   },
 

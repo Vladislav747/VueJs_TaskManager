@@ -1,7 +1,7 @@
 <template>
   <div class="task-container">
     <div v-if="isLoading" class="lds-dual-ring"></div>
-    <div v-if="!isLoading" class="task">
+    <div v-else class="task">
       <div class="header-task">
         <div class="header-title">
           <h3>
@@ -32,11 +32,19 @@ export default {
   data() {
     return {
       task: {
-        name: "",
-        category: "",
-        description: ""
+        type: Object,
+        default: () => {
+        return {
+          name: "Новое",
+          category: "Тестовая",
+          description: "Тестовое описание"
+        };
+        }
       },
-      isLoading:true,
+      isLoading:{
+        type: Boolean,
+        default: true,
+      },
     };
   },
 
@@ -47,11 +55,11 @@ export default {
   computed: {
     formatData: function(){
         return new Date(this.task.dateOfTask).toLocaleString('ru', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
       });
     },
   },

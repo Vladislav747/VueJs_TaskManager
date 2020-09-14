@@ -40,19 +40,33 @@ export default {
   name: "FilterTasks",
 
   props:{
-    isLoading: "",
-    noTasks:"",
+    isLoading: {
+      type: Boolean,
+      default: true,
+    },
+    noTasks: {
+      type: Boolean,
+      default: true,
+    },
     tasks: {
       type: Array,
-      default: [],
+      default: function () {
+        return []
+      }
     },
   },
   
   data() {
     return {
-      filteredTasks: [],
-      filterCategory: "",
-      filterDateDeadline: "",
+      filteredTasks: {
+        type: Array,
+      },
+      filterCategory: {
+        type: String,
+      },
+      filterDateDeadline: {
+        type: String,
+      },
       taskTypes: TASK_TYPES,
       deadlineTypes: DEADLINE_TYPES,
       filteredTasksTime: [],
