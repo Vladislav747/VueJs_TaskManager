@@ -23,7 +23,7 @@
 import { showNoty, TASK_TYPES, DEADLINE_TYPES } from "../../utility";
 import {tasks} from "../../api/index.js";
 
-import TaskCard from "../TaskCard/TaskCard.vue";
+
 import FilterTasks from "../FilterTasks/FilterTasks.vue";
 import ScrollUp from "../ScrollUp/ScrollUp.vue";
 import ColumnComponent from "../ColumnComponent/ColumnComponent.vue";
@@ -32,7 +32,6 @@ export default {
   name: "TaskList",
 
   components: {
-    TaskCard,
     FilterTasks,
     ScrollUp,
     ColumnComponent,
@@ -87,7 +86,6 @@ export default {
 
   mounted() {
     this.getTasks();
-    console.log(this.filteredTasks);
   },
 
   methods: {

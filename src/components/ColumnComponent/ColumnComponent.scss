@@ -8,7 +8,10 @@
     position: relative;
     white-space: normal;
     width: 33%;
+    height: 100%;
     margin: 0 20px;
+    transition: all 0.3s ease;
+
 
     &__title{
         display: flex;
@@ -18,6 +21,14 @@
     }
 
     &__items{
-        padding: 0 16px;
+        padding: 16px;
+
+        &.hovered{
+            background: #abdeb3;
+            border: 5px #000;
+            border-style: dashed;
+        }
     }
+
+    
 }

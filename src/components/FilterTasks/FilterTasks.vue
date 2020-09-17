@@ -155,10 +155,7 @@ export default {
 
     /* Очистить результаты фильтрации */
     clearResults() {
-     
-      console.log(this.tasks, "clear Results");
       this.$emit('clear_results', this.tasks);
-
     },
   }
 };

@@ -1,5 +1,5 @@
 <template>
-  <section class="card" draggable="true">
+  <div class="card" draggable="true" @mousedown="dragCard($event.target)">
     <div class="card-inner">
       <div class="card-header">
         <div class="card-header--top">
@@ -23,7 +23,7 @@
       </div>
         
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -57,36 +57,36 @@ export default {
 
   computed: {
 
-  classObject: function () {
-    var className;
+    classObject: function () {
+      var className;
 
-    switch(this.task.category){
+      switch(this.task.category){
 
-      case 'Просрочено':
-        className = 'category_sticker expired_sticker';
-        break;
-      case 'В работе':
-        className = 'category_sticker inwork_sticker';
-        break;
-      case 'Сделано':
-        className = 'category_sticker ready_sticker';
-        break;
-      default:
-        className = 'category_sticker';
-        break;
-    }
-      return className
-    },
+        case 'Просрочено':
+          className = 'category_sticker expired_sticker';
+          break;
+        case 'В работе':
+          className = 'category_sticker inwork_sticker';
+          break;
+        case 'Сделано':
+          className = 'category_sticker ready_sticker';
+          break;
+        default:
+          className = 'category_sticker';
+          break;
+      }
+        return className
+      },
 
-    formatData: function(){
-        return new Date(this.task.dateOfTask).toLocaleString('ru', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-      });
-    },
+      formatData: function(){
+          return new Date(this.task.dateOfTask).toLocaleString('ru', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+        });
+      },
   
 },
 
@@ -151,7 +151,68 @@ export default {
           this.check.close();
           showNoty(error);
       }
-    }
+    },
+    /*
+      Перетаскивание элемента
+    
+    */
+    dragCard(element){
+      var card = '';
+      if(element.className !== 'card-inner'){
+        return
+      }
+        card = element.parentElement
+        var columns = document.querySelectorAll('.column');
+        var columnItems = document.querySelectorAll('.column__items');
+
+        card.addEventListener('dragstart', dragStart);
+        card.addEventListener('dragend', dragEnd);
+
+        for(const column of columns){
+          column.addEventListener('dragover', dragOver);
+          column.addEventListener('dragenter', dragEnter);
+          column.addEventListener('dragleave', dragLeave);
+          column.addEventListener('drop', dragDrop);
+        }
+
+        function dragStart(){
+          card.className += ' hold';
+          
+          setTimeout(() => {
+            card.className += ' invisible';
+          }, 0);
+        }
+        function dragEnd(){
+          card.className = 'card';
+        }
+
+        function dragOver(e) {
+          e.preventDefault();
+          if(e.toElement !== undefined && e.toElement.className == 'column__items'){
+            e.toElement.className += ' hovered';
+          }
+          
+        }
+        function dragEnter(e) {
+          e.preventDefault();
+        }
+        function dragLeave(e) {
+          if(e.toElement !== undefined && e.toElement.className == 'column__items hovered'){
+              e.toElement.className = 'column__items';
+            }
+        }
+        function dragDrop(e) {
+          var divColumnItems = this.querySelector('.column__items');
+          if(divColumnItems){
+            divColumnItems.prepend(card);
+            columnItems.forEach((item) => item.className="column__items")
+          }
+        }
+      
+      
+        
+    },
+    
   },
 
   mounted: function() {
