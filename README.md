@@ -1,40 +1,10 @@
-# vuejs_taskmanager
+# vuejs_taskmanager - Удобный Task manager
 
-Don't forget to launch server
+First start Server npm run start
+Сначала запустить сервер npm run start
 
-## Project setup
-```
-npm install
-```
+Затем фронтенд часть npm run serve
+Launch frontend part npm run serve
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-
-### Start server node server
-```
-npm run start
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
-
-Deploy of project is here https://vue-taskmanager.herokuapp.com/
+Deploy of project is here   https://vue-taskmanager.herokuapp.com/
+Посмотреть задеплоенный проект можно тут https://vue-taskmanager.herokuapp.com/
