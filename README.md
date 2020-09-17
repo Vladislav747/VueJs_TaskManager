@@ -1,10 +1,10 @@
 # vuejs_taskmanager - Удобный Task manager
 
-First start Server npm run start
-Сначала запустить сервер npm run start
+First start Server npm run start  
+Сначала запустить сервер npm run start  
 
-Затем фронтенд часть npm run serve
-Launch frontend part npm run serve
+Затем фронтенд часть npm run serve  
+Launch frontend part npm run serve  
 
-Deploy of project is here   https://vue-taskmanager.herokuapp.com/
-Посмотреть задеплоенный проект можно тут https://vue-taskmanager.herokuapp.com/
+Deploy of project is here   DEMO[https://vue-taskmanager.herokuapp.com/]  
+Посмотреть задеплоенный проект можно тут DEMO[https://vue-taskmanager.herokuapp.com/]    
