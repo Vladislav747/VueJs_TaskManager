@@ -38,7 +38,7 @@ export default {
 
 <style lang="scss" scoped>
 
-@import "../scss/components/FooterNavigation.scss";
+@import "./FooterNavigation.scss";
 
 </style>
 

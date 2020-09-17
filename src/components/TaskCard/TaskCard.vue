@@ -1,5 +1,5 @@
 <template>
-  <section class="card">
+  <section class="card" draggable="true">
     <div class="card-inner">
       <div class="card-header">
         <div class="card-header--top">
@@ -28,7 +28,8 @@
 
 <script>
 import Noty from "noty";
-import { showNoty } from "../utility";
+
+import { showNoty } from "../../utility";
 
 export default {
   name: "TaskCard",
@@ -145,7 +146,7 @@ export default {
         this.check.close();
         this.$router.push({ name: "task-list" });
 
-        showNoty("Задача Удалена.", "success");
+        showNoty("Задача Удалена.", "error");
       } catch (error) {
           this.check.close();
           showNoty(error);
@@ -160,6 +161,6 @@ export default {
 </script>
 
 <style lang="scss" scoped> 
-@import "../scss/components/TaskCard.scss";
+@import "./TaskCard.scss";
 
 </style>

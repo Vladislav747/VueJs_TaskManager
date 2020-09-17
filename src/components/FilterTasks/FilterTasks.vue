@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { TASK_TYPES, DEADLINE_TYPES } from "../utility";
+import { TASK_TYPES, DEADLINE_TYPES } from "../../utility";
 
 export default {
   name: "FilterTasks",
@@ -165,5 +165,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../scss/components/FilterTasks.scss";
+@import "./FilterTasks.scss";
 </style>

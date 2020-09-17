@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { bus } from "../utility/bus.js";
+import { bus } from "../../utility/bus.js";
 
 export default {
   name: "TopNavigation",
@@ -76,7 +76,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../scss/components/TopNavigation.scss";
+@import "./TopNavigation.scss";
 
 
 </style>

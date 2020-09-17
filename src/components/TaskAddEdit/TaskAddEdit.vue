@@ -59,7 +59,8 @@
 </template>
 
 <script>
-import { showNoty, TASK_TYPES } from "../utility";
+import { showNoty, TASK_TYPES } from "../../utility";
+
 import DatePicker from "vue2-datepicker";
 import { required, maxLength } from "vuelidate/lib/validators";
 
@@ -239,6 +240,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../scss/components/TaskAddEdit.scss";
+@import "./TaskAddEdit.scss";
 
 </style>

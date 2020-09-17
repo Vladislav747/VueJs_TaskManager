@@ -24,7 +24,7 @@
 <script>
 import Noty from "noty";
 
-import { showNoty } from "../utility";
+import { showNoty } from "../../utility";
 
 export default {
   name: "TaskDetail",
@@ -133,7 +133,7 @@ export default {
         this.check.close();
         this.$router.push({ name: "task-list" });
 
-        showNoty("Задача Удалена.", "success");
+        showNoty("Задача Удалена.", "error");
       } catch (error) {
         this.check.close();
         showNoty(error);
@@ -144,10 +144,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../scss/components/TaskDetail.scss";
+@import "./TaskDetail.scss";
 
 //preloader
-@import "../scss/preloader.scss";
+@import "../../scss/preloader.scss";
 
 
 

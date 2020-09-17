@@ -51,6 +51,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../scss/components/ScrollUp.scss";
+@import "./ScrollUp.scss";
 </style>
 

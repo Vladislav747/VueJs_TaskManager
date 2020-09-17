@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import TopNavigation from './components/TopNavigation'
-import FooterNavigation from './components/FooterNavigation';
+import TopNavigation from './components/TopNavigation/TopNavigation'
+import FooterNavigation from './components/FooterNavigation/FooterNavigation';
 
 export default {
   

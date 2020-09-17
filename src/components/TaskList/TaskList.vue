@@ -10,23 +10,23 @@
 
     <!-- Если есть isLoading то ставим Loader -->
     <div v-if="isLoading" class="lds-dual-ring"></div>
-    <div v-if="noTasks" class="no-tasks">
-      <h3>Задачи не найдены</h3>Нажмите вверху на панели Добавить Новую задачу
-    </div>
 
     <div v-else id="tasks">
-      <task-card v-for="task in filteredTasks" :key="task._id" :task="task"/>
+      <!-- <task-card v-for="task in filteredTasks" :key="task._id" :task="task"/> -->
+      <column-component v-for="column in filteredTasks" :key="column.title" :tasks="column"  />
     </div>
     <scroll-up/>
   </div>  
 </template>
 
 <script>
-import { showNoty, TASK_TYPES, DEADLINE_TYPES } from "../utility";
+import { showNoty, TASK_TYPES, DEADLINE_TYPES } from "../../utility";
+import {tasks} from "../../api/index.js";
 
-import TaskCard from "./TaskCard.vue";
-import FilterTasks from "./FilterTasks.vue";
-import ScrollUp from "./ScrollUp.vue";
+import TaskCard from "../TaskCard/TaskCard.vue";
+import FilterTasks from "../FilterTasks/FilterTasks.vue";
+import ScrollUp from "../ScrollUp/ScrollUp.vue";
+import ColumnComponent from "../ColumnComponent/ColumnComponent.vue";
 
 export default {
   name: "TaskList",
@@ -35,13 +35,14 @@ export default {
     TaskCard,
     FilterTasks,
     ScrollUp,
+    ColumnComponent,
   },
 
   data() {
     return {
       isLoading: true,
       tasks: [],
-      filteredTasks: [],
+      filteredTasks: tasks,
       filterCategory: "",
       filterDateDeadline: "",
       taskTypes: TASK_TYPES,
@@ -54,7 +55,7 @@ export default {
   computed: {
     noTasks() {
       return (
-        this.isLoading === false && (this.tasks && this.tasks.length === 0)
+        this.tasks.length == 0
       );
     },
   },
@@ -86,6 +87,7 @@ export default {
 
   mounted() {
     this.getTasks();
+    console.log(this.filteredTasks);
   },
 
   methods: {
@@ -93,17 +95,17 @@ export default {
      * Получить задачи
      */
     async getTasks() {
-      try {
-        const response = await this.$http.get("tasks");
-        this.tasks = response.data;
-        this.$emit("remove", this.tasks);
-        this.$emit("get-tasks", this.tasks);
-        //Создается копия массива
-        this.filteredTasks = this.tasks.slice();
-      } catch (error) {
-        showNoty("Ошибка вывода списка задач  " + error);
-      }
-
+      // try {
+      //   const response = await this.$http.get("tasks");
+      //   this.tasks = response.data;
+      //   this.$emit("remove", this.tasks);
+      //   this.$emit("get-tasks", this.tasks);
+      //   //Создается копия массива
+      //   this.filteredTasks = this.tasks.slice();
+      // } catch (error) {
+      //   showNoty("Ошибка вывода списка задач  " + error);
+      // }
+      this.filteredTasks = tasks;
       this.isLoading = false;
     },
 
@@ -131,6 +133,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../scss/components/TaskList.scss";
-@import "../scss/preloader.scss";
+@import "./TaskList.scss";
+@import "../../scss/preloader.scss";
 </style>
