@@ -74,13 +74,17 @@ export default {
         }, 0);
       }
       function dragEnd(){
+        card.className = 'card';
         console.log("dragEnd");
       }
 
-      function dragOver() {
-        console.log("dragOver");
+      function dragOver(e) {
+        e.preventDefault();
+        console.log(e,"dragOver");
       }
-      function dragEnter() {
+      function dragEnter(e) {
+        e.preventDefault();
+        card.className += ' hovered';
         console.log("dragEnter");
       }
       function dragLeave() {

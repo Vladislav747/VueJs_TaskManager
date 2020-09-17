@@ -5,10 +5,6 @@
         <span class="top-desktop">Задачи</span>
         <font-awesome-icon icon="list-ul" size="2x" class="top-icon"/>
       </router-link>
-      <router-link id="task-add" class="header__link" :to="{ name: 'task-add' }">
-        <span class="top-desktop">Создать</span>
-        <font-awesome-icon icon="plus-circle" size="2x" class="top-icon"/>
-      </router-link>
 
       <div class="spacer"/>
       <!-- TODO: Не работает поиск - лучше всего ввести  -->
