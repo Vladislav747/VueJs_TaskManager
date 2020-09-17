@@ -1,17 +1,16 @@
 <template>
   <div class="taskList max-width-block">
-    <filter-tasks
-        v-bind:tasks="tasks"
-        v-bind:isLoading="isLoading"
-        v-bind:noTasks="noTasks"
-        v-on:filter_tasks="filterResults"
-        v-on:clear_results="filterResults"
-      ></filter-tasks>
+    
 
     <!-- Если есть isLoading то ставим Loader -->
     <div v-if="isLoading" class="lds-dual-ring"></div>
 
     <div v-else id="tasks">
+      <filter-tasks
+        v-bind:tasks="filteredTasks"
+        v-on:filter_tasks="filterResults"
+        v-on:clear_results="filterResults"
+      ></filter-tasks>
       <!-- <task-card v-for="task in filteredTasks" :key="task._id" :task="task"/> -->
       <column-component v-for="column in filteredTasks" :key="column.title" :tasks="column"  />
     </div>
@@ -40,7 +39,6 @@ export default {
   data() {
     return {
       isLoading: true,
-      tasks: [],
       filteredTasks: tasks,
       filterCategory: "",
       filterDateDeadline: "",

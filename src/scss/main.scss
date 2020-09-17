@@ -4,3 +4,33 @@
         background-color: #65b5fa;
     }
 }
+
+.bg-green-element{
+    background-color: #39c071;
+    color: #fff;
+    &:hover{
+        background-color: #49c97e;
+    }
+}
+
+.bg-red-element{
+    background-color: #df3d2c;
+    color: #fff;
+    &:hover{
+        background-color: #f95f5f;
+    }
+}
+
+.btn-task{
+    border: 1px solid #fff;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 1em;
+    outline: none;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+    opacity: 1;
+    cursor: pointer;
+    font-weight: 700;
+    width: 100%;
+}

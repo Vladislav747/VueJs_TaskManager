@@ -1,5 +1,5 @@
 <template>     
-     <div v-if="!isLoading && !noTasks" class="filterWrapper">
+     <div class="filterWrapper">
         <div class="filterIcon bg-blue-element" v-on:click="showFilter()">
           <font-awesome-icon icon="filter" class="top-icon icon-size-m"/>
         </div>
@@ -26,7 +26,7 @@
           </div>
 
           <div class="clear-result__wrapper">
-              <button @click="clearResults()" class="clear-results__btn">Сбросить результаты</button>
+              <button @click="clearResults()" class="btn-task clear-results__btn bg-red-element">Сбросить результаты</button>
           </div>
         </div>
     </div>
@@ -40,19 +40,8 @@ export default {
   name: "FilterTasks",
 
   props:{
-    isLoading: {
-      type: Boolean,
-      default: true,
-    },
-    noTasks: {
-      type: Boolean,
-      default: true,
-    },
     tasks: {
       type: Array,
-      default: function () {
-        return []
-      }
     },
   },
   
@@ -70,34 +59,50 @@ export default {
       taskTypes: TASK_TYPES,
       deadlineTypes: DEADLINE_TYPES,
       filteredTasksTime: [],
-      filteredTasksDeadline: []
+      filteredTasksDeadline: [],
+    
     };
   },
 
   watch: {
     filterCategory: function() {
+        var filterData = [];
+        this.filteredTasks = this.tasks;
       if (this.filteredTasksDeadline.length === 0) {
-        this.filteredTasksTime = this.tasks.filter(this.filterTask);
+        filterData = this.tasks.slice();
+        filterData.forEach(element => {
+          element.cards = element.cards.filter(this.filterTask)
+        });
+        this.filteredTasksTime = filterData;
       } else {
-        this.filteredTasksTime = this.filteredTasksDeadline.filter(
-          this.filterTask
-        );
+        filterData = this.filteredTasksDeadline;
+        filterData.forEach(element => {
+          element.cards = element.cards.filter(this.filterTask)
+        });
+        this.filteredTasksTime = filterData;
+
       }
-      this.filteredTasks = this.filteredTasksTime;
-      this.$emit('filter_tasks', this.filteredTasks);
+      this.$emit('filter_tasks', this.filteredTasksTime);
     },
 
     filterDateDeadline: function() {
-
+      var filterData = [];
+      this.filteredTasks = this.tasks;
+      
       if (this.filteredTasksTime.length === 0) {
-        this.filteredTasksDeadline = this.tasks.filter(this.filterTaskDeadline);
+        filterData = this.tasks.slice();
+        filterData.forEach(element => {
+          element.cards = element.cards.filter(this.filterTaskDeadline)
+        });
+        this.filteredTasksDeadline = filterData;
       } else {
-        this.filteredTasksDeadline = this.filteredTasksTime.filter(
-          this.filterTaskDeadline
-        );
+        filterData = this.filteredTasksTime;
+        filterData.forEach(element => {
+          element.cards = element.cards.filter(this.filterTask)
+        });
+        this.filteredTasksDeadline = filterData;
       }
-      this.filteredTasks = this.filteredTasksDeadline;
-      this.$emit('filter_tasks', this.filteredTasks);
+      this.$emit('filter_tasks', this.filteredTasksDeadline);
     }
   },
 
@@ -155,7 +160,7 @@ export default {
 
     /* Очистить результаты фильтрации */
     clearResults() {
-      this.$emit('clear_results', this.tasks);
+      this.$emit('clear_results', this.filteredTasks);
     },
   }
 };

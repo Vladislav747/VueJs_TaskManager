@@ -40,7 +40,8 @@ export default {
         return {
           name: "Новое",
           category: "Тестовая",
-          description: "Тестовое описание"
+          description: "Тестовое описание",
+          dateOfTask: "",
         };
       }
     }

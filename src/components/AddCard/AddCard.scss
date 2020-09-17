@@ -1,0 +1,49 @@
+.add-form {
+    padding: 12px;
+    &__input{
+        input, textarea{
+            border: 0;
+            padding: 10px;
+            margin: 8px 0;
+            width: 100%;
+            resize: none;
+            font-size: 1rem;
+            background: #fff;
+            box-shadow: 0 1px 4px rgba(9,45,66,.25);
+            border-radius: 3px;
+            outline: none;
+            cursor: pointer;
+            
+        }
+    }
+
+    &__bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+    
+        .add-btn {
+            border-color: #dfe1e6;
+            width: 40%;
+
+            img {
+                margin-right: 8px;
+            }
+        }
+
+        &-add{
+            margin-right: 8px;
+            cursor: pointer;
+        }
+
+        &-clear {
+            cursor: pointer;
+        }
+    }
+
+    &:hover{
+        background-color: darken(#dfe3e6, 10);
+    }
+    
+}
