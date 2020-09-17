@@ -35,6 +35,7 @@
 
 <script>
 import { TASK_TYPES, DEADLINE_TYPES } from "../../utility";
+import {tasks} from "../../api/index.js";
 
 export default {
   name: "FilterTasks",
@@ -47,9 +48,7 @@ export default {
   
   data() {
     return {
-      filteredTasks: {
-        type: Array,
-      },
+      filteredTasks: tasks,
       filterCategory: {
         type: String,
       },
@@ -67,9 +66,8 @@ export default {
   watch: {
     filterCategory: function() {
         var filterData = [];
-        this.filteredTasks = this.tasks;
       if (this.filteredTasksDeadline.length === 0) {
-        filterData = this.tasks.slice();
+        filterData = this.tasks.slice(0);
         filterData.forEach(element => {
           element.cards = element.cards.filter(this.filterTask)
         });
@@ -87,10 +85,9 @@ export default {
 
     filterDateDeadline: function() {
       var filterData = [];
-      this.filteredTasks = this.tasks;
       
       if (this.filteredTasksTime.length === 0) {
-        filterData = this.tasks.slice();
+        filterData = this.tasks.slice(0);
         filterData.forEach(element => {
           element.cards = element.cards.filter(this.filterTaskDeadline)
         });

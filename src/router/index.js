@@ -21,12 +21,6 @@ export default new Router({
             component: TaskDetail,
         },
         {
-            //вызывается с помощью компонента TaskList this.$router.push('task-add')
-            path: "/task-add",
-            name: "task-add",
-            component: TaskAddEdit,
-        },
-        {
             path: "/task-edit/:id",
             name: "task-edit",
             component: TaskAddEdit,

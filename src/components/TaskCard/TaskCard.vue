@@ -13,9 +13,9 @@
         <div class="datetimeDeadline">{{ formatData }}</div>
 
         <div class="card-icons"> 
-          <a id="edit" @click.prevent="editTask()" class="card-icons--link">
+          <!-- <a id="edit" @click.prevent="editTask()" class="card-icons--link">
             <font-awesome-icon icon="edit" class="top-icon icon-size-xl" alt="Редактировать задачу"/>
-          </a>
+          </a> -->
           <a id="delete" @click.prevent="deleteTask()" class="card-icons--link">
             <font-awesome-icon icon="trash" class="top-icon icon-size-xl" alt="Удалить задачу"/>
           </a>
@@ -141,17 +141,20 @@ export default {
      * Удаление задачи
      */
     async realDelete() {
-      try {
-        await this.$http.delete("tasks/" + this.task.id);
 
-        this.check.close();
-        this.$router.push({ name: "task-list" });
+      this.$emit("deleteTask", this.task);
+      this.closeCheck();
+      // try {
+      //   await this.$http.delete("tasks/" + this.task.id);
 
-        showNoty("Задача Удалена.", "error");
-      } catch (error) {
-          this.check.close();
-          showNoty(error);
-      }
+      //   this.check.close();
+      //   this.$router.push({ name: "task-list" });
+
+      //   showNoty("Задача Удалена.", "error");
+      // } catch (error) {
+      //     this.check.close();
+      //     showNoty(error);
+      // }
     },
     /*
       Перетаскивание элемента

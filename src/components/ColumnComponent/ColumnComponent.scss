@@ -32,3 +32,22 @@
 
     
 }
+
+@media screen and (max-width: 1024px) {
+    .column {
+        width: 30%;
+        margin: 0 10px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .column {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .column {
+        width: 90%;
+    }
+}

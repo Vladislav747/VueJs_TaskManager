@@ -11,7 +11,7 @@
             </div>
           </div>
           <div class="column__items">
-            <task-card v-for="task in tasks.cards" :key="task._id" :task="task" />
+            <task-card v-for="task in tasks.cards" :key="task._id" :task="task" v-on:deleteTask="deleteCard"/>
             <add-card v-on:newCard="addNewCard"/>
           </div>
       </div>
@@ -37,16 +37,15 @@ export default {
     TaskCard,
     AddCard,
   },
-  data() {
-    return {
-    };
-  },
 
   methods: {
     addNewCard(data){
       this.tasks.cards.push(data);
-      console.log(this.tasks.cards);
       showNoty("Задача добавлена !", "success");
+    },
+    deleteCard(data){
+      this.tasks.cards = this.tasks.cards.filter(task => task.id !== data.id);
+      showNoty("Задача удалена !", "success");
     }
   },
 };
