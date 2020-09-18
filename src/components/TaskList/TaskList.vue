@@ -1,7 +1,7 @@
 <template>
   <div class="taskList max-width-block">
     
-
+    <enter-banner v-if="!showEnterBanner" />
     <!-- Если есть isLoading то ставим Loader -->
     <div v-if="isLoading" class="lds-dual-ring"></div>
 
@@ -26,6 +26,7 @@ import {tasks} from "../../api/index.js";
 import FilterTasks from "../FilterTasks/FilterTasks.vue";
 import ScrollUp from "../ScrollUp/ScrollUp.vue";
 import ColumnComponent from "../ColumnComponent/ColumnComponent.vue";
+import EnterBanner from "../EnterBanner/EnterBanner.vue";
 
 export default {
   name: "TaskList",
@@ -34,6 +35,7 @@ export default {
     FilterTasks,
     ScrollUp,
     ColumnComponent,
+    EnterBanner,
   },
 
   data() {
@@ -55,6 +57,12 @@ export default {
         this.tasks.length == 0
       );
     },
+
+    showEnterBanner(){
+      var localStorageBanner = localStorage.getItem("enterBanner");
+      console.log(localStorageBanner, "localStorageBanner");
+      return localStorageBanner;
+    }
   },
 
   watch: {

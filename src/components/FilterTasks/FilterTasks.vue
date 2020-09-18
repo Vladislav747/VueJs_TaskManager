@@ -35,7 +35,6 @@
 
 <script>
 import { TASK_TYPES, DEADLINE_TYPES } from "../../utility";
-import {tasks} from "../../api/index.js";
 
 export default {
   name: "FilterTasks",
