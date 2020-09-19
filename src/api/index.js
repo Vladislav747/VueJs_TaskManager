@@ -1,4 +1,4 @@
-export const tasks = [
+export default [
     {
         title: 'Главное',
         cards: [

@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { bus } from "../../utility/bus.js";
+import * as bus from "../../utility/bus.js";
 
 export default {
   name: "TopNavigation",
