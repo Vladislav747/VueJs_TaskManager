@@ -20,7 +20,7 @@
 
 <script>
 import { showNoty, TASK_TYPES, DEADLINE_TYPES } from "../../utility";
-import * as tasks from "../../api/index.js";
+import {tasks} from "../../api/index.js";
 
 import FilterTasks from "../FilterTasks/FilterTasks.vue";
 import ScrollUp from "../ScrollUp/ScrollUp.vue";
