@@ -11,7 +11,7 @@
         v-on:filter_tasks="filterResults"
         v-on:clear_results="filterResults"
       ></filter-tasks>
-      <column-component v-for="column in filteredTasks" :key="column.title" :tasks="column"  />
+      <column-component v-for="(column, index) in filteredTasks" :key="column.title" :tasks="column" :order="index" />
     </div>
     <scroll-up />
   </div>  
