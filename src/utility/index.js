@@ -1,5 +1,6 @@
 import Noty from 'noty';
 
+// eslint-disable-next-line func-names
 export const showNoty = function(text, type = 'error') {
     new Noty({
         text,
@@ -11,7 +12,7 @@ export const showNoty = function(text, type = 'error') {
 
 export const TASK_TYPES = ['Просрочено', 'В работе', 'Сделано'];
 
-//Для тестирования в случае если нету никаких заданий
+// Для тестирования в случае если нету никаких заданий
 export const defaultTasks = [];
 
 export const tags = [];

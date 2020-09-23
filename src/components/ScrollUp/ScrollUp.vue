@@ -30,15 +30,6 @@
 
 export default {
   name: "ScrollUp",
-
-  data() {
-    return {
-     
-    };
-  },
-
-  props: ["tasks1"],
-
   methods: {
       scrollTop(){
           window.scrollTo({

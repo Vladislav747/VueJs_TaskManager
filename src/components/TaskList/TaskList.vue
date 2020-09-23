@@ -2,7 +2,7 @@
   <div class="taskList max-width-block">
     
     <enter-banner v-if="!showEnterBanner" />
-    <!-- Если есть isLoading то ставим Loader -->
+
     <div v-if="isLoading" class="lds-dual-ring"></div>
 
     <div v-else id="tasks">
@@ -11,10 +11,9 @@
         v-on:filter_tasks="filterResults"
         v-on:clear_results="filterResults"
       ></filter-tasks>
-      <!-- <task-card v-for="task in filteredTasks" :key="task._id" :task="task"/> -->
       <column-component v-for="column in filteredTasks" :key="column.title" :tasks="column"  />
     </div>
-    <scroll-up/>
+    <scroll-up />
   </div>  
 </template>
 
