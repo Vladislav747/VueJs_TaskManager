@@ -1,80 +1,81 @@
 {
-  "name": "vuejs_taskmanager",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "start": "cd ./server && node server.js",
-    "start_sqlite": "cd ./server && $typeDB=sqlite node server.js",
-    "debug": "cd ./server && node --nolazy --inspect-brk=9229 server.js",
-    "server_and_client": "PORT=8080 npm run start & PORT=8081 npm run serve"
-  },
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.19",
-    "@fortawesome/free-solid-svg-icons": "^5.9.0",
-    "@fortawesome/vue-fontawesome": "^0.1.6",
-    "app-root-path": "^2.2.1",
-    "axios": "^0.18.1",
-    "cors": "^2.8.5",
-    "epilogue": "^0.7.1",
-    "express": "^4.17.1",
-    "html": "^1.0.0",
-    "moment": "^2.24.0",
-    "mongoose": "^5.6.3",
-    "node-sass": "^4.12.0",
-    "noty": "^3.2.0-beta",
-    "path": "^0.12.7",
-    "pug": "^2.0.4",
-    "sass-loader": "^7.1.0",
-    "sequelize": "^4.44.0",
-    "sqlite3": "^4.0.9",
-    "uuid": "^3.3.2",
-    "vue": "^2.6.10",
-    "vue-input-tag": "^2.0.6",
-    "vue-router": "^3.0.6",
-    "vue2-datepicker": "^2.12.0",
-    "vuelidate": "^0.7.4"
-  },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.8.0",
-    "@vue/cli-plugin-eslint": "^3.8.0",
-    "@vue/cli-service": "^3.8.4",
-    "babel-eslint": "^10.0.2",
-    "cross-env": "^7.0.2",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-loader": "^4.0.2",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-vue": "^6.2.2",
-    "vue-loader": "^15.7.0",
-    "vue-template-compiler": "^2.6.10"
-  },
-  "engines": {
-    "node": "8.x"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
+    "name": "vuejs_taskmanager",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "dev": "vue-cli-service serve --mode development",
+        "build": "vue-cli-service build",
+        "start": "cd ./server && node server.js",
+        "start_sqlite": "cd ./server && $typeDB=sqlite node server.js",
+        "debug": "cd ./server && node --nolazy --inspect-brk=9229 server.js",
+        "server_and_client": "PORT=8080 npm run start & PORT=8081 npm run serve"
     },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ]
+    "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^1.2.19",
+        "@fortawesome/free-solid-svg-icons": "^5.9.0",
+        "@fortawesome/vue-fontawesome": "^0.1.6",
+        "app-root-path": "^2.2.1",
+        "axios": "^0.18.1",
+        "cors": "^2.8.5",
+        "epilogue": "^0.7.1",
+        "express": "^4.17.1",
+        "html": "^1.0.0",
+        "moment": "^2.24.0",
+        "mongoose": "^5.6.3",
+        "node-sass": "^4.12.0",
+        "noty": "^3.2.0-beta",
+        "path": "^0.12.7",
+        "pug": "^2.0.4",
+        "sass-loader": "^7.1.0",
+        "sequelize": "^4.44.0",
+        "sqlite3": "^4.0.9",
+        "uuid": "^3.3.2",
+        "vue": "^2.6.10",
+        "vue-input-tag": "^2.0.6",
+        "vue-router": "^3.0.6",
+        "vue2-datepicker": "^2.12.0",
+        "vuelidate": "^0.7.4"
+    },
+    "devDependencies": {
+        "@vue/cli-plugin-babel": "^3.8.0",
+        "@vue/cli-plugin-eslint": "^3.8.0",
+        "@vue/cli-service": "^3.8.4",
+        "babel-eslint": "^10.0.2",
+        "cross-env": "^7.0.2",
+        "eslint": "^5.16.0",
+        "eslint-config-airbnb-base": "^14.2.0",
+        "eslint-loader": "^4.0.2",
+        "eslint-plugin-import": "^2.22.0",
+        "eslint-plugin-vue": "^6.2.2",
+        "vue-loader": "^15.7.0",
+        "vue-template-compiler": "^2.6.10"
+    },
+    "engines": {
+        "node": "8.x"
+    },
+    "eslintConfig": {
+        "root": true,
+        "env": {
+            "node": true
+        },
+        "extends": [
+            "plugin:vue/essential",
+            "eslint:recommended"
+        ],
+        "rules": {},
+        "parserOptions": {
+            "parser": "babel-eslint"
+        }
+    },
+    "postcss": {
+        "plugins": {
+            "autoprefixer": {}
+        }
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not ie <= 8"
+    ]
 }
